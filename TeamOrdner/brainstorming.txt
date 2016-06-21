@@ -1,0 +1,36 @@
+Teilaufgaben:
+
+GUI
+Logik
+
+
+Userstories:
+
+== Katalogauswahl ==
+
+User wählt Übungsaufgabe aus und bestätigt Auswahl
+Auswahl Dialog
+"Katalog Loader"
+
+
+== Editor ==
+
+Ermöglicht das Schreiben von Tests und Klassen
+
+Modus RED:
+Zuerst wird ein Test geschrieben und per Button kann zum Schreiben der Klassen übergegangen. Dies darf nur möglich sein, wenn es genau einen fehlschlagenden Test gibt oder der Code nicht kompiliert.
+
+Modus GREEN:
+Hier wird dann der Code geschrieben um den Test lauffähig zu bekommen.
+Per Button kommt man zum Refactor Modus. Dies geht nur wenn alle Tests lauffähig sind.
+Es ist auch mögich wieder in den RED Modus zurück zu springen. Dabei wird der neue Code gelöscht.
+
+Modus REFACTOR:
+Im Refactor Modus lässt sich der Code überarbeiten.
+Aus dem Refactor Modus kann man in den RED Modus weiter gehen um neue Tests zu schreiben.
+Dies ist nur möglich wenn alle Tests lauffähig sind.
+
+== Executor ==
+
+Verwendet die Bendisposto-Bibliothek
+Führt übergebene Testfälle und Code aus
