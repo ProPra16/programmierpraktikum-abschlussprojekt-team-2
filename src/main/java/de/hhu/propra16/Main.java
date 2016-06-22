@@ -1,5 +1,6 @@
+package de.hhu.propra16;
 
-public class Dummy {
+public class Main {
 	public static void main(String[] args) {
 		System.out.println("Hallo Welt");
 	}
