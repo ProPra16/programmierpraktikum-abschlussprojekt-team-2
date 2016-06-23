@@ -6,6 +6,6 @@ public class Main {
 	}
 	
 	public static void ausgabe(String string){
-		System.out.println(string)
+		System.out.println(string);
 	}
 }
