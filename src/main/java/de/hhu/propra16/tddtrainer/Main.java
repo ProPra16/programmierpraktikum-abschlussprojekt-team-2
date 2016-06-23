@@ -1,4 +1,4 @@
-package de.hhu.propra16;
+package de.hhu.propra16.tddtrainer;
 
 public class Main {
 	public static void main(String[] args) {

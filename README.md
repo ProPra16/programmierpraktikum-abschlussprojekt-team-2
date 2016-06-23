@@ -2,4 +2,5 @@
 
 Open a terminal.
 Navigate in the folder containing the src-folder.
-Type 'build gradle'
+Type 'gradle eclipse'
+
