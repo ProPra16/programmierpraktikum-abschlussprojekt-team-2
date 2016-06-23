@@ -1,4 +1,4 @@
-"# Testdriven Development Trainer"
+# Testdriven Development Trainer
 (programmierpraktikum-abschlussprojekt-team-2)
 
 Open a terminal.
