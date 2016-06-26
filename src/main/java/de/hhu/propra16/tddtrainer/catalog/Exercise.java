@@ -8,19 +8,19 @@ import java.util.List;
  * 
  * @author Marcel
  */
-public class Excercise {
+public class Exercise {
 
 	private String name;
 	private String description;
 	private List<JavaClass> code;
 	private List<JavaClass> tests;
 
-	public Excercise() {
+	public Exercise() {
 		code = new ArrayList<>();
 		tests = new ArrayList<>();
 	}
 
-	public Excercise(String name, String description) {
+	public Exercise(String name, String description) {
 		this();
 		this.name = name;
 		this.description = description;
