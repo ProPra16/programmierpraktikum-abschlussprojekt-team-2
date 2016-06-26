@@ -26,5 +26,9 @@ public class JavaClass {
 		this.code = code;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("{name=\"%s\" code=\"%s\"}", name, code.replaceAll("\n", " "));
+	}
 	
 }

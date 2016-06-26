@@ -1,0 +1,29 @@
+<exercises>
+	<exercise name="Funktionierender Test">
+		<description>Ein beits funktionierender Test.
+Normalerweise werden Tests und Klassen im Katalog unvollständig sein, da diese vom Benutzer geschrieben werden müssen</description>
+		<classes>
+			<class name="WorkingCode">
+public class WorkingCode {
+	public int returnOne() {
+		return 1;
+	}
+}
+			</class>
+		</classes>
+		<tests>
+			<test name="WorkingTest">
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class WorkingTest {
+	@Test
+	public void testCode() {
+		WorkingCode c = new WorkingCode();
+		assertEquals(1, c.returnOne());
+	}
+}
+			</test>
+		</tests>
+	</exercise>
+</exercises>

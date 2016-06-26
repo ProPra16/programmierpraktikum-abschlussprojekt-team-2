@@ -75,5 +75,10 @@ public class Exercise {
 	public void setTests(List<JavaClass> test) {
 		this.tests = test;
 	}
+	
+	@Override
+	public String toString(){
+		return String.format("{name=\"%s\" description=\"%s\" code=%s tests=%s}", name, description.replaceAll("\n", " "), code.toString(), tests.toString());
+	}
 
 }

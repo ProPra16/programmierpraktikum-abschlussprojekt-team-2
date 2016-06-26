@@ -1,10 +1,17 @@
 package de.hhu.propra16.tddtrainer.executor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
+
 import org.junit.Test;
 
+import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
+import de.hhu.propra16.tddtrainer.catalog.FakeCatalogDatasource;
 import de.hhu.propra16.tddtrainer.catalog.JavaClass;
+import de.hhu.propra16.tddtrainer.catalog.XMLCatalogDatasource;
+import vk.core.api.CompilerResult;
 
 public class ExecutorTest {
 	
@@ -91,5 +98,16 @@ public class ExecutorTest {
 		
 		ExecutionResult result = new Executor().execute(exercise);
 		assertEquals(true, result.getCompilerResult().hasCompileErrors());
+	}
+	
+	@Test
+	public void testExecuteWithExerciseFromCatalog() {
+		CatalogDatasourceIF catalogDs = new FakeCatalogDatasource();
+		
+		Exercise exercise = catalogDs.loadCatalog().get(0);
+		
+		ExecutionResult result = new Executor().execute(exercise);
+		assertEquals(false, result.getCompilerResult().hasCompileErrors());
+		assertEquals(1, result.getTestResult().getNumberOfSuccessfulTests());
 	}
 }
