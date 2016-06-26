@@ -1,6 +1,8 @@
 # Testdriven Development Trainer
 (programmierpraktikum-abschlussprojekt-team-2)
 
+ProPra Abschlussprojekt der Gruppe (╯°□°）╯︵ ┻━┻
+
 Open a terminal.
 Navigate in the folder containing the src-folder.
 Type 'gradle eclipse'
