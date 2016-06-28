@@ -1,6 +1,8 @@
 package de.hhu.propra16.tddtrainer;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,8 @@ public class Main extends Application {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
+			Locale locale = new Locale("de", "DE");
+			loader.setResources(ResourceBundle.getBundle("bundles.tddt", locale));
 			loader.setLocation(Main.class.getResource("gui/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			primaryStage.setScene(new Scene(rootLayout));
@@ -29,16 +33,5 @@ public class Main extends Application {
 		}
 		
 		primaryStage.show();
-		showEditorView();
-	}
-
-	private void showEditorView() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("gui/EditorView.fxml"));
-			rootLayout.setCenter(loader.load());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }
