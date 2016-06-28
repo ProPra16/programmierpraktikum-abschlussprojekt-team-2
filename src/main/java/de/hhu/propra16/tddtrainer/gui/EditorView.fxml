@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -7,16 +8,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="335.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="335.0" prefWidth="640.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.5" layoutX="-1.0" layoutY="1.0" prefHeight="315.0" prefWidth="622.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.5" layoutX="-1.0" layoutY="1.0" prefHeight="315.0" prefWidth="622.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <ScrollPane fitToHeight="true" fitToWidth="true" minWidth="150.0">
                <content>
-                  <AnchorPane>
+                  <AnchorPane style="-fx-background-color: white;">
                      <children>
-                        <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="316.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
-                        <Label layoutX="14.0" layoutY="14.0" text="Tests">
+                        <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="316.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
+                        <Label layoutX="11.0" layoutY="12.0" text="Code" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="12.0">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
@@ -25,12 +26,12 @@
                   </AnchorPane>
                </content>
             </ScrollPane>
-            <ScrollPane fitToHeight="true" fitToWidth="true" minWidth="150.0" prefHeight="333.0" prefWidth="191.0">
+            <ScrollPane fitToHeight="true" fitToWidth="true" minWidth="150.0" prefHeight="333.0" prefWidth="191.0" style="-fx-background-color: white;">
                <content>
-                  <AnchorPane>
+                  <AnchorPane style="-fx-background-color: white;">
                      <children>
-                        <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="316.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
-                        <Label layoutX="15.0" layoutY="14.0" text="Code">
+                        <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="316.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
+                        <Label layoutX="17.0" layoutY="8.0" text="Tests" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="8.0">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
@@ -41,5 +42,6 @@
             </ScrollPane>
          </items>
       </SplitPane>
+      <Button layoutX="578.0" layoutY="309.0" mnemonicParsing="false" text="%nextStep" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0" />
    </children>
 </AnchorPane>

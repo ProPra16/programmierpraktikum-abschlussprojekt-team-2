@@ -38,7 +38,8 @@ public class RootLayoutController implements Initializable {
 	private void showEditorView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("gui/EditorView.fxml"));
+			loader.setLocation(this.getClass().getResource("EditorView.fxml"));
+			loader.setResources(resources);
 			root.setCenter(loader.load());
 		} catch (IOException e) {
 			e.printStackTrace();
