@@ -14,19 +14,13 @@ public class ExecutionResult {
 
 	private CompilerResult compilerResult;
 	private TestResult testResult;
-	private List<List<String>> compileErrors;
+	private List<CompilationResult> compileErrors;
 	
 	public ExecutionResult(CompilerResult cr, List<CompilationUnit> fcu) {
 		compilerResult = cr;
 		compileErrors = new ArrayList<>();
 		for(CompilationUnit cu : fcu) {
-			Collection<CompileError> compilerErrors = cr.getCompilerErrorsForCompilationUnit(cu);
-			List<String> errorsForEachUnit = new ArrayList<>();
-			errorsForEachUnit.add(cu.getClassName());
-			for(CompileError ce : compilerErrors) {
-				errorsForEachUnit.add(ce.getMessage());
-			}
-			compileErrors.add(errorsForEachUnit);
+			compileErrors.add(new CompilationResult(cu.getClassName(), new ArrayList<>(cr.getCompilerErrorsForCompilationUnit(cu))));
 		}
 	}
 	
@@ -43,7 +37,7 @@ public class ExecutionResult {
 		return testResult;
 	}
 	
-	public List<List<String>> getCompileErrors() {
+	public List<CompilationResult> getCompileErrors() {
 		return compileErrors;
 	}
 	

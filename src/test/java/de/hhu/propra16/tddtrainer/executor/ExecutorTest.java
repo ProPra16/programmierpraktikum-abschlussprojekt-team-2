@@ -135,7 +135,7 @@ public class ExecutorTest {
 			exercise.addTest(test);
 			
 			ExecutionResult result = new Executor().execute(exercise);
-			assertEquals("Main", result.getCompileErrors().get(0).get(0));
+			assertEquals("Main", result.getCompileErrors().get(0).getClassName());
 	}
 	
 	@Test
@@ -162,7 +162,7 @@ public class ExecutorTest {
 			exercise.addTest(test);
 			
 			ExecutionResult result = new Executor().execute(exercise);
-			assertEquals("reached end of file while parsing", result.getCompileErrors().get(0).get(1));
+			assertEquals("reached end of file while parsing", result.getCompileErrors().get(0).getCompileErrors().get(0).getMessage());
 	}
 	
 }
