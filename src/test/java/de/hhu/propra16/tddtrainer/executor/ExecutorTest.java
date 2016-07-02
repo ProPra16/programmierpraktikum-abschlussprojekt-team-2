@@ -2,16 +2,9 @@ package de.hhu.propra16.tddtrainer.executor;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-
 import org.junit.Test;
 
-import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
-import de.hhu.propra16.tddtrainer.catalog.Exercise;
-import de.hhu.propra16.tddtrainer.catalog.FakeCatalogDatasource;
-import de.hhu.propra16.tddtrainer.catalog.JavaClass;
-import de.hhu.propra16.tddtrainer.catalog.XMLCatalogDatasource;
-import vk.core.api.CompilerResult;
+import de.hhu.propra16.tddtrainer.catalog.*;
 
 public class ExecutorTest {
 	
