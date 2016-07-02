@@ -16,6 +16,8 @@ public class Exercise {
 	private List<JavaClass> tests;
 
 	public Exercise() {
+		name = "";
+		description = "";
 		code = new ArrayList<>();
 		tests = new ArrayList<>();
 	}
