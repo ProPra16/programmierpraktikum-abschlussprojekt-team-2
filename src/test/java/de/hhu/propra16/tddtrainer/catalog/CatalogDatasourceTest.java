@@ -13,12 +13,28 @@ public class CatalogDatasourceTest {
 	public void testFakeCatalogDatasource() {
 		CatalogDatasourceIF catalogDs = new FakeCatalogDatasource();
 		List<Exercise> excercises = catalogDs.loadCatalog();
-		Exercise ex = excercises.get(0);
-		String code = ex.getCode(0).getCode();
-		String test = ex.getTest(0).getCode();
+		String code1 = excercises.get(0).getCode(0).getCode();
+		String test1 = excercises.get(0).getTest(0).getCode();
 
-		assertEquals("public class WorkingCode {public int returnOne() {return 1;}}", code);
-		assertEquals("import static org.junit.Assert.*; import org.junit.Test; public class WorkingTest {	@Test public void testCode() {WorkingCode c = new WorkingCode(); assertEquals(1, c.returnOne());}}", test);
+		assertEquals("public class WorkingCode {public int returnOne() {return 1;}}", code1);
+		assertEquals("import static org.junit.Assert.*; import org.junit.Test; public class WorkingTest {@Test public void testCode() {WorkingCode c = new WorkingCode(); assertEquals(1, c.returnOne());}}", test1);
+		
+		String code2 = excercises.get(1).getCode(0).getCode();
+		String test2 = excercises.get(1).getTest(0).getCode();
+
+		assertEquals("public class CompileErrorCode {public int returnOne() {return 1;}}", code2);
+		assertEquals("import static org.junit.Assert.*; import org.junit.Test; public class CompileErrorTest {@Test public void testCode() {CompileErrorCode c = new CompileErrorCode(); assertEquals(2, c.returnTwo());}}", test2);
+
+		
+		String code3 = excercises.get(2).getCode(0).getCode();
+		String test3 = excercises.get(2).getTest(0).getCode();
+
+		assertEquals("public class TestErrorCode {public int returnOne() {return 2;}}", code3);
+		assertEquals("import static org.junit.Assert.*; import org.junit.Test; public class TestErrorTest {@Test public void testCode() {TestErrorCode c = new TestErrorCode(); assertEquals(1, c.returnOne());}}", test3);
+
+		
+		
+		
 	}
 	
 	/*

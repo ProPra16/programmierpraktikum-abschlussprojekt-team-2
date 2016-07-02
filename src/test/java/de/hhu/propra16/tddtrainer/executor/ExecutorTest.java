@@ -101,7 +101,7 @@ public class ExecutorTest {
 	}
 	
 	@Test
-	public void testExecuteWithExerciseFromCatalog() {
+	public void testExecuteWithExerciseFromCatalogNoError() {
 		CatalogDatasourceIF catalogDs = new FakeCatalogDatasource();
 		
 		Exercise exercise = catalogDs.loadCatalog().get(0);
@@ -109,6 +109,29 @@ public class ExecutorTest {
 		ExecutionResult result = new Executor().execute(exercise);
 		assertEquals(false, result.getCompilerResult().hasCompileErrors());
 		assertEquals(1, result.getTestResult().getNumberOfSuccessfulTests());
+	}
+	
+	
+	@Test
+	public void testExecuteWithExerciseFromCatalogCompileError() {
+		CatalogDatasourceIF catalogDs = new FakeCatalogDatasource();
+		
+		Exercise exercise = catalogDs.loadCatalog().get(1);
+		
+		ExecutionResult result = new Executor().execute(exercise);
+		assertEquals(true, result.getCompilerResult().hasCompileErrors());
+	}
+	
+	
+	@Test
+	public void testExecuteWithExerciseFromCatalogTestError() {
+		CatalogDatasourceIF catalogDs = new FakeCatalogDatasource();
+		
+		Exercise exercise = catalogDs.loadCatalog().get(2);
+		
+		ExecutionResult result = new Executor().execute(exercise);
+		assertEquals(false, result.getCompilerResult().hasCompileErrors());
+		assertEquals(1, result.getTestResult().getNumberOfFailedTests());
 	}
 	
 	@Test
