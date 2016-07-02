@@ -24,16 +24,21 @@ public class TestMain extends Application{
 		Executor executor = new Executor();
 		ExecutionResult result = executor.execute(exercise);
 		
-		PhaseStatus phaseStatus = new PhaseStatus(true, result, Phase.GREEN);
+		PhaseStatus phaseStatus = new PhaseStatus(true, result, Phase.RED);
 		PhaseStatus phaseStatus2 = new PhaseStatus(true, result, Phase.GREEN);
+		PhaseStatus phaseStatus3 = new PhaseStatus(false, result, Phase.REFACTOR);
 		
 		Thread.sleep(1000);
 		
 		trackingManager.track(exercise, phaseStatus);
 		
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		trackingManager.track(exercise, phaseStatus2);
+		
+		Thread.sleep(3000);
+		
+		trackingManager.track(exercise, phaseStatus3);
 		
 		trackingManager.displayInNewWindow();
 		
