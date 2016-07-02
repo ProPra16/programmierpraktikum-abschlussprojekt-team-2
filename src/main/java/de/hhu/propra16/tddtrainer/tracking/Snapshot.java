@@ -38,30 +38,39 @@ public class Snapshot {
 	    	}
 	}
 	
-	List<String> executionResultToList() {
-		String outputCompile = "";
-		String outputTest = "";
+	List<String> compilationResultToList() {
+		
+		List<String> result = new ArrayList<>();
 
 		for(CompilationResult compilationResult:  phaseStatus.getExecutionResult().getCompileErrors()) {
 			List<CompileError> compileErrors = compilationResult.getCompileErrors();
 			for(CompileError compileError : compileErrors) {
-				outputCompile += compileError.getMessage() + "\n";
+				String outputCompile = compileError.getMessage();
+				result.add(outputCompile);
 			}
 		}
-		TestResult testresult = phaseStatus.getExecutionResult().getTestResult();
+
 		
-		Collection<TestFailure> testFailures = testresult.getTestFailures();
 		
-		for(TestFailure testFail : testFailures) {
-			outputTest += testFail.getMessage() + "\n";
-		}
+		
+				
+		return result;
+	}
+	
+	List<String> testResultToList(){
 		
 		List<String> result = new ArrayList<>();
 		
-		result.add(outputCompile);
-		result.add(outputTest);
-				
+		TestResult testresult = phaseStatus.getExecutionResult().getTestResult();
+		Collection<TestFailure> testFailures = testresult.getTestFailures();
+		
+		for(TestFailure testFail : testFailures) {
+			String outputTest = testFail.getMessage();
+			result.add(outputTest);
+		}
+		
 		return result;
+		 
 	}
 	
 }
