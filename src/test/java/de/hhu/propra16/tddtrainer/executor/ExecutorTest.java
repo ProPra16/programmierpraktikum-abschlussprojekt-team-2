@@ -110,4 +110,59 @@ public class ExecutorTest {
 		assertEquals(false, result.getCompilerResult().hasCompileErrors());
 		assertEquals(1, result.getTestResult().getNumberOfSuccessfulTests());
 	}
+	
+	@Test
+	public void testExecuteWithCompileErrorMessageNameOfClass() {
+		JavaClass code = new JavaClass("Main",
+				"public class Main {\n"
+				+ "public static void main(String[] args) {\n"
+				+ "String s = ausgabe(\"Hallo Welt\");\n"
+				+ "}\n"
+				+ "public static String ausgabe(String string){\n"
+				+ "return string + \"!\";\n"
+				+ "}\n");
+			JavaClass test = new JavaClass("JunitTest",
+				"import static org.junit.Assert.*;\n"
+				+ "import org.junit.Test;\n"
+				+ "public class JunitTest {\n"
+				+ "@Test\n"
+				+ "public void testMain() {\n"
+				+ "assertEquals(\"Hallo Welt!\", Main.ausgabe(\"Hallo Welt\"));\n"
+				+ "}\n"
+				+ "}\n");
+			Exercise exercise = new Exercise();
+			exercise.addCode(code);
+			exercise.addTest(test);
+			
+			ExecutionResult result = new Executor().execute(exercise);
+			assertEquals("Main", result.getCompileErrors().get(0).get(0));
+	}
+	
+	@Test
+	public void testExecuteWithCompileErrorMessageError() {
+		JavaClass code = new JavaClass("Main",
+				"public class Main {\n"
+				+ "public static void main(String[] args) {\n"
+				+ "String s = ausgabe(\"Hallo Welt\");\n"
+				+ "}\n"
+				+ "public static String ausgabe(String string){\n"
+				+ "return string + \"!\";\n"
+				+ "}\n");
+			JavaClass test = new JavaClass("JunitTest",
+				"import static org.junit.Assert.*;\n"
+				+ "import org.junit.Test;\n"
+				+ "public class JunitTest {\n"
+				+ "@Test\n"
+				+ "public void testMain() {\n"
+				+ "assertEquals(\"Hallo Welt!\", Main.ausgabe(\"Hallo Welt\"));\n"
+				+ "}\n"
+				+ "}\n");
+			Exercise exercise = new Exercise();
+			exercise.addCode(code);
+			exercise.addTest(test);
+			
+			ExecutionResult result = new Executor().execute(exercise);
+			assertEquals("reached end of file while parsing", result.getCompileErrors().get(0).get(1));
+	}
+	
 }
