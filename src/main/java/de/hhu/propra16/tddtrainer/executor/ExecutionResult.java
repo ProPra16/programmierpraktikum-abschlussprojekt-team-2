@@ -14,11 +14,10 @@ public class ExecutionResult {
 
 	private CompilerResult compilerResult;
 	private TestResult testResult;
-	private List<CompilationResult> compileErrors;
+	private List<CompilationResult> compileErrors = new ArrayList<>();
 	
 	public ExecutionResult(CompilerResult cr, List<CompilationUnit> fcu) {
 		compilerResult = cr;
-		compileErrors = new ArrayList<>();
 		for(CompilationUnit cu : fcu) {
 			compileErrors.add(new CompilationResult(cu.getClassName(), new ArrayList<>(cr.getCompilerErrorsForCompilationUnit(cu))));
 		}
