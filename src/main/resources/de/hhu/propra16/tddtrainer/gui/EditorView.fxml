@@ -16,8 +16,11 @@
 					<content>
 						<AnchorPane style="-fx-background-color: white;">
 							<children>
-								<TextArea fx:id="tests" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="316.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
-								<Label layoutX="14.0" layoutY="-1.0" text="Tests" textFill="#6f8391">
+								<TextArea fx:id="code" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="316.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextArea>
+								<Label layoutX="14.0" layoutY="-1.0" text="Code" textFill="#6f8391">
 									<font>
 										<Font name="System Bold" size="21.0" />
 									</font>
@@ -30,8 +33,11 @@
 					<content>
 						<AnchorPane style="-fx-background-color: white;">
 							<children>
-								<TextArea fx:id="code" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="316.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
-								<Label layoutX="15.0" text="Code" textFill="#6f8391">
+								<TextArea fx:id="tests" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="333.0" prefWidth="316.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font></TextArea>
+								<Label layoutX="15.0" text="Tests" textFill="#6f8391">
 									<font>
 										<Font name="System Bold" size="21.0" />
 									</font>
