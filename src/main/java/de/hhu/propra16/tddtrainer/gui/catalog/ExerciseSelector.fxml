@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelectorController">
+   <bottom>
+      <HBox prefHeight="29.0" prefWidth="566.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <Button fx:id="selectButton" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Select" />
+            <Button fx:id="cancelButton" alignment="TOP_LEFT" cancelButton="true" mnemonicParsing="false" text="Cancel" />
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <left>
+      <VBox prefHeight="285.0" prefWidth="280.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Exercise" />
+            <ListView fx:id="exerciseList" prefHeight="264.0" prefWidth="288.0" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="285.0" prefWidth="270.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Description" />
+            <TextArea fx:id="descriptionField" editable="false" prefHeight="264.0" prefWidth="306.0" wrapText="true" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

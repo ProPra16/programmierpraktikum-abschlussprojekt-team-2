@@ -1,5 +1,7 @@
 package de.hhu.propra16.tddtrainer.executor;
 
+import java.util.ArrayList;
+
 /**
  * takes an exercise and computes the corresponding execution result.
  * returns an object of type ExecutionResult which holds an object of type CompilerResult and
@@ -37,7 +39,13 @@ public class Executor {
 			return executionResult;
 		}
 		else {
-			ExecutionResult executionResult = new ExecutionResult(compilerResult);
+			List<CompilationUnit> failedCompilationUnits = new ArrayList<>();
+			for(CompilationUnit cu : units) {
+				if(compilerResult.getCompilerErrorsForCompilationUnit(cu) != null) {
+					failedCompilationUnits.add(cu);
+				}
+			}
+			ExecutionResult executionResult = new ExecutionResult(compilerResult, failedCompilationUnits);
 			return executionResult;
 		}
 		
