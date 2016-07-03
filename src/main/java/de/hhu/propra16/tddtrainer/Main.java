@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.google.common.eventbus.EventBus;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,11 +13,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	private BorderPane rootLayout;
+	
     public static void main(String[] args) {
         launch(args);
     }
-
-	private BorderPane rootLayout;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -23,7 +25,7 @@ public class Main extends Application {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			Locale locale = new Locale("de", "DE");
+			Locale locale = new Locale("en", "EN");
 			loader.setResources(ResourceBundle.getBundle("bundles.tddt", locale));
 			loader.setLocation(Main.class.getResource("gui/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
@@ -34,4 +36,5 @@ public class Main extends Application {
 		
 		primaryStage.show();
 	}
+	
 }

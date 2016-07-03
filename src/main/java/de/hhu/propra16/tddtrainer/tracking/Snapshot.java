@@ -7,7 +7,6 @@ import java.util.List;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.executor.CompilationResult;
-import de.hhu.propra16.tddtrainer.logic.Phase;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
 import javafx.scene.paint.Color;
 import vk.core.api.CompileError;
@@ -27,7 +26,6 @@ public class Snapshot {
 	}
 	
 	Color getColor(){
-		
 	    	switch(phaseStatus.getPhase()) {
 	    	case RED:
 	    		return Color.RED;
@@ -39,7 +37,6 @@ public class Snapshot {
 	}
 	
 	List<String> compilationResultToList() {
-		
 		List<String> result = new ArrayList<>();
 
 		for(CompilationResult compilationResult:  phaseStatus.getExecutionResult().getCompileErrors()) {
@@ -48,17 +45,11 @@ public class Snapshot {
 				String outputCompile = compileError.getMessage();
 				result.add(outputCompile);
 			}
-		}
-
-		
-		
-		
-				
+		}		
 		return result;
 	}
 	
 	List<String> testResultToList(){
-		
 		List<String> result = new ArrayList<>();
 		
 		TestResult testresult = phaseStatus.getExecutionResult().getTestResult();
@@ -68,9 +59,6 @@ public class Snapshot {
 			String outputTest = testFail.getMessage();
 			result.add(outputTest);
 		}
-		
 		return result;
-		 
 	}
-	
 }
