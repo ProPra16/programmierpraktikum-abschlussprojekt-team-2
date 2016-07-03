@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="335.0" prefWidth="640.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.gui.EditorViewController">
 	<children>
-		<SplitPane dividerPositions="0.5" layoutX="-1.0" layoutY="1.0" prefHeight="315.0" prefWidth="640.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+		<SplitPane dividerPositions="0.5" layoutX="-1.0" layoutY="1.0" prefHeight="315.0" prefWidth="640.0" style="-fx-background-color: white;" stylesheets="@editorView.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
 			<items>
 				<ScrollPane fitToHeight="true" fitToWidth="true" minWidth="140.0">
 					<content>
@@ -48,7 +48,7 @@
 				</ScrollPane>
 			</items>
 		</SplitPane>
-		<Button layoutX="553.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleNextStep" style="-fx-background-color: #6f8391;" text="%nextStep" textFill="WHITE" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+		<Button fx:id="nextStepButton" disable="true" layoutX="553.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleNextStep" style="-fx-background-color: #6f8391;" text="%nextStep" textFill="WHITE" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -57,9 +57,9 @@
 				<Font name="System Bold" size="21.0" />
 			</font>
 		</Label>
-      <Label fx:id="statusLabel" layoutX="24.0" layoutY="17.0" text="RED" textFill="#6f8391" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="10.0">
+      <Label fx:id="statusLabel" layoutX="107.0" layoutY="8.0" stylesheets="@editorView.css" textFill="#6f8391" AnchorPane.leftAnchor="107.0" AnchorPane.topAnchor="8.0">
          <font>
-            <Font name="System Bold" size="21.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
       </Label>
 	</children>

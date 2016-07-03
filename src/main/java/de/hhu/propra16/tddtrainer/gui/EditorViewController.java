@@ -10,6 +10,7 @@ import de.hhu.propra16.tddtrainer.events.NewExerciseEvent;
 import de.hhu.propra16.tddtrainer.logic.Phase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
@@ -23,6 +24,9 @@ public class EditorViewController {
 
 	@FXML
 	private Label statusLabel;
+	
+    @FXML
+    private Button nextStepButton;
 
 	public void initialize() {
 		MyEventBus.getInstance().register(this);
@@ -30,7 +34,9 @@ public class EditorViewController {
 
 	@FXML
 	private void handleNextStep(ActionEvent event) {
-
+		Exercise exercise = newExerciseFromCurrentInput();
+		
+		//TODO notify PhaseManager - IF or EventBus??
 	}
 
 	@Subscribe
@@ -44,6 +50,8 @@ public class EditorViewController {
 		for (JavaClass jclass : exercise.getTests()) {
 			tests.appendText(jclass.getCode());
 		}
+		changePhaseToRed();
+		nextStepButton.setDisable(false);
 	}
 
 	@Subscribe
@@ -63,16 +71,35 @@ public class EditorViewController {
 		}
 	}
 
-	private void changePhaseToRefactor() {
-		statusLabel.setText("REFACTOR");
+	private void changePhaseToRed() {
+		statusLabel.setText("red");
+		statusLabel.getStyleClass().clear();
+		statusLabel.getStyleClass().add("statuslabel-red");
+		code.setDisable(true);
+		tests.setDisable(false);
 	}
 
 	private void changePhaseToGreen() {
-		statusLabel.setText("GREEN");
+		statusLabel.setText("green");
+		statusLabel.getStyleClass().clear();
+		statusLabel.getStyleClass().add("statuslabel-green");
+		code.setDisable(false);
+		tests.setDisable(true);
 	}
 
-	private void changePhaseToRed() {
-		statusLabel.setText("RED");
+	private void changePhaseToRefactor() {
+		statusLabel.setText("refactor");
+		statusLabel.getStyleClass().clear();
+		statusLabel.getStyleClass().add("statuslabel-refactor");
+		code.setDisable(false);
+		tests.setDisable(false);
+	}
+
+	private Exercise newExerciseFromCurrentInput() {
+		Exercise exercise = new Exercise();
+		exercise.addCode(new JavaClass("", code.getText()));
+		exercise.addTest(new JavaClass("", tests.getText()));
+		return exercise;
 	}
 
 }
