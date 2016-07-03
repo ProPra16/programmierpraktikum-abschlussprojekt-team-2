@@ -8,7 +8,12 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import de.hhu.propra16.tddtrainer.Main;
+import de.hhu.propra16.tddtrainer.catalog.Exercise;
+import de.hhu.propra16.tddtrainer.catalog.FakeCatalogDatasource;
+import de.hhu.propra16.tddtrainer.catalog.JavaClass;
+import de.hhu.propra16.tddtrainer.events.MyEventBus;
+import de.hhu.propra16.tddtrainer.events.NewExerciseEvent;
+import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +52,7 @@ public class RootLayoutController implements Initializable {
 	}
 
 	@FXML
-	void changeLanguage(ActionEvent event) {
+	private void changeLanguage(ActionEvent event) {
 		List<String> choices = new ArrayList<>();
 		choices.add("English");
 		choices.add("Deutsch");
@@ -76,6 +81,17 @@ public class RootLayoutController implements Initializable {
 			} 
 		}
 
+	}
+	
+	@FXML
+	private void selectExercise(ActionEvent event) {
+		//new ExerciseSelector(new FakeCatalogDatasource()).selectExercise();
+		
+		Exercise working = new Exercise("Working Excercise", "This is a working exercise");
+		working.addCode(new JavaClass("WorkingCode", "public class WorkingCode {public int returnOne() {return 1;}}"));
+		working.addTest(new JavaClass("WorkingTest", "import static org.junit.Assert.*; import org.junit.Test; public class WorkingTest {@Test public void testCode() {WorkingCode c = new WorkingCode(); assertEquals(1, c.returnOne());}}"));
+		
+		MyEventBus.getInstance().post(new NewExerciseEvent(working));
 	}
 
 	private void restart(Locale locale) {

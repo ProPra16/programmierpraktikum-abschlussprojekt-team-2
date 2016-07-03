@@ -9,6 +9,11 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
+            <Menu mnemonicParsing="false" text="%menu.catalog">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#selectExercise" text="%menu.catalog.exercise" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="%menu.settings">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#changeLanguage" text="%menu.settings.language" />
