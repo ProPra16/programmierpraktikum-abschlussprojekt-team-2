@@ -1,0 +1,32 @@
+@font-face { 
+    src: url('/fonts/Swagger/Swagger.ttf'); 
+} 
+
+
+.split-pane > .split-pane-divider {
+    -fx-padding: 0 1 0 1; /* 0 3 0 3 */
+
+}
+
+.split-pane:horizontal > .split-pane-divider {
+   -fx-background-color: #6f8391;
+   -fx-background-insets: 0;
+}
+
+.statuslabel-red {
+	-fx-text-fill: crimson;
+	-fx-font-family: 'Swagger';
+	-fx-font-weight: bold;
+}
+
+.statuslabel-green {
+	-fx-text-fill: forestgreen;
+	-fx-font-family: 'Swagger';
+	-fx-font-weight: bold;
+}
+
+.statuslabel-refactor {
+	-fx-text-fill: grey;
+	-fx-font-family: 'Swagger';
+	-fx-font-weight: bold;
+}
