@@ -9,8 +9,8 @@
    <bottom>
       <HBox prefHeight="29.0" prefWidth="566.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="selectButton" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Select" />
-            <Button fx:id="cancelButton" alignment="TOP_LEFT" cancelButton="true" mnemonicParsing="false" text="Cancel" />
+            <Button fx:id="selectButton" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#selectButtonAction" text="Select" />
+            <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
          </children>
          <padding>
             <Insets top="20.0" />
