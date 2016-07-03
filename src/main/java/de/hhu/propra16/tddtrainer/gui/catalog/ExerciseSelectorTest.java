@@ -15,7 +15,7 @@ public class ExerciseSelectorTest extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		new ExerciseSelector(new FakeCatalogDatasource()).selectExercise();
+		System.out.println(new ExerciseSelector(new FakeCatalogDatasource()).selectExercise());
 	}
 	
 }

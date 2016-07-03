@@ -3,6 +3,11 @@ package de.hhu.propra16.tddtrainer.catalog;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A dummy {@link CatalogDatasourceIF} implementation which contains three exercieses where the first has no errors, the second has a compile error and the third has a test error.
+ * @author Marcel
+ *
+ */
 public class FakeCatalogDatasource implements CatalogDatasourceIF {
 
 	@Override
