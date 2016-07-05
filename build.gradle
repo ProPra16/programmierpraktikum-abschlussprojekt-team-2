@@ -3,6 +3,19 @@ apply plugin: "eclipse"
 
 sourceCompatibility = 1.8
 
+task fatJar(type: Jar) {
+	manifest {
+		attributes 'Main-Class' : 'de.hhu.propra16.tddtrainer.Main',
+				   'Implementation-Version': '1.0.0',
+				   'Implementation-Title': 'TDD-Trainer'
+	}
+	baseName = 'TDD Trainer'
+	from {
+		configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
+	}
+	with jar
+}
+
 repositories {
 	mavenCentral()
 }
