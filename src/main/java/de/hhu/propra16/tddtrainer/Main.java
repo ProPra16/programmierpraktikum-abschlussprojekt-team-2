@@ -1,11 +1,13 @@
 package de.hhu.propra16.tddtrainer;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.tools.ToolProvider;
 
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
 import de.hhu.propra16.tddtrainer.catalog.FakeCatalogDatasource;
@@ -25,6 +27,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private BorderPane rootLayout;
+	private Stage primaryStage;
+	private EventBus bus;
+	private PhaseManagerIF phaseManager;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -32,6 +37,9 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		this.primaryStage = primaryStage;
+		primaryStage.setTitle("TDDTrainer");
+		primaryStage.setOnCloseRequest((e) -> System.exit(0));
 		if(ToolProvider.getSystemJavaCompiler() == null){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error: No Java Compiler");
@@ -43,32 +51,35 @@ public class Main extends Application {
 			return;
 		}
 		
-		EventBus bus = new EventBus();
+		bus = new EventBus();
+		bus.register(this);
 		TrackingManager trackingManager = new TrackingManager();
 		CatalogDatasourceIF datasource = new FakeCatalogDatasource();
 		ExerciseSelector exerciseSelector = new ExerciseSelector(datasource);
 		bus.register(exerciseSelector);
+		phaseManager = new PhaseManager(trackingManager, exerciseSelector, bus);
 		
 		Locale locale = new Locale("en", "EN");
 		ResourceBundle bundle = ResourceBundle.getBundle("bundles.tddt", locale);
 		bus.post(new LanguageChangeEvent(bundle));
+	}
+	
+	@Subscribe
+	public void initRootLayout(LanguageChangeEvent event) throws IOException {
+		ResourceBundle bundle = event.getBundle();
 		
-		PhaseManagerIF phaseManager = new PhaseManager(trackingManager, exerciseSelector, bus);
-		
-		primaryStage.setTitle("TDDTrainer");
-
 		FXMLLoader loader = new FXMLLoader();
-		
 		loader.setResources(bundle);
 		loader.setLocation(Main.class.getResource("gui/RootLayout.fxml"));
 		rootLayout = (BorderPane) loader.load();
 		RootLayoutController controller = loader.getController();
 		controller.init(phaseManager, bus);
 		primaryStage.setScene(new Scene(rootLayout));
-		primaryStage.setOnCloseRequest((e) -> System.exit(0));
 		primaryStage.show();
 		primaryStage.setMinWidth(1000);
 		primaryStage.setMinHeight(600);
 	}
+	
+	
 
 }
