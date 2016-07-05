@@ -1,5 +1,7 @@
 package de.hhu.propra16.tddtrainer.gui;
 
+import org.fxmisc.richtext.CodeArea;
+
 import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
@@ -12,34 +14,39 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 
 public class EditorViewController {
 
-	@FXML
-	private TextArea tests;
+	private CodeArea tests;
+	private CodeArea code;
 
 	@FXML
-	private TextArea code;
+	private AnchorPane codePane;
+	
+	@FXML
+	private AnchorPane testPane;
 
 	@FXML
 	private Label statusLabel;
-	
+
 	@FXML
 	private Label exerciseLabel;
-	
-    @FXML
-    private Button nextStepButton;
+
+	@FXML
+	private Button nextStepButton;
 
 	public void initialize() {
 		MyEventBus.getInstance().register(this);
+		
+		addEditors();	
 	}
 
 	@FXML
 	private void handleNextStep(ActionEvent event) {
 		Exercise exercise = newExerciseFromCurrentInput();
-		
-		//TODO notify PhaseManager - IF or EventBus??
+
+		// TODO notify PhaseManager - IF or EventBus??
 	}
 
 	@Subscribe
@@ -104,6 +111,22 @@ public class EditorViewController {
 		exercise.addCode(new JavaClass("", code.getText()));
 		exercise.addTest(new JavaClass("", tests.getText()));
 		return exercise;
+	}
+
+	private void addEditors() {
+		code = new JavaCodeArea();
+		codePane.getChildren().add(code);
+		AnchorPane.setTopAnchor(code, 50.0);
+		AnchorPane.setLeftAnchor(code, 20.0);
+		AnchorPane.setRightAnchor(code, 20.0);
+		AnchorPane.setBottomAnchor(code, 5.0);
+		
+		tests = new JavaCodeArea();
+		testPane.getChildren().add(tests);
+		AnchorPane.setTopAnchor(tests, 50.0);
+		AnchorPane.setLeftAnchor(tests, 20.0);
+		AnchorPane.setRightAnchor(tests, 20.0);
+		AnchorPane.setBottomAnchor(tests, 5.0);
 	}
 
 }
