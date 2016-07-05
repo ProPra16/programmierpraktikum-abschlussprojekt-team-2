@@ -1,4 +1,4 @@
-package de.hhu.propra16.tddtrainer.babysteps;
+package babysteps;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
