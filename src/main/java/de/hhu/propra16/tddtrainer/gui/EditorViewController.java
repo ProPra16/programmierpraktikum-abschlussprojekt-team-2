@@ -44,6 +44,7 @@ public class EditorViewController {
 	private Button nextStepButton;
 	
 	private PhaseManagerIF phaseManager;
+	private RootLayoutController rootLayoutController;
 
 	public void initialize() {		
 		addEditors();	
@@ -103,34 +104,31 @@ public class EditorViewController {
 		statusLabel.setText("red");
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-red");
-		code.setStylesheet(true);
-		code.setDisable(true);
-		tests.setDisable(false);
-		tests.setStylesheet(false);
+		code.disable(true);
+		tests.disable(false);
+		rootLayoutController.enableReset(true);
 	}
 
 	private void changePhaseToGreen() {
 		statusLabel.setText("green");
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-green");		
-		code.setDisable(false);
-		code.setStylesheet(false);
-		tests.setStylesheet(true);
-		tests.setDisable(true);	
+		code.disable(false);
+		tests.disable(true);
+		rootLayoutController.enableReset(true);
 	}
 
 	private void changePhaseToRefactor() {
 		statusLabel.setText("refactor");
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-refactor");
-		code.setDisable(false);
-		code.setStylesheet(false);
-		tests.setDisable(false);
-		tests.setStylesheet(false);
+		code.disable(false);
+		tests.disable(false);
+		rootLayoutController.enableReset(false);
 	}
 
 	private Exercise newExerciseFromCurrentInput() {
-		Exercise exercise = new Exercise();
+		Exercise exercise = new Exercise(exerciseLabel.getText(), "");
 		exercise.addCode(new JavaClass(codeLabel.getText(), code.getText()));
 		exercise.addTest(new JavaClass(testLabel.getText(), tests.getText()));
 		return exercise;
@@ -138,6 +136,7 @@ public class EditorViewController {
 
 	private void addEditors() {
 		code = new JavaCodeArea();
+		code.disable(true);
 		codePane.getChildren().add(code);
 		AnchorPane.setTopAnchor(code, 50.0);
 		AnchorPane.setLeftAnchor(code, 20.0);
@@ -145,6 +144,7 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(code, 5.0);
 		
 		tests = new JavaCodeArea();
+		tests.disable(true);
 		testPane.getChildren().add(tests);
 		AnchorPane.setTopAnchor(tests, 50.0);
 		AnchorPane.setLeftAnchor(tests, 20.0);
@@ -152,9 +152,10 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(tests, 5.0);
 	}
 
-	public void init(PhaseManagerIF phaseManager, EventBus bus) {
+	public void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
 		this.phaseManager = phaseManager;
-		bus.register(this);
+		this.rootLayoutController = rootLayoutController;
+		rootLayoutController.enableReset(false);
 	}
 
 }
