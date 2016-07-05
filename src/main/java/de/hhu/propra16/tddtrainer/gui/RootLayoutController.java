@@ -89,7 +89,7 @@ public class RootLayoutController implements Initializable {
 	
 	@FXML
 	private void showProgress(ActionEvent event) {
-		
+		phaseManager.displayTracking();
 	}
 	
 	@FXML
