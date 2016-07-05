@@ -106,6 +106,7 @@ public class EditorViewController {
 		statusLabel.getStyleClass().add("statuslabel-red");
 		code.disable(true);
 		tests.disable(false);
+		rootLayoutController.enableReset(true);
 	}
 
 	private void changePhaseToGreen() {
@@ -113,7 +114,8 @@ public class EditorViewController {
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-green");		
 		code.disable(false);
-		tests.disable(true);	
+		tests.disable(true);
+		rootLayoutController.enableReset(true);
 	}
 
 	private void changePhaseToRefactor() {
@@ -122,6 +124,7 @@ public class EditorViewController {
 		statusLabel.getStyleClass().add("statuslabel-refactor");
 		code.disable(false);
 		tests.disable(false);
+		rootLayoutController.enableReset(false);
 	}
 
 	private Exercise newExerciseFromCurrentInput() {
@@ -152,6 +155,7 @@ public class EditorViewController {
 	public void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
 		this.phaseManager = phaseManager;
 		this.rootLayoutController = rootLayoutController;
+		rootLayoutController.enableReset(false);
 	}
 
 }
