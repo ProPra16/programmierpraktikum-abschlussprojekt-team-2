@@ -30,7 +30,7 @@ public class BabystepsManager implements BabystepsManagerIF{
 				new Thread(() -> {
 					while(!stopped) {
 						nowTime = LocalDateTime.now();
-						long dTime = nowTime.until(startTime, ChronoUnit.SECONDS);
+						long dTime = startTime.until(nowTime, ChronoUnit.SECONDS);
 		
 			    		if(dTime > phaseTime) {
 							phaseManager.resetPhase();
@@ -51,16 +51,11 @@ public class BabystepsManager implements BabystepsManagerIF{
 		}
 	}
 	
-	public void next() {
-		
-	}
-	
 	public void stop() {
 		if(this.status) {
 			this.stopped = true;
 		}
-	}
-	
+	}	
 	public void enable(){
 		this.status = true;
 	}
