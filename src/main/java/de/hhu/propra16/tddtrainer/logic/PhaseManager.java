@@ -101,11 +101,14 @@ public class PhaseManager implements PhaseManagerIF {
 	}
 	
 	public void selectExercise() {
-		originalExercise = validExercise = exerciseSelector.selectExercise();
-		
-		if(validExercise != null) {
-			bus.post(new ExerciseEvent(validExercise));
+		Exercise exercise = exerciseSelector.selectExercise();
+		if(exercise == null) {
+			return;
 		}
+		
+		originalExercise = validExercise = exercise;
+		
+		bus.post(new ExerciseEvent(validExercise));
 		babystepsManager.start(originalExercise.getBabyStepsTestTime());
 	}
 	

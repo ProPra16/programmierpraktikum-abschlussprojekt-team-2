@@ -44,7 +44,6 @@ public class EditorViewController {
 	private Button nextStepButton;
 	
 	private PhaseManagerIF phaseManager;
-	private EventBus bus;
 
 	public void initialize() {		
 		addEditors();	
@@ -62,15 +61,21 @@ public class EditorViewController {
 		Exercise exercise = exerciseEvent.getExercise();
 
 		for (JavaClass jclass : exercise.getCode()) {
+			boolean wasDisabled = code.isDisable();
+			code.setDisable(false);
 			code.clear();
 			code.appendText(jclass.getCode());
 			codeLabel.setText(jclass.getName());
+			code.setDisable(wasDisabled);
 		}
 
 		for (JavaClass jclass : exercise.getTests()) {
+			boolean wasDisabled = code.isDisable();
+			tests.setDisable(false);
 			tests.clear();
 			tests.appendText(jclass.getCode());
 			testLabel.setText(jclass.getName());
+			tests.setDisable(wasDisabled);
 		}
 		changePhaseToRed();
 		nextStepButton.setDisable(false);
@@ -143,7 +148,6 @@ public class EditorViewController {
 
 	public void init(PhaseManagerIF phaseManager, EventBus bus) {
 		this.phaseManager = phaseManager;
-		this.bus = bus;		
 		bus.register(this);
 	}
 
