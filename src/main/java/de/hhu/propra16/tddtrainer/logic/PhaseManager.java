@@ -2,6 +2,7 @@ package de.hhu.propra16.tddtrainer.logic;
 
 import com.google.common.eventbus.EventBus;
 
+import de.hhu.propra16.tddtrainer.babysteps.BabystepsManager;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.events.ExerciseEvent;
 import de.hhu.propra16.tddtrainer.executor.*;
@@ -16,11 +17,14 @@ public class PhaseManager implements PhaseManagerIF {
 	private TrackingManager trackingManager;
 	private EventBus bus;
 	private ExerciseSelector exerciseSelector;
+	private BabystepsManager babystepsManager;
+	private Exercise originalExercise;
 	
 	public PhaseManager(TrackingManager trackingManager, ExerciseSelector exerciseSelector, EventBus bus) {
 		this.trackingManager = trackingManager;
 		this.bus = bus;
 		this.exerciseSelector = exerciseSelector;
+		this.babystepsManager = new BabystepsManager(this);
 	}
 
 	@Override
@@ -47,6 +51,8 @@ public class PhaseManager implements PhaseManagerIF {
 			if(valid) {
 				if(continuePhase) {
 					phase = Phase.GREEN;
+					babystepsManager.stop();
+					babystepsManager.start(originalExercise.getBabyStepsCodeTime());
 				}
 				validExercise = exercise;
 			}
@@ -59,9 +65,11 @@ public class PhaseManager implements PhaseManagerIF {
 				if(continuePhase) {
 					if(phase.equals(Phase.GREEN)) {
 						phase = Phase.REFACTOR;
+						babystepsManager.stop();
 					}
 					else {
 						phase = Phase.RED;
+						babystepsManager.start(originalExercise.getBabyStepsTestTime());
 					}
 				}
 				validExercise = exercise;
@@ -88,15 +96,18 @@ public class PhaseManager implements PhaseManagerIF {
 		if(phase.equals(Phase.GREEN)) {
 			phase = Phase.RED;
 		}
+		babystepsManager.stop();
+		babystepsManager.start(originalExercise.getBabyStepsTestTime());
 		
 		bus.post(new ExerciseEvent(validExercise));
 	}
 	
 	public void selectExercise() {
-		validExercise = exerciseSelector.selectExercise();
+		originalExercise = validExercise = exerciseSelector.selectExercise();
 		
 		if(validExercise != null) {
 			bus.post(new ExerciseEvent(validExercise));
 		}
+		babystepsManager.start(originalExercise.getBabyStepsTestTime());
 	}
 }

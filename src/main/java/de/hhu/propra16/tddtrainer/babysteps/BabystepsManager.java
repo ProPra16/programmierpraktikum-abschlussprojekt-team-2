@@ -3,74 +3,63 @@ package de.hhu.propra16.tddtrainer.babysteps;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-import de.hhu.propra16.tddtrainer.catalog.Exercise;
-import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
+import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 
-/**
- * 
- * PhaseManager - Methode: checkPhase - als erstes babysteps.check(validExercise, exercise, phaseStatus);
- *	
- * Exercise SelectorController
- * 		benötigt Button / 2 x Input für RED & GREEN Time
- * 	
- * 	RootLayoutController 
- * 		
- * 		bentötigt Alert o.ä. optisches Feedback für Reset durch Timeout
- *
- */
-
-
-public class BabystepsManager extends Thread implements BabystepsManagerIF{
+public class BabystepsManager implements BabystepsManagerIF{
 	
+	PhaseManagerIF phaseManager;
 	private boolean status = false;
-	private int phaseTime_RED = 0;	
-	private int phaseTime_GREEN = 0;
+	private boolean running = false;
 	private LocalDateTime startTime;
 	private LocalDateTime nowTime;
-	private String errorMsg = "Reset timeout";
+	private boolean stopped = true;
 	
-	public BabystepsManager() {}
-	
-	@Override
-	public Exercise check(Exercise mValidExercise, Exercise mExercise, PhaseStatus mPhaseStatus) {
-		nowTime = LocalDateTime.now();
-		long dTime = nowTime.until(startTime, ChronoUnit.MINUTES);
-		
-		switch(mPhaseStatus.getPhase()) {
-    	case RED:
-    		if(dTime > phaseTime_RED) return mValidExercise;
-    		return mExercise;
-    	case GREEN:
-    		if(dTime > phaseTime_GREEN) return mValidExercise;
-    		return mExercise;
-    	default:
-    		return mExercise;
-    	}
-	}
-	
-	public void start() {
-		startTime = LocalDateTime.now();
-	}
-	
-	public boolean getStatus() {
-		return this.status;
+	public BabystepsManager(PhaseManagerIF phaseManager) {
+		this.phaseManager = phaseManager;
 	}
 	
 	@Override
-	public void activator(int mPhaseTime_GREEN, int mPhaseTime_RED) {
-		changeStatus();
-		this.phaseTime_GREEN = mPhaseTime_GREEN;
-		this.phaseTime_RED = mPhaseTime_RED;
-		start();
+	public synchronized void start(int mPhaseTime) {
+		if(this.status) {
+			if(!running) {
+				running = true;
+				stopped = false;
+				startTime = LocalDateTime.now();
+				new Thread(() -> {
+					while(!stopped) {
+						nowTime = LocalDateTime.now();
+						long dTime = nowTime.until(startTime, ChronoUnit.SECONDS);
 		
-	}
-	
-	public void changeStatus() {
-		if (this.status == false) {
-			this.status = true;
-			return;
+			    		if(dTime > mPhaseTime) {
+							phaseManager.resetPhase();
+							running = false;
+							return;
+			    		};
+						
+						try {
+							Thread.sleep(100);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}	
+				})
+				.start();
+			}
 		}
+	}
+	
+	public void stop() {
+		if(this.status) {
+			this.stopped = true;
+		}
+	}
+	
+	public void enable(){
+		this.status = true;
+	}
+	
+	public void disable(){
 		this.status = false;
 	}
-		
 }

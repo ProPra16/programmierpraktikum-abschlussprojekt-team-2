@@ -1,5 +1,29 @@
 <exercises>
-	<exercise name="Funktionierender Test">
+	<exercise name="Hallo Welt!">
+		<description>Schreiben Sie eine Methode, welche keine Parameter bekommt und beim Aufruf "Hallo Welt!" ausgibt.
+Überladen Sie die Methode außerdem, so dass diese einen String Parameter bekommt und diesen statt "Welt" ausgibt ("Hallo {param}!")</description>
+		<classes>
+			<class name="HelloWorld">
+public class HelloWorld {
+	// Implementieren Sie Ihre Methoden hier
+}
+			</class>
+		</classes>
+		<tests>
+			<test name="HelloWorldTest">
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class HelloWorldTest {
+	@Test
+	public void test() {
+		// implementieren Sie Ihren Test hier
+	}
+}
+			</test>
+		</tests>
+	</exercise>
+	<exercise name="Multiplikator">
 		<description>Ein beits funktionierender Test.
 Normalerweise werden Tests und Klassen im Katalog unvollständig sein, da diese vom Benutzer geschrieben werden müssen</description>
 		<classes>

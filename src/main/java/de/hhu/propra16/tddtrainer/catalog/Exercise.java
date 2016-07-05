@@ -14,10 +14,14 @@ public class Exercise {
 	private String description;
 	private List<JavaClass> code;
 	private List<JavaClass> tests;
+	private int babyStepsCodeTime;
+	private int babyStepsTestTime;
 
 	public Exercise() {
 		name = "";
 		description = "";
+		babyStepsCodeTime = 60;
+		babyStepsTestTime = 60;
 		code = new ArrayList<>();
 		tests = new ArrayList<>();
 	}
@@ -54,6 +58,14 @@ public class Exercise {
 		return tests.get(index);
 	}
 	
+	public int getBabyStepsCodeTime() {
+		return babyStepsCodeTime;
+	}
+
+	public int getBabyStepsTestTime() {
+		return babyStepsTestTime;
+	}
+
 	public void addCode(JavaClass code){
 		this.code.add(code);
 	}
@@ -78,6 +90,14 @@ public class Exercise {
 		this.tests = test;
 	}
 	
+	public void setBabyStepsCodeTime(int babyStepsCodeTime) {
+		this.babyStepsCodeTime = babyStepsCodeTime;
+	}
+
+	public void setBabyStepsTestTime(int babyStepsTestTime) {
+		this.babyStepsTestTime = babyStepsTestTime;
+	}
+
 	@Override
 	public String toString(){
 		return String.format("{name=\"%s\" description=\"%s\" code=%s tests=%s}", name, description.replaceAll("\n", " "), code.toString(), tests.toString());
