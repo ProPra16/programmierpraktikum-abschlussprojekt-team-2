@@ -133,6 +133,7 @@ public class EditorViewController {
 
 	private void addEditors() {
 		code = new JavaCodeArea();
+		code.disable(true);
 		codePane.getChildren().add(code);
 		AnchorPane.setTopAnchor(code, 50.0);
 		AnchorPane.setLeftAnchor(code, 20.0);
@@ -140,6 +141,7 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(code, 5.0);
 		
 		tests = new JavaCodeArea();
+		tests.disable(true);
 		testPane.getChildren().add(tests);
 		AnchorPane.setTopAnchor(tests, 50.0);
 		AnchorPane.setLeftAnchor(tests, 20.0);
