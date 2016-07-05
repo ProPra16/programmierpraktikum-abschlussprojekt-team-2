@@ -11,5 +11,6 @@ dependencies {
 	testCompile "junit:junit:4.8.2"
 	compile "de.hhu.stups:virtual-kata-lib:1.0.1"
 	compile "org.sonatype.nexus:google-guava-eventbus:3.0.0-03"
+	compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.6.10'
 }
 
