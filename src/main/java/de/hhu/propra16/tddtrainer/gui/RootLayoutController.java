@@ -8,10 +8,9 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import de.hhu.propra16.tddtrainer.catalog.Exercise;
-import de.hhu.propra16.tddtrainer.catalog.JavaClass;
-import de.hhu.propra16.tddtrainer.events.MyEventBus;
-import de.hhu.propra16.tddtrainer.events.NewExerciseEvent;
+import com.google.common.eventbus.EventBus;
+
+import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,10 +30,13 @@ public class RootLayoutController implements Initializable {
 
 	private ResourceBundle resources;
 
+	private PhaseManagerIF phaseManager;
+
+	private EventBus bus;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.resources = resources;
-		showEditorView();
 	}
 
 	private void showEditorView() {
@@ -43,6 +45,7 @@ public class RootLayoutController implements Initializable {
 			loader.setLocation(this.getClass().getResource("EditorView.fxml"));
 			loader.setResources(resources);
 			root.setCenter(loader.load());
+			((EditorViewController) loader.getController()).init(phaseManager, bus);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,20 +84,17 @@ public class RootLayoutController implements Initializable {
 
 	@FXML
 	private void selectExercise(ActionEvent event) {
-		// new ExerciseSelector(new FakeCatalogDatasource()).selectExercise();
-
-		Exercise working = new Exercise("Working Excercise", "This is a working exercise");
-		working.addCode(new JavaClass("WorkingCode",
-				"public class WorkingCode {\n    public int returnOne() {\n        return 1;\n    }\n}"));
-		working.addTest(new JavaClass("WorkingTest",
-				"import static org.junit.Assert.*;\nimport org.junit.Test;\n\npublic class WorkingTest {\n\n    @Test\n    public void testCode() {\n        WorkingCode c = new WorkingCode();\n        assertEquals(1, c.returnOne());\n    }\n}"));
-
-		MyEventBus.getInstance().post(new NewExerciseEvent(working));
+		phaseManager.selectExercise();
 	}
 	
 	@FXML
 	private void showProgress(ActionEvent event) {
-		//TODO
+		
+	}
+	
+	@FXML
+	private void reset(ActionEvent event) {
+		phaseManager.resetPhase();
 	}
 
 	private void restart(Locale locale) {
@@ -110,6 +110,12 @@ public class RootLayoutController implements Initializable {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void init(PhaseManagerIF phaseManager, EventBus bus) {
+		this.phaseManager = phaseManager;
+		this.bus = bus;
+		showEditorView();
 	}
 
 }

@@ -13,6 +13,7 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#selectExercise" text="%menu.exercise.openexercise" />
                   <MenuItem mnemonicParsing="false" text="%menu.exercise.tracking" />
+                  <MenuItem mnemonicParsing="false" onAction="#reset" text="%menu.exercise.reset" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="%menu.settings">

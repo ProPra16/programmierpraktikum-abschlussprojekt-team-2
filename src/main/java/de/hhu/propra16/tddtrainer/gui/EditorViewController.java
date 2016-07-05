@@ -2,14 +2,15 @@ package de.hhu.propra16.tddtrainer.gui;
 
 import org.fxmisc.richtext.CodeArea;
 
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.catalog.JavaClass;
-import de.hhu.propra16.tddtrainer.events.ChangePhaseEvent;
-import de.hhu.propra16.tddtrainer.events.MyEventBus;
-import de.hhu.propra16.tddtrainer.events.NewExerciseEvent;
+import de.hhu.propra16.tddtrainer.events.ExerciseEvent;
 import de.hhu.propra16.tddtrainer.logic.Phase;
+import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
+import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,42 +33,53 @@ public class EditorViewController {
 
 	@FXML
 	private Label exerciseLabel;
+	
+	@FXML
+	private Label codeLabel;
+	
+	@FXML
+	private Label testLabel;
 
 	@FXML
 	private Button nextStepButton;
+	
+	private PhaseManagerIF phaseManager;
+	private EventBus bus;
 
-	public void initialize() {
-		MyEventBus.getInstance().register(this);
-		
+	public void initialize() {		
 		addEditors();	
 	}
 
 	@FXML
 	private void handleNextStep(ActionEvent event) {
 		Exercise exercise = newExerciseFromCurrentInput();
-
-		// TODO notify PhaseManager - IF or EventBus??
+		PhaseStatus status = phaseManager.checkPhase(exercise, true);
+		changePhase(status);
 	}
 
 	@Subscribe
-	public void startNewExercise(NewExerciseEvent exerciseEvent) {
+	public void showExercise(ExerciseEvent exerciseEvent) {
 		Exercise exercise = exerciseEvent.getExercise();
 
 		for (JavaClass jclass : exercise.getCode()) {
+			code.clear();
 			code.appendText(jclass.getCode());
+			codeLabel.setText(jclass.getName());
 		}
 
 		for (JavaClass jclass : exercise.getTests()) {
+			tests.clear();
 			tests.appendText(jclass.getCode());
+			testLabel.setText(jclass.getName());
 		}
 		changePhaseToRed();
 		nextStepButton.setDisable(false);
 		exerciseLabel.setText(exercise.getName());
 	}
 
-	@Subscribe
-	public void changePhase(ChangePhaseEvent phaseEvent) {
-		Phase phase = phaseEvent.getPhase();
+	public void changePhase(PhaseStatus phaseStatus) {
+		System.out.println(phaseStatus.isValid());
+		Phase phase = phaseStatus.getPhase();
 
 		switch (phase) {
 		case RED:
@@ -108,8 +120,8 @@ public class EditorViewController {
 
 	private Exercise newExerciseFromCurrentInput() {
 		Exercise exercise = new Exercise();
-		exercise.addCode(new JavaClass("", code.getText()));
-		exercise.addTest(new JavaClass("", tests.getText()));
+		exercise.addCode(new JavaClass(codeLabel.getText(), code.getText()));
+		exercise.addTest(new JavaClass(testLabel.getText(), tests.getText()));
 		return exercise;
 	}
 
@@ -127,6 +139,12 @@ public class EditorViewController {
 		AnchorPane.setLeftAnchor(tests, 20.0);
 		AnchorPane.setRightAnchor(tests, 20.0);
 		AnchorPane.setBottomAnchor(tests, 5.0);
+	}
+
+	public void init(PhaseManagerIF phaseManager, EventBus bus) {
+		this.phaseManager = phaseManager;
+		this.bus = bus;		
+		bus.register(this);
 	}
 
 }
