@@ -6,7 +6,11 @@ import java.util.List;
 
 import org.junit.*;
 
+import com.google.common.eventbus.EventBus;
+
+import de.hhu.propra16.tddtrainer.babysteps.BabystepsManager;
 import de.hhu.propra16.tddtrainer.catalog.*;
+import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
 import de.hhu.propra16.tddtrainer.tracking.TrackingManager;
 
 public class PhaseManagerTest {
@@ -18,7 +22,7 @@ public class PhaseManagerTest {
 	
 	@Before
 	public void createPhaseManager() {
-		phaseManager = new PhaseManager(new TrackingManager());
+		phaseManager = new PhaseManager(new TrackingManager(), new ExerciseSelector(new FakeCatalogDatasource()), new EventBus());
 		List<Exercise> fcd = new FakeCatalogDatasource().loadCatalog();
 		exerciseWithCompileError = fcd.get(1);
 		exerciseWithTestError = fcd.get(2);
@@ -27,8 +31,7 @@ public class PhaseManagerTest {
 	
 	@Test
 	public void testCheckPhaseWithContinueOnPhase1() {
-		phaseManager.checkPhase(exerciseWithCompileError, true);
-		assertEquals(Phase.GREEN, phaseManager.getPhase());
+		assertEquals(Phase.GREEN, phaseManager.checkPhase(exerciseWithTestError, true).getPhase());
 	}
 
 	@Test
@@ -72,12 +75,5 @@ public class PhaseManagerTest {
 		phaseManager.checkPhase(exerciseWorking, true);
 		phaseManager.checkPhase(exerciseWorking, true);
 		assertEquals(Phase.RED, phaseManager.getPhase());
-	}
-	
-	@Test
-	public void testResetPhase() {
-		phaseManager.checkPhase(exerciseWithCompileError, true);
-		phaseManager.checkPhase(exerciseWithTestError, true);
-		assertEquals(exerciseWithCompileError, phaseManager.resetPhase());
 	}
 }
