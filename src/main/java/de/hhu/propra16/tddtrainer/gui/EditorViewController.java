@@ -25,6 +25,9 @@ public class EditorViewController {
 	@FXML
 	private Label statusLabel;
 	
+	@FXML
+	private Label exerciseLabel;
+	
     @FXML
     private Button nextStepButton;
 
@@ -52,6 +55,7 @@ public class EditorViewController {
 		}
 		changePhaseToRed();
 		nextStepButton.setDisable(false);
+		exerciseLabel.setText(exercise.getName());
 	}
 
 	@Subscribe
