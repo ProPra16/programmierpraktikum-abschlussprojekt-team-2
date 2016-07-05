@@ -21,6 +21,7 @@ public class PhaseManager implements PhaseManagerIF {
 	private Exercise originalExercise;
 	
 	public PhaseManager(TrackingManager trackingManager, ExerciseSelector exerciseSelector, EventBus bus) {
+		this.originalExercise = new Exercise();
 		this.trackingManager = trackingManager;
 		this.bus = bus;
 		this.exerciseSelector = exerciseSelector;

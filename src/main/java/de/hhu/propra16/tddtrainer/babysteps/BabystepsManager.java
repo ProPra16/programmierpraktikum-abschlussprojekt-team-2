@@ -9,7 +9,7 @@ import javafx.application.Platform;
 public class BabystepsManager implements BabystepsManagerIF{
 	
 	PhaseManagerIF phaseManager;
-	private boolean enabled = true;
+	private boolean enabled = false;
 	private boolean running = false;
 	private LocalDateTime startTime;
 	private LocalDateTime nowTime;
@@ -22,7 +22,6 @@ public class BabystepsManager implements BabystepsManagerIF{
 	
 	@Override
 	public synchronized void start(int mPhaseTime) {
-		System.out.println("Called start");
 		if(this.enabled) {
 			phaseTime = mPhaseTime;
 			startTime = LocalDateTime.now();
