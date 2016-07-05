@@ -44,6 +44,7 @@ public class EditorViewController {
 	private Button nextStepButton;
 	
 	private PhaseManagerIF phaseManager;
+	private RootLayoutController rootLayoutController;
 
 	public void initialize() {		
 		addEditors();	
@@ -103,34 +104,28 @@ public class EditorViewController {
 		statusLabel.setText("red");
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-red");
-		code.setStylesheet(true);
-		code.setDisable(true);
-		tests.setDisable(false);
-		tests.setStylesheet(false);
+		code.disable(true);
+		tests.disable(false);
 	}
 
 	private void changePhaseToGreen() {
 		statusLabel.setText("green");
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-green");		
-		code.setDisable(false);
-		code.setStylesheet(false);
-		tests.setStylesheet(true);
-		tests.setDisable(true);	
+		code.disable(false);
+		tests.disable(true);	
 	}
 
 	private void changePhaseToRefactor() {
 		statusLabel.setText("refactor");
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-refactor");
-		code.setDisable(false);
-		code.setStylesheet(false);
-		tests.setDisable(false);
-		tests.setStylesheet(false);
+		code.disable(false);
+		tests.disable(false);
 	}
 
 	private Exercise newExerciseFromCurrentInput() {
-		Exercise exercise = new Exercise();
+		Exercise exercise = new Exercise(exerciseLabel.getText(), "");
 		exercise.addCode(new JavaClass(codeLabel.getText(), code.getText()));
 		exercise.addTest(new JavaClass(testLabel.getText(), tests.getText()));
 		return exercise;
@@ -152,9 +147,9 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(tests, 5.0);
 	}
 
-	public void init(PhaseManagerIF phaseManager, EventBus bus) {
+	public void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
 		this.phaseManager = phaseManager;
-		bus.register(this);
+		this.rootLayoutController = rootLayoutController;
 	}
 
 }

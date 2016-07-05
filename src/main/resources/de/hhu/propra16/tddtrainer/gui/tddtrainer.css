@@ -36,3 +36,7 @@
 	-fx-text-fill: white;
 	-fx-font-weight: bold;
 }
+
+.label {
+	-fx-text-fill: #6f8391;
+}

@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -27,6 +28,9 @@ public class RootLayoutController implements Initializable {
 
 	@FXML
 	private BorderPane root;
+	
+    @FXML
+    private MenuItem reset;
 
 	private ResourceBundle resources;
 
@@ -45,7 +49,9 @@ public class RootLayoutController implements Initializable {
 			loader.setLocation(this.getClass().getResource("EditorView.fxml"));
 			loader.setResources(resources);
 			root.setCenter(loader.load());
-			((EditorViewController) loader.getController()).init(phaseManager, bus);
+			EditorViewController controller = loader.getController();
+			bus.register(controller);
+			controller.init(phaseManager, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
