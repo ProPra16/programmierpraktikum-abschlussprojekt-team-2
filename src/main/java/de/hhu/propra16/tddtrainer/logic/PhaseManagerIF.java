@@ -25,4 +25,6 @@ public interface PhaseManagerIF {
 	
 	public void selectExercise();
 	
+	public void displayTracking();
+	
 }

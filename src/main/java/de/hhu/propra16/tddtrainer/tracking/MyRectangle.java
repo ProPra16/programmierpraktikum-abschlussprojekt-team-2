@@ -15,10 +15,12 @@ public class MyRectangle extends Rectangle {
         setOnMouseClicked(event -> {
         	
         	for(String result : snapshot.compilationResultToList()) {
+        		Trackline.listViewCompile.getItems().clear();
         		Trackline.listViewCompile.getItems().add(result);
         	}
         	
         	for(String result : snapshot.testResultToList()) {
+        		Trackline.listViewTest.getItems().clear();
         		Trackline.listViewTest.getItems().add(result);
         	}
    
