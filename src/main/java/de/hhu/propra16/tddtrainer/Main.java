@@ -29,10 +29,10 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		EventBus bus = new EventBus();
 		TrackingManager trackingManager = new TrackingManager();
-		PhaseManagerIF phaseManager = new PhaseManager(trackingManager);
-		
 		CatalogDatasourceIF datasource = new FakeCatalogDatasource();
 		ExerciseSelector exerciseSelector = new ExerciseSelector(datasource);
+		
+		PhaseManagerIF phaseManager = new PhaseManager(trackingManager, exerciseSelector, bus);
 		
 		primaryStage.setTitle("TDDTrainer");
 
@@ -42,7 +42,7 @@ public class Main extends Application {
 		loader.setLocation(Main.class.getResource("gui/RootLayout.fxml"));
 		rootLayout = (BorderPane) loader.load();
 		RootLayoutController controller = loader.getController();
-		controller.init(phaseManager, exerciseSelector, bus);
+		controller.init(phaseManager, bus);
 		primaryStage.setScene(new Scene(rootLayout));
 		primaryStage.setOnCloseRequest((e) -> System.exit(0));
 		primaryStage.show();

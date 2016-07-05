@@ -2,11 +2,11 @@ package de.hhu.propra16.tddtrainer.events;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 
-public class NewExerciseEvent {
+public class ExerciseEvent {
 	
 	private Exercise exercise;
 
-	public NewExerciseEvent(Exercise exercise) {
+	public ExerciseEvent(Exercise exercise) {
 		this.exercise = exercise;
 	}
 
