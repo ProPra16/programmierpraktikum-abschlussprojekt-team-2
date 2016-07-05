@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import com.google.common.eventbus.EventBus;
 
+import de.hhu.propra16.tddtrainer.events.LanguageChangeEvent;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -75,15 +76,10 @@ public class RootLayoutController implements Initializable {
 
 		if (!resources.getLocale().toString().equals(locale.toString().substring(0, 2))) {
 
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle(resources.getString("restartdialog.title"));
-			alert.setHeaderText(resources.getString("restartdialog.headerText"));
-			alert.setContentText(resources.getString("restartdialog.contentText"));
-
-			Optional<ButtonType> result1 = alert.showAndWait();
-			if (result1.get() == ButtonType.OK) {
-				restart(locale);
-			}
+			this.resources = ResourceBundle.getBundle("bundles.tddt", locale);
+			restart(locale);
+			bus.post(new LanguageChangeEvent(resources));
+			phaseManager.resetPhase();
 		}
 
 	}
@@ -109,9 +105,12 @@ public class RootLayoutController implements Initializable {
 			loader.setResources(ResourceBundle.getBundle("bundles.tddt", locale));
 			loader.setLocation(this.getClass().getResource("RootLayout.fxml"));
 			BorderPane rootLayout = loader.load();
-
+			RootLayoutController controller = loader.getController();
+			controller.init(phaseManager, bus);
+			
 			Stage stage = (Stage) root.getScene().getWindow();
 			stage.setScene(new Scene(rootLayout));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

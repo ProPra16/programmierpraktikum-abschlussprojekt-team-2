@@ -1,8 +1,5 @@
 package de.hhu.propra16.tddtrainer.gui;
 
-import org.fxmisc.richtext.CodeArea;
-
-import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;

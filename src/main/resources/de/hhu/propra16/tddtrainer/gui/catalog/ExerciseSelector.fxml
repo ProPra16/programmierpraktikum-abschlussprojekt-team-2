@@ -8,13 +8,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="606.0" style="-fx-background-color: white;" stylesheets="@../tddtrainer.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelectorController">
    <bottom>
       <HBox prefHeight="29.0" prefWidth="566.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <Button fx:id="selectButton" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#selectButtonAction" text="Select" />
-            <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
+            <Button fx:id="selectButton" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#selectButtonAction" text="%select" />
+            <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelButtonAction" text="%cancel" />
          </children>
          <padding>
             <Insets top="20.0" />
@@ -27,7 +28,10 @@
    <left>
       <VBox prefHeight="285.0" prefWidth="280.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Exercise" />
+            <Label text="%exercise">
+               <font>
+                  <Font size="21.0" />
+               </font></Label>
             <ListView fx:id="exerciseList" prefHeight="264.0" prefWidth="288.0" />
          </children>
       </VBox>
@@ -35,7 +39,10 @@
    <center>
       <VBox prefHeight="285.0" prefWidth="270.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Description" />
+            <Label text="%description">
+               <font>
+                  <Font size="21.0" />
+               </font></Label>
             <TextArea fx:id="descriptionField" editable="false" prefHeight="264.0" prefWidth="306.0" wrapText="true" />
          </children>
       </VBox>
