@@ -14,27 +14,24 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private BorderPane rootLayout;
-	
-    public static void main(String[] args) {
-        launch(args);
-    }
+
+	public static void main(String[] args) {
+		launch(args);
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("TDDTrainer");
-		
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			Locale locale = new Locale("en", "EN");
-			loader.setResources(ResourceBundle.getBundle("bundles.tddt", locale));
-			loader.setLocation(Main.class.getResource("gui/RootLayout.fxml"));
-			rootLayout = (BorderPane) loader.load();
-			primaryStage.setScene(new Scene(rootLayout));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+
+		FXMLLoader loader = new FXMLLoader();
+		Locale locale = new Locale("en", "EN");
+		loader.setResources(ResourceBundle.getBundle("bundles.tddt", locale));
+		loader.setLocation(Main.class.getResource("gui/RootLayout.fxml"));
+		rootLayout = (BorderPane) loader.load();
+		primaryStage.setScene(new Scene(rootLayout));
 		primaryStage.show();
+		primaryStage.setMinWidth(1000);
+		primaryStage.setMinHeight(600);
 	}
-	
+
 }
