@@ -44,6 +44,7 @@ public class Main extends Application {
 		RootLayoutController controller = loader.getController();
 		controller.init(phaseManager, exerciseSelector, bus);
 		primaryStage.setScene(new Scene(rootLayout));
+		primaryStage.setOnCloseRequest((e) -> System.exit(0));
 		primaryStage.show();
 		primaryStage.setMinWidth(1000);
 		primaryStage.setMinHeight(600);

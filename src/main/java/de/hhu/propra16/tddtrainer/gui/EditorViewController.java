@@ -11,6 +11,7 @@ import de.hhu.propra16.tddtrainer.events.ChangePhaseEvent;
 import de.hhu.propra16.tddtrainer.events.NewExerciseEvent;
 import de.hhu.propra16.tddtrainer.logic.Phase;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
+import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -42,6 +43,7 @@ public class EditorViewController {
 
 	@FXML
 	private Button nextStepButton;
+	
 	private PhaseManagerIF phaseManager;
 	private EventBus bus;
 
@@ -52,8 +54,8 @@ public class EditorViewController {
 	@FXML
 	private void handleNextStep(ActionEvent event) {
 		Exercise exercise = newExerciseFromCurrentInput();
-
-		phaseManager.checkPhase(exercise, true);
+		PhaseStatus status = phaseManager.checkPhase(exercise, true);
+		changePhase(status);
 	}
 
 	@Subscribe
@@ -74,9 +76,9 @@ public class EditorViewController {
 		exerciseLabel.setText(exercise.getName());
 	}
 
-	@Subscribe
-	public void changePhase(ChangePhaseEvent phaseEvent) {
-		Phase phase = phaseEvent.getPhase();
+	public void changePhase(PhaseStatus phaseStatus) {
+		System.out.println(phaseStatus.isValid());
+		Phase phase = phaseStatus.getPhase();
 
 		switch (phase) {
 		case RED:
@@ -117,8 +119,8 @@ public class EditorViewController {
 
 	private Exercise newExerciseFromCurrentInput() {
 		Exercise exercise = new Exercise();
-		exercise.addCode(new JavaClass("code", code.getText()));
-		exercise.addTest(new JavaClass("test", tests.getText()));
+		exercise.addCode(new JavaClass(codeLabel.getText(), code.getText()));
+		exercise.addTest(new JavaClass(testLabel.getText(), tests.getText()));
 		return exercise;
 	}
 
