@@ -1,4 +1,4 @@
-package babysteps;
+package de.hhu.propra16.tddtrainer.babysteps;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

@@ -26,7 +26,6 @@ public class PhaseManager implements PhaseManagerIF {
 				loop:
 				for(CompilationResult cr : executionResult.getCompileErrors()) {
 					for(CompileError ce : cr.getCompileErrors()) {
-						System.out.println(ce.getMessage());
 						if(!(ce.getMessage().contains("cannot find symbol"))) {
 							valid = false;
 							break loop;
