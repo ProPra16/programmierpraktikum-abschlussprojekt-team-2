@@ -9,11 +9,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
-import de.hhu.propra16.tddtrainer.catalog.FakeCatalogDatasource;
 import de.hhu.propra16.tddtrainer.catalog.JavaClass;
 import de.hhu.propra16.tddtrainer.events.MyEventBus;
 import de.hhu.propra16.tddtrainer.events.NewExerciseEvent;
-import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -92,6 +90,11 @@ public class RootLayoutController implements Initializable {
 				"import static org.junit.Assert.*;\nimport org.junit.Test;\n\npublic class WorkingTest {\n\n    @Test\n    public void testCode() {\n        WorkingCode c = new WorkingCode();\n        assertEquals(1, c.returnOne());\n    }\n}"));
 
 		MyEventBus.getInstance().post(new NewExerciseEvent(working));
+	}
+	
+	@FXML
+	private void showProgress(ActionEvent event) {
+		//TODO
 	}
 
 	private void restart(Locale locale) {

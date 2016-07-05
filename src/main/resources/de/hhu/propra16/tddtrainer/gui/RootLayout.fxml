@@ -5,13 +5,14 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="root" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.gui.RootLayoutController">
+<BorderPane fx:id="root" minHeight="100.0" minWidth="300.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.gui.RootLayoutController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-            <Menu mnemonicParsing="false" text="%menu.catalog">
+            <Menu mnemonicParsing="false" text="%menu.exercise">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#selectExercise" text="%menu.catalog.exercise" />
+                  <MenuItem mnemonicParsing="false" onAction="#selectExercise" text="%menu.exercise.openexercise" />
+                  <MenuItem mnemonicParsing="false" text="%menu.exercise.tracking" />
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="%menu.settings">
