@@ -1,9 +1,13 @@
 package de.hhu.propra16.tddtrainer.gui.catalog;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
+
+import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
+import de.hhu.propra16.tddtrainer.events.LanguageChangeEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -16,10 +20,12 @@ import javafx.stage.Stage;
 public class ExerciseSelector {
 	
 	private CatalogDatasourceIF dataSource;
+	private ResourceBundle bundle;
 
 	/**
 	 * Creates an ExerciseSelector
 	 * @param dataSource the data source from where the catalog should be read
+	 * @param bundle 
 	 */
 	public ExerciseSelector(CatalogDatasourceIF dataSource){
 		this.dataSource = dataSource;
@@ -34,6 +40,7 @@ public class ExerciseSelector {
 
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("ExerciseSelector.fxml"));
+			loader.setResources(bundle);
 			BorderPane pane = (BorderPane) loader.load();
 			ExerciseSelectorController controller = (ExerciseSelectorController) loader.getController();
 			controller.setDatasource(dataSource);
@@ -49,5 +56,10 @@ public class ExerciseSelector {
 			e.printStackTrace();
 			return null;
 		} 
+	}
+
+	@Subscribe
+	public void setResourceBundle(LanguageChangeEvent event) {
+		this.bundle = event.getBundle();
 	}
 }

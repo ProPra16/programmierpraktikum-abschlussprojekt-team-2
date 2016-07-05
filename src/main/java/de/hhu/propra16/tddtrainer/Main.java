@@ -9,6 +9,7 @@ import com.google.common.eventbus.EventBus;
 
 import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
 import de.hhu.propra16.tddtrainer.catalog.FakeCatalogDatasource;
+import de.hhu.propra16.tddtrainer.events.LanguageChangeEvent;
 import de.hhu.propra16.tddtrainer.gui.RootLayoutController;
 import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
 import de.hhu.propra16.tddtrainer.logic.PhaseManager;
@@ -46,14 +47,19 @@ public class Main extends Application {
 		TrackingManager trackingManager = new TrackingManager();
 		CatalogDatasourceIF datasource = new FakeCatalogDatasource();
 		ExerciseSelector exerciseSelector = new ExerciseSelector(datasource);
+		bus.register(exerciseSelector);
+		
+		Locale locale = new Locale("en", "EN");
+		ResourceBundle bundle = ResourceBundle.getBundle("bundles.tddt", locale);
+		bus.post(new LanguageChangeEvent(bundle));
 		
 		PhaseManagerIF phaseManager = new PhaseManager(trackingManager, exerciseSelector, bus);
 		
 		primaryStage.setTitle("TDDTrainer");
 
 		FXMLLoader loader = new FXMLLoader();
-		Locale locale = new Locale("en", "EN");
-		loader.setResources(ResourceBundle.getBundle("bundles.tddt", locale));
+		
+		loader.setResources(bundle);
 		loader.setLocation(Main.class.getResource("gui/RootLayout.fxml"));
 		rootLayout = (BorderPane) loader.load();
 		RootLayoutController controller = loader.getController();
