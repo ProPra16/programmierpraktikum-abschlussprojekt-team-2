@@ -13,6 +13,7 @@ public class BabystepsManager implements BabystepsManagerIF{
 	private LocalDateTime startTime;
 	private LocalDateTime nowTime;
 	private boolean stopped = true;
+	private int phaseTime;
 	
 	public BabystepsManager(PhaseManagerIF phaseManager) {
 		this.phaseManager = phaseManager;
@@ -21,16 +22,17 @@ public class BabystepsManager implements BabystepsManagerIF{
 	@Override
 	public synchronized void start(int mPhaseTime) {
 		if(this.status) {
+			phaseTime = mPhaseTime;
+			startTime = LocalDateTime.now();
 			if(!running) {
 				running = true;
 				stopped = false;
-				startTime = LocalDateTime.now();
 				new Thread(() -> {
 					while(!stopped) {
 						nowTime = LocalDateTime.now();
 						long dTime = nowTime.until(startTime, ChronoUnit.SECONDS);
 		
-			    		if(dTime > mPhaseTime) {
+			    		if(dTime > phaseTime) {
 							phaseManager.resetPhase();
 							running = false;
 							return;
@@ -47,6 +49,10 @@ public class BabystepsManager implements BabystepsManagerIF{
 				.start();
 			}
 		}
+	}
+	
+	public void next() {
+		
 	}
 	
 	public void stop() {
