@@ -1,11 +1,17 @@
 package de.hhu.propra16.tddtrainer;
 
-import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.google.common.eventbus.EventBus;
 
+import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
+import de.hhu.propra16.tddtrainer.catalog.FakeCatalogDatasource;
+import de.hhu.propra16.tddtrainer.gui.RootLayoutController;
+import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
+import de.hhu.propra16.tddtrainer.logic.PhaseManager;
+import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
+import de.hhu.propra16.tddtrainer.tracking.TrackingManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +27,13 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		EventBus bus = new EventBus();
+		TrackingManager trackingManager = new TrackingManager();
+		PhaseManagerIF phaseManager = new PhaseManager(trackingManager);
+		
+		CatalogDatasourceIF datasource = new FakeCatalogDatasource();
+		ExerciseSelector exerciseSelector = new ExerciseSelector(datasource);
+		
 		primaryStage.setTitle("TDDTrainer");
 
 		FXMLLoader loader = new FXMLLoader();
@@ -28,6 +41,8 @@ public class Main extends Application {
 		loader.setResources(ResourceBundle.getBundle("bundles.tddt", locale));
 		loader.setLocation(Main.class.getResource("gui/RootLayout.fxml"));
 		rootLayout = (BorderPane) loader.load();
+		RootLayoutController controller = loader.getController();
+		controller.init(phaseManager, exerciseSelector, bus);
 		primaryStage.setScene(new Scene(rootLayout));
 		primaryStage.show();
 		primaryStage.setMinWidth(1000);
