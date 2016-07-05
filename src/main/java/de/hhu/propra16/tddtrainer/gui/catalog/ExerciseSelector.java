@@ -1,45 +1,53 @@
 package de.hhu.propra16.tddtrainer.gui.catalog;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Dialog;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
+/**
+ * Provides an gui window where a user can select an Exercise from a exercise catalog
+ * @author Marcel
+ */
 public class ExerciseSelector {
 	
 	private CatalogDatasourceIF dataSource;
 
+	/**
+	 * Creates an ExerciseSelector
+	 * @param dataSource the data source from where the catalog should be read
+	 */
 	public ExerciseSelector(CatalogDatasourceIF dataSource){
 		this.dataSource = dataSource;
 	}
 	
+	/**
+	 * Opens a new modal window where the user can select an Exercise from the catalog
+	 * @return the selected Exercise or null if the dialog is canceled
+	 */
 	public Exercise selectExercise(){
-		
-		Dialog<Exercise> dialog = new Dialog<>();
+		Stage dialogStage = new Stage();
 
 		try {
-			BorderPane pane = (BorderPane) FXMLLoader.load(this.getClass().getResource("ExerciseSelector.fxml"));
-			dialog.getDialogPane().getChildren().add(pane);
-			dialog.setResizable(true);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ExerciseSelector.fxml"));
+			BorderPane pane = (BorderPane) loader.load();
+			ExerciseSelectorController controller = (ExerciseSelectorController) loader.getController();
+			controller.setDatasource(dataSource);
+			controller.setStage(dialogStage);
+			controller.loadData();
 
-		
+			dialogStage.setScene(new Scene(pane));
+			dialogStage.sizeToScene();
+			dialogStage.showAndWait();
+
+			return controller.getSelectedExercise();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} 
-		
-		dialog.setResult(null); //TODO ausgewählte Excercise
-		
-		Optional<Exercise> exerciseOptional = dialog.showAndWait();
-		if(exerciseOptional.isPresent()){
-			return exerciseOptional.get();
-		} else {
 			return null;
-		}
+		} 
 	}
-
-	
 }
