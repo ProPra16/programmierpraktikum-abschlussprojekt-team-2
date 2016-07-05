@@ -16,14 +16,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class RootLayoutController implements Initializable {
 
@@ -77,7 +72,6 @@ public class RootLayoutController implements Initializable {
 		if (!resources.getLocale().toString().equals(locale.toString().substring(0, 2))) {
 
 			this.resources = ResourceBundle.getBundle("bundles.tddt", locale);
-			restart(locale);
 			bus.post(new LanguageChangeEvent(resources));
 			phaseManager.resetPhase();
 		}
@@ -97,24 +91,6 @@ public class RootLayoutController implements Initializable {
 	@FXML
 	private void reset(ActionEvent event) {
 		phaseManager.resetPhase();
-	}
-
-	private void restart(Locale locale) {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setResources(ResourceBundle.getBundle("bundles.tddt", locale));
-			loader.setLocation(this.getClass().getResource("RootLayout.fxml"));
-			BorderPane rootLayout = loader.load();
-			RootLayoutController controller = loader.getController();
-			controller.init(phaseManager, bus);
-			
-			Stage stage = (Stage) root.getScene().getWindow();
-			stage.setScene(new Scene(rootLayout));
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	public void init(PhaseManagerIF phaseManager, EventBus bus) {
