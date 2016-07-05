@@ -51,7 +51,6 @@ public class PhaseManager implements PhaseManagerIF {
 			if(valid) {
 				if(continuePhase) {
 					phase = Phase.GREEN;
-					babystepsManager.stop();
 					babystepsManager.start(originalExercise.getBabyStepsCodeTime());
 				}
 				validExercise = exercise;
@@ -96,7 +95,6 @@ public class PhaseManager implements PhaseManagerIF {
 		if(phase.equals(Phase.GREEN)) {
 			phase = Phase.RED;
 		}
-		babystepsManager.stop();
 		babystepsManager.start(originalExercise.getBabyStepsTestTime());
 		
 		bus.post(new ExerciseEvent(validExercise));
