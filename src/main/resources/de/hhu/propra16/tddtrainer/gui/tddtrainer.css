@@ -30,3 +30,9 @@
 	-fx-font-family: 'Swagger';
 	-fx-font-weight: bold;
 }
+
+.button {
+	-fx-background-color: #6f8391;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+}
