@@ -19,8 +19,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class EditorViewController {
 
-	private CodeArea tests;
-	private CodeArea code;
+	private JavaCodeArea tests;
+	private JavaCodeArea code;
 
 	@FXML
 	private AnchorPane codePane;
@@ -103,16 +103,20 @@ public class EditorViewController {
 		statusLabel.setText("red");
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-red");
+		code.setStylesheet(true);
 		code.setDisable(true);
 		tests.setDisable(false);
+		tests.setStylesheet(false);
 	}
 
 	private void changePhaseToGreen() {
 		statusLabel.setText("green");
 		statusLabel.getStyleClass().clear();
-		statusLabel.getStyleClass().add("statuslabel-green");
+		statusLabel.getStyleClass().add("statuslabel-green");		
 		code.setDisable(false);
-		tests.setDisable(true);
+		code.setStylesheet(false);
+		tests.setStylesheet(true);
+		tests.setDisable(true);	
 	}
 
 	private void changePhaseToRefactor() {
@@ -120,7 +124,9 @@ public class EditorViewController {
 		statusLabel.getStyleClass().clear();
 		statusLabel.getStyleClass().add("statuslabel-refactor");
 		code.setDisable(false);
+		code.setStylesheet(false);
 		tests.setDisable(false);
+		tests.setStylesheet(false);
 	}
 
 	private Exercise newExerciseFromCurrentInput() {

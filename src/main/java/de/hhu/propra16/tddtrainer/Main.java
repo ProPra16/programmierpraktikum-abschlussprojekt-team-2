@@ -3,6 +3,8 @@ package de.hhu.propra16.tddtrainer;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.tools.ToolProvider;
+
 import com.google.common.eventbus.EventBus;
 
 import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
@@ -15,6 +17,8 @@ import de.hhu.propra16.tddtrainer.tracking.TrackingManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -27,6 +31,17 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		if(ToolProvider.getSystemJavaCompiler() == null){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error: No Java Compiler");
+			alert.setHeaderText(null);
+			alert.setContentText("This application requires a java compiler to function.\n\n"
+					+ "Please run the application with a JDK of version 1.8.0_40 or higher.");
+			
+			alert.showAndWait();
+			return;
+		}
+		
 		EventBus bus = new EventBus();
 		TrackingManager trackingManager = new TrackingManager();
 		CatalogDatasourceIF datasource = new FakeCatalogDatasource();

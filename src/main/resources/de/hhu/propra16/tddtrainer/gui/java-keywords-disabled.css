@@ -1,0 +1,38 @@
+/**
+ * Source: All code below is copied from GitHub RichTextFX Repository
+ * (https://github.com/TomasMikula/RichTextFX/blob/master/richtextfx-demos/src/main/resources/org/fxmisc/richtext/demo/java-keywords.css)
+ * 
+ * @author TomasMikula
+ *
+ */
+
+.keyword {
+    -fx-fill: grey;
+    -fx-font-weight: bold;
+}
+.semicolon {
+    -fx-font-weight: bold;
+}
+.paren {
+    -fx-fill: grey;
+    -fx-font-weight: bold;
+}
+.bracket {
+    -fx-fill: grey;
+    -fx-font-weight: bold;
+}
+.brace {
+    -fx-fill: grey;
+    -fx-font-weight: bold;
+}
+.string {
+    -fx-fill: grey;
+}
+
+.comment {
+	-fx-fill: grey;
+}
+
+.paragraph-box:has-caret {
+    -fx-background-color: #f2f9fc;
+}
