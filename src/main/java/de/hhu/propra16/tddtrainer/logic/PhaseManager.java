@@ -21,6 +21,7 @@ public class PhaseManager implements PhaseManagerIF {
 	private Exercise originalExercise;
 	
 	public PhaseManager(TrackingManager trackingManager, ExerciseSelector exerciseSelector, EventBus bus) {
+		this.originalExercise = new Exercise();
 		this.trackingManager = trackingManager;
 		this.bus = bus;
 		this.exerciseSelector = exerciseSelector;
@@ -51,7 +52,6 @@ public class PhaseManager implements PhaseManagerIF {
 			if(valid) {
 				if(continuePhase) {
 					phase = Phase.GREEN;
-					babystepsManager.stop();
 					babystepsManager.start(originalExercise.getBabyStepsCodeTime());
 				}
 				validExercise = exercise;
@@ -96,18 +96,20 @@ public class PhaseManager implements PhaseManagerIF {
 		if(phase.equals(Phase.GREEN)) {
 			phase = Phase.RED;
 		}
-		babystepsManager.stop();
 		babystepsManager.start(originalExercise.getBabyStepsTestTime());
 		
 		bus.post(new ExerciseEvent(validExercise));
 	}
 	
 	public void selectExercise() {
-		originalExercise = validExercise = exerciseSelector.selectExercise();
-		
-		if(validExercise != null) {
-			bus.post(new ExerciseEvent(validExercise));
+		Exercise exercise = exerciseSelector.selectExercise();
+		if(exercise == null) {
+			return;
 		}
+		
+		originalExercise = validExercise = exercise;
+		
+		bus.post(new ExerciseEvent(validExercise));
 		babystepsManager.start(originalExercise.getBabyStepsTestTime());
 	}
 	

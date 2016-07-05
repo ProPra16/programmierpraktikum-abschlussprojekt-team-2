@@ -4,11 +4,12 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
+import javafx.application.Platform;
 
 public class BabystepsManager implements BabystepsManagerIF{
 	
 	PhaseManagerIF phaseManager;
-	private boolean status = false;
+	private boolean enabled = false;
 	private boolean running = false;
 	private LocalDateTime startTime;
 	private LocalDateTime nowTime;
@@ -21,51 +22,49 @@ public class BabystepsManager implements BabystepsManagerIF{
 	
 	@Override
 	public synchronized void start(int mPhaseTime) {
-		if(this.status) {
+		if(this.enabled) {
 			phaseTime = mPhaseTime;
 			startTime = LocalDateTime.now();
+			stopped = false;
 			if(!running) {
 				running = true;
-				stopped = false;
 				new Thread(() -> {
 					while(!stopped) {
 						nowTime = LocalDateTime.now();
-						long dTime = nowTime.until(startTime, ChronoUnit.SECONDS);
+						long dTime = startTime.until(nowTime, ChronoUnit.SECONDS);
 		
 			    		if(dTime > phaseTime) {
-							phaseManager.resetPhase();
+			    			Platform.runLater(() -> phaseManager.resetPhase());
 							running = false;
 							return;
 			    		};
 						
+			    		System.out.println(phaseTime - dTime);
+			    		
 						try {
-							Thread.sleep(100);
+							Thread.sleep(1000);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}	
+					}
+					running = false;
 				})
 				.start();
 			}
 		}
 	}
 	
-	public void next() {
-		
-	}
-	
 	public void stop() {
-		if(this.status) {
+		if(this.enabled) {
 			this.stopped = true;
 		}
-	}
-	
+	}	
 	public void enable(){
-		this.status = true;
+		this.enabled = true;
 	}
 	
 	public void disable(){
-		this.status = false;
+		this.enabled = false;
 	}
 }
