@@ -7,8 +7,7 @@ import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.catalog.JavaClass;
-import de.hhu.propra16.tddtrainer.events.ChangePhaseEvent;
-import de.hhu.propra16.tddtrainer.events.NewExerciseEvent;
+import de.hhu.propra16.tddtrainer.events.ExerciseEvent;
 import de.hhu.propra16.tddtrainer.logic.Phase;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
@@ -59,15 +58,17 @@ public class EditorViewController {
 	}
 
 	@Subscribe
-	public void startNewExercise(NewExerciseEvent exerciseEvent) {
+	public void showExercise(ExerciseEvent exerciseEvent) {
 		Exercise exercise = exerciseEvent.getExercise();
 
 		for (JavaClass jclass : exercise.getCode()) {
+			code.clear();
 			code.appendText(jclass.getCode());
 			codeLabel.setText(jclass.getName());
 		}
 
 		for (JavaClass jclass : exercise.getTests()) {
+			tests.clear();
 			tests.appendText(jclass.getCode());
 			testLabel.setText(jclass.getName());
 		}

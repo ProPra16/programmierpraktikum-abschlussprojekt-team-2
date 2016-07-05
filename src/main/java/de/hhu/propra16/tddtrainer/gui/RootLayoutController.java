@@ -10,9 +10,6 @@ import java.util.ResourceBundle;
 
 import com.google.common.eventbus.EventBus;
 
-import de.hhu.propra16.tddtrainer.catalog.Exercise;
-import de.hhu.propra16.tddtrainer.events.NewExerciseEvent;
-import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,8 +31,6 @@ public class RootLayoutController implements Initializable {
 	private ResourceBundle resources;
 
 	private PhaseManagerIF phaseManager;
-
-	private ExerciseSelector exerciseSelector;
 
 	private EventBus bus;
 
@@ -89,16 +84,17 @@ public class RootLayoutController implements Initializable {
 
 	@FXML
 	private void selectExercise(ActionEvent event) {
-		Exercise exercise = exerciseSelector.selectExercise();
-		
-		if(exercise != null) {
-			bus.post(new NewExerciseEvent(exercise));
-		}
+		phaseManager.selectExercise();
 	}
 	
 	@FXML
 	private void showProgress(ActionEvent event) {
 		
+	}
+	
+	@FXML
+	private void reset(ActionEvent event) {
+		phaseManager.resetPhase();
 	}
 
 	private void restart(Locale locale) {
@@ -116,9 +112,8 @@ public class RootLayoutController implements Initializable {
 
 	}
 
-	public void init(PhaseManagerIF phaseManager, ExerciseSelector exerciseSelector, EventBus bus) {
+	public void init(PhaseManagerIF phaseManager, EventBus bus) {
 		this.phaseManager = phaseManager;
-		this.exerciseSelector = exerciseSelector;
 		this.bus = bus;
 		showEditorView();
 	}
