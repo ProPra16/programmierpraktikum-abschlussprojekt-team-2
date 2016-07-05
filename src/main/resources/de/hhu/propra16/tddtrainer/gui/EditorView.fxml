@@ -16,11 +16,20 @@
 					<content>
 						<AnchorPane fx:id="codePane" style="-fx-background-color: white;">
 							<children>
-								<Label layoutX="14.0" layoutY="-1.0" text="Code" textFill="#6f8391">
-									<font>
-										<Font size="21.0" />
-									</font>
-								</Label>
+                        <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="-1.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
+                           <children>
+      								<Label text="Code:" textFill="#6f8391">
+      									<font>
+      										<Font size="21.0" />
+      									</font>
+      								</Label>
+                              <Label fx:id="codeLabel" textFill="#6f8391">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
 							</children>
 						</AnchorPane>
 					</content>
@@ -29,11 +38,20 @@
 					<content>
 						<AnchorPane fx:id="testPane" style="-fx-background-color: white;">
 							<children>
-								<Label layoutX="15.0" text="Tests" textFill="#6f8391">
-									<font>
-										<Font size="21.0" />
-									</font>
-								</Label>
+                        <HBox alignment="CENTER_LEFT" layoutX="15.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
+                           <children>
+      								<Label text="Tests:" textFill="#6f8391">
+      									<font>
+      										<Font size="21.0" />
+      									</font>
+      								</Label>
+                              <Label fx:id="testLabel" textFill="#6f8391">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
 							</children>
 						</AnchorPane>
 					</content>
