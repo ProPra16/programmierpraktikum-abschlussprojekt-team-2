@@ -110,4 +110,8 @@ public class PhaseManager implements PhaseManagerIF {
 		}
 		babystepsManager.start(originalExercise.getBabyStepsTestTime());
 	}
+	
+	public void displayTracking() {
+		trackingManager.displayInNewWindow();
+	}
 }
