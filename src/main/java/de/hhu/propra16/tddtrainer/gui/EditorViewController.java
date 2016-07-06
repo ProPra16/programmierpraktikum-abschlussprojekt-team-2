@@ -21,7 +21,7 @@ public class EditorViewController {
 
 	@FXML
 	private AnchorPane codePane;
-	
+
 	@FXML
 	private AnchorPane testPane;
 
@@ -30,21 +30,22 @@ public class EditorViewController {
 
 	@FXML
 	private Label exerciseLabel;
-	
+
 	@FXML
 	private Label codeLabel;
-	
+
 	@FXML
 	private Label testLabel;
 
 	@FXML
 	private Button nextStepButton;
-	
+
 	private PhaseManagerIF phaseManager;
 	private RootLayoutController rootLayoutController;
+	private boolean guidisabled;
 
-	public void initialize() {		
-		addEditors();	
+	public void initialize() {
+		addEditors();
 	}
 
 	@FXML
@@ -58,26 +59,29 @@ public class EditorViewController {
 	public void showExercise(ExerciseEvent exerciseEvent) {
 		Exercise exercise = exerciseEvent.getExercise();
 
-		for (JavaClass jclass : exercise.getCode()) {
-			boolean wasDisabled = code.isDisable();
-			code.setDisable(false);
-			code.clear();
-			code.appendText(jclass.getCode());
-			codeLabel.setText(jclass.getName());
-			code.setDisable(wasDisabled);
-		}
+		if (exercise != null) {
+			guidisabled = false;
+			for (JavaClass jclass : exercise.getCode()) {
+				boolean wasDisabled = code.isDisable();
+				code.setDisable(false);
+				code.clear();
+				code.appendText(jclass.getCode());
+				codeLabel.setText(jclass.getName());
+				code.setDisable(wasDisabled);
+			}
 
-		for (JavaClass jclass : exercise.getTests()) {
-			boolean wasDisabled = code.isDisable();
-			tests.setDisable(false);
-			tests.clear();
-			tests.appendText(jclass.getCode());
-			testLabel.setText(jclass.getName());
-			tests.setDisable(wasDisabled);
+			for (JavaClass jclass : exercise.getTests()) {
+				boolean wasDisabled = code.isDisable();
+				tests.setDisable(false);
+				tests.clear();
+				tests.appendText(jclass.getCode());
+				testLabel.setText(jclass.getName());
+				tests.setDisable(wasDisabled);
+			}
+			changePhase(phaseManager.checkPhase(exercise, false));
+			exerciseLabel.setText(exercise.getName());
 		}
-		changePhaseToRed();
-		nextStepButton.setDisable(false);
-		exerciseLabel.setText(exercise.getName());
+		nextStepButton.setDisable(guidisabled);
 	}
 
 	public void changePhase(PhaseStatus phaseStatus) {
@@ -109,7 +113,7 @@ public class EditorViewController {
 	private void changePhaseToGreen() {
 		statusLabel.setText("green");
 		statusLabel.getStyleClass().clear();
-		statusLabel.getStyleClass().add("statuslabel-green");		
+		statusLabel.getStyleClass().add("statuslabel-green");
 		code.disable(false);
 		tests.disable(true);
 		rootLayoutController.enableReset(true);
@@ -139,7 +143,7 @@ public class EditorViewController {
 		AnchorPane.setLeftAnchor(code, 20.0);
 		AnchorPane.setRightAnchor(code, 20.0);
 		AnchorPane.setBottomAnchor(code, 5.0);
-		
+
 		tests = new JavaCodeArea();
 		tests.disable(true);
 		testPane.getChildren().add(tests);
