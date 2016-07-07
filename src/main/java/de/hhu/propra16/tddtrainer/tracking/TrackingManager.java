@@ -30,4 +30,9 @@ public class TrackingManager implements TrackingManagerIF{
 	public void displayInNewWindow() {
 		Trackline.popup(this);
 	}
+	
+	public void reset() {
+		progress = new ArrayList<>();
+		start = LocalDateTime.now();
+	}
 }

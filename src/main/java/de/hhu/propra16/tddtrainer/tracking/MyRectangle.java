@@ -1,6 +1,5 @@
 package de.hhu.propra16.tddtrainer.tracking;
 
-
 import javafx.scene.shape.Rectangle;
 
 public class MyRectangle extends Rectangle {
@@ -13,17 +12,15 @@ public class MyRectangle extends Rectangle {
        this.snapshot = snapshot;
         
         setOnMouseClicked(event -> {
+        	Trackline.listViewCompile.getItems().clear();
+        	Trackline.listViewTest.getItems().clear();
         	
         	for(String result : snapshot.compilationResultToList()) {
-        		Trackline.listViewCompile.getItems().clear();
         		Trackline.listViewCompile.getItems().add(result);
         	}
-        	
         	for(String result : snapshot.testResultToList()) {
-        		Trackline.listViewTest.getItems().clear();
         		Trackline.listViewTest.getItems().add(result);
         	}
-   
         });
     }
 }
