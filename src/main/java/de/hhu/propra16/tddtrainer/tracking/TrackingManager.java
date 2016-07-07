@@ -12,7 +12,6 @@ public class TrackingManager implements TrackingManagerIF{
 	ArrayList<Snapshot> progress;
 	LocalDateTime start;
 	
-	
 	public TrackingManager() {
 		progress = new ArrayList<>();
 		start = LocalDateTime.now(); 
@@ -31,5 +30,4 @@ public class TrackingManager implements TrackingManagerIF{
 	public void displayInNewWindow() {
 		Trackline.popup(this);
 	}
-	
 }
