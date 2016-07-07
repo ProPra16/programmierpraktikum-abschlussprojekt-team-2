@@ -34,7 +34,7 @@ public class BabystepsManager implements BabystepsManagerIF{
 						long dTime = startTime.until(nowTime, ChronoUnit.SECONDS);
 		
 			    		if(dTime > phaseTime) {
-			    			Platform.runLater(() -> phaseManager.resetPhase());
+			    			Platform.runLter(() -> phaseManager.resetPhase());
 							running = false;
 							return;
 			    		};
