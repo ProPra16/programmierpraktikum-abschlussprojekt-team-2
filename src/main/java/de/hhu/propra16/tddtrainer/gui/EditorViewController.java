@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 
 public class EditorViewController {
@@ -80,6 +81,7 @@ public class EditorViewController {
 			}
 			changePhase(phaseManager.checkPhase(exercise, false));
 			exerciseLabel.setText(exercise.getName());
+			exerciseLabel.setTooltip(new Tooltip(exercise.getDescription()));
 		}
 		nextStepButton.setDisable(guidisabled);
 	}
