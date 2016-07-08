@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane fx:id="borderPane" minHeight="500.0" minWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.tracking.TrackingController">
+<BorderPane fx:id="borderPane" minHeight="500.0" minWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.tracking.TrackingController">
    <bottom>
       <Button fx:id="buttonClose" mnemonicParsing="false" text="Close" BorderPane.alignment="CENTER" />
    </bottom>
@@ -15,22 +16,30 @@
          <items>
             <VBox fx:id="vboxCompilationResult" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="labelCompilationResult" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="222.0" text="Compilation Result">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <ListView fx:id="listViewCompilationResult" />
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="labelCompilationResult" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="245.0" text="Compilation Result" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ListView fx:id="listViewCompilationResult" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
             <VBox fx:id="vboxTestResult" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="labelTestResult" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="220.0" text="Test Result" textAlignment="CENTER">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <ListView fx:id="listViewTestResult" />
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="labelTestResult" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="220.0" text="Test Result" textAlignment="CENTER">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <ListView fx:id="listViewTestResult" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </items>
@@ -39,11 +48,16 @@
    <top>
       <VBox fx:id="vboxtracking" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelHeader" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="450.0" text="Get started to view your progress!" textAlignment="CENTER">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="labelHeader" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="500.0" text="Get started to view your progress!" textAlignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="hboxTracking" />
          </children>
       </VBox>
    </top>
