@@ -22,13 +22,13 @@ public class Trackline {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Tracked Progress");
         stage.setMinWidth(500);
-        stage.setMinHeight(250);
+        stage.setMinHeight(350);
 
         Label header = new Label();
         
         try {
 			header.setText("Progress of: " + trackingManager.progress.get(0).exercise.getName());
-		} catch (NullPointerException e) {
+		} catch (IndexOutOfBoundsException e) {
 			header.setText("Get started to view your progress!");
 		} finally {
 			header.setFont(new Font("Arial", 20));
@@ -37,16 +37,23 @@ public class Trackline {
         closeButton.setOnAction(event -> stage.close());
 
         VBox vbox = new VBox(10);
-        HBox hbox = generateTrackline(trackingManager); 
+        HBox hboxTrackline = generateTrackline(trackingManager); 
         
-        listViewCompile.getItems().add("CompilationResult");
-        listViewTest.getItems().add("TestResult");
+        Label compilationResultLabel = new Label("CompilationResult");
+        Label testResultLabel	= new Label("TestResult");
         
-        HBox hbox2 = new HBox();
-        hbox2.getChildren().addAll(listViewCompile, listViewTest);
-        hbox2.setAlignment(Pos.CENTER);
-        hbox.setAlignment(Pos.CENTER);
-        vbox.getChildren().addAll(header, hbox, hbox2, closeButton);
+        HBox hboxListView = new HBox();
+        VBox vboxCompile = new VBox();
+        vboxCompile.getChildren().addAll(compilationResultLabel, listViewCompile);
+        vboxCompile.setAlignment(Pos.CENTER);
+        VBox vboxTest = new VBox();
+        vboxTest.getChildren().addAll(testResultLabel, listViewTest);
+        vboxTest.setAlignment(Pos.CENTER);
+        hboxListView.getChildren().addAll(vboxCompile, vboxTest);
+        hboxListView.setAlignment(Pos.CENTER);
+        hboxTrackline.setAlignment(Pos.CENTER);
+        
+        vbox.getChildren().addAll(header, hboxTrackline, hboxListView, closeButton);
         vbox.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(vbox);
@@ -56,12 +63,18 @@ public class Trackline {
     
     	private static HBox generateTrackline(TrackingManager trackingManager) {
     		HBox hbox = new HBox();
-    		
     		int size = trackingManager.progress.size();
-    		long totalWorktime = TrackingManager.getTimeBetweenSnaps(trackingManager.start, trackingManager.progress.get(size-1).pointOfTime); 
+    		
+    		long totalWorktime;
+			try {
+				totalWorktime = TrackingManager.getTimeBetweenSnaps(trackingManager.start, trackingManager.progress.get(size-1).pointOfTime);
+			} catch (ArrayIndexOutOfBoundsException e) {
+				totalWorktime = 0;
+			} 
     		long timeOfSnap;
     		
     		for (int i = 0; i<size; i++) {
+    			System.out.println(i);
     			timeOfSnap = 0;
     			if(i == 0) {
     				timeOfSnap =  TrackingManager.getTimeBetweenSnaps(trackingManager.start, trackingManager.progress.get(0).pointOfTime);

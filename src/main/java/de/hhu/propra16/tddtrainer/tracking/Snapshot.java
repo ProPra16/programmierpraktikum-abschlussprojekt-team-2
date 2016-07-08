@@ -52,12 +52,12 @@ public class Snapshot {
 	List<String> testResultToList(){
 		List<String> result = new ArrayList<>();
 		
-		TestResult testresult = phaseStatus.getExecutionResult().getTestResult();
-		Collection<TestFailure> testFailures = testresult.getTestFailures();
-		
-		for(TestFailure testFail : testFailures) {
-			String outputTest = testFail.getMessage();
-			result.add(outputTest);
+		try {
+			for(TestFailure testFail : phaseStatus.getExecutionResult().getTestResult().getTestFailures()) {
+				String outputTest = testFail.getMessage();
+				result.add(outputTest);
+			}
+		} catch (NullPointerException e) {
 		}
 		return result;
 	}
