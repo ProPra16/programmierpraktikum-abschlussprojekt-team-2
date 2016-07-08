@@ -14,11 +14,11 @@
    <center>
       <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
-            <VBox fx:id="vboxCompilationResult" prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label fx:id="labelCompilationResult" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="245.0" text="Compilation Result" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="245.0" text="Compilation Result" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -28,11 +28,11 @@
                   <ListView fx:id="listViewCompilationResult" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <VBox fx:id="vboxTestResult" prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label fx:id="labelTestResult" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="220.0" text="Test Result" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="220.0" text="Test Result" textAlignment="CENTER">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -46,7 +46,7 @@
       </SplitPane>
    </center>
    <top>
-      <VBox fx:id="vboxtracking" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER">
                <children>

@@ -35,15 +35,18 @@ public class TrackingManager implements TrackingManagerIF {
 	}
 
 	public void displayInNewWindow() {
-		// Trackline.popup(this);
+		
 		Stage stage = new Stage();
-      stage.setMinWidth(500);
-      stage.setMinHeight(530);
+		stage.setMinWidth(500);
+		stage.setMinHeight(530);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Tracked Progress");
+		
+		
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Tracking.fxml"));
 			BorderPane boarderPane = (BorderPane) loader.load();
+			
 			TrackingController controller = loader.getController();
 			controller.generateTrackline(this);
 			controller.setStage(stage);
@@ -51,12 +54,11 @@ public class TrackingManager implements TrackingManagerIF {
 			Scene scene = new Scene(boarderPane);
 	        stage.setScene(scene);
 	        stage.showAndWait();
+	        
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-        
-
 	}
 
 	public void reset() {

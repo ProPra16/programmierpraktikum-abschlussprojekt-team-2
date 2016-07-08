@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -18,52 +17,25 @@ public class TrackingController {
 	private Stage stage;
 	private TrackingManager trackingManager;
 	
-
 	@FXML
     private BorderPane borderPane;
-
     
     @FXML
     private Label labelHeader;
-
     
     @FXML
     private Button buttonClose;
-
     
     @FXML
     ListView<String> listViewCompilationResult;
-
     
     @FXML
     ListView<String> listViewTestResult;
 
-    
-    @FXML
-    private VBox vboxTestResult;
-
-    
-    @FXML
-    private VBox vboxtracking;
-    
-
     @FXML
     private HBox hboxTracking;
 
-
     
-    @FXML
-    private VBox vboxCompilationResult;
-
-    
-    @FXML
-    private Label labelTestResult;
-
-    
-    @FXML
-    private Label labelCompilationResult;
-
-
 	void generateTrackline(TrackingManager trackingManager) {
 		
 		this.trackingManager = trackingManager;
@@ -71,15 +43,13 @@ public class TrackingController {
 		try {
 			labelHeader.setText("Progress of: '" + trackingManager.progress.get(0).exercise.getName() + "'");
 		} catch (Exception e) {
-			
 		}
 		
 		generateRectangles();
-		
 		buttonClose.setOnAction(event -> stage.close());
 		
-		
 	}
+	
 	
 	private void generateRectangles() {
 		
@@ -108,17 +78,8 @@ public class TrackingController {
 	}
 	
 	
-	
-	
-	
-	
-	void onClose() {
-		stage.close();
-	}
-
 	void setStage(Stage stage) {
 		this.stage = stage;
 	}
-    
     
 }
