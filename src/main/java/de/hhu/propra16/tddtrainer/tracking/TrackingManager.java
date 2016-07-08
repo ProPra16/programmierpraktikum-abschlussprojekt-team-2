@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import de.hhu.propra16.tddtrainer.Main;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +45,8 @@ public class TrackingManager implements TrackingManagerIF {
 		
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("Tracking.fxml"));
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("gui/tracking/Tracking.fxml"));
 			BorderPane boarderPane = (BorderPane) loader.load();
 			
 			TrackingController controller = loader.getController();
