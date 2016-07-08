@@ -10,7 +10,6 @@ import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -39,7 +38,7 @@ public class TrackingManager implements TrackingManagerIF {
 		
 		Stage stage = new Stage();
 		stage.setMinWidth(500);
-		stage.setMinHeight(530);
+		stage.setMinHeight(350);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Tracked Progress");
 		
