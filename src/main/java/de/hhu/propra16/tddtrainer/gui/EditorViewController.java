@@ -168,7 +168,7 @@ public class EditorViewController {
 	
 	@Subscribe
 	public void showExecutionResult(ExecutionResultEvent event) {
-		console.setText(event.getExecutionResultAsString());
+		console.setText(event.getPhaseStatus().getExecutionResultAsString());
 	}
 
 }
