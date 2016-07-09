@@ -13,7 +13,7 @@ import vk.core.api.CompileError;
 
 /**
  * Manages the phases, whether to go on to the next phase or not.
- * @author luisa
+ * @author Luisa
  *
  */
 public class PhaseManager implements PhaseManagerIF {
@@ -93,7 +93,7 @@ public class PhaseManager implements PhaseManagerIF {
 			}
 		}
 		trackingManager.track(exercise, phaseStatus);
-		bus.post(new ExecutionResultEvent(executionResult));
+		bus.post(new ExecutionResultEvent(phaseStatus));
 		return phaseStatus;
 	}
 
