@@ -1,12 +1,15 @@
 /**
  * Source: All code below is copied from GitHub RichTextFX Repository.
- * Color values were modified.
+ * Color values were modified. Annotation StyleClass was added.
  * (https://github.com/TomasMikula/RichTextFX/blob/master/richtextfx-demos/src/main/resources/org/fxmisc/richtext/demo/java-keywords.css)
  * 
  * @author TomasMikula
  *
  */
 
+.annotation {
+    -fx-fill: lightgrey;
+}
 .keyword {
     -fx-fill: #b300b3;
     -fx-font-weight: bold;

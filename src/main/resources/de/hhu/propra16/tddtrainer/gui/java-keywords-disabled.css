@@ -5,6 +5,9 @@
  *
  */
 
+.annotation {
+    -fx-fill: grey;
+}
 .keyword {
     -fx-fill: grey;
     -fx-font-weight: bold;
