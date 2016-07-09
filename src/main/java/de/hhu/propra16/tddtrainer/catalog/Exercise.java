@@ -14,6 +14,7 @@ public class Exercise {
 	private String description;
 	private List<JavaClass> code;
 	private List<JavaClass> tests;
+	private boolean babyStepsActivated;
 	private int babyStepsCodeTime;
 	private int babyStepsTestTime;
 
@@ -58,6 +59,10 @@ public class Exercise {
 		return tests.get(index);
 	}
 	
+	public boolean isBabyStepsActivated(){
+		return babyStepsActivated;
+	}
+	
 	public int getBabyStepsCodeTime() {
 		return babyStepsCodeTime;
 	}
@@ -88,6 +93,10 @@ public class Exercise {
 
 	public void setTests(List<JavaClass> test) {
 		this.tests = test;
+	}
+	
+	public void setBabyStepsActivated(boolean activated){
+		this.babyStepsActivated = activated;
 	}
 	
 	public void setBabyStepsCodeTime(int babyStepsCodeTime) {
