@@ -4,6 +4,7 @@ import com.google.common.eventbus.EventBus;
 
 import de.hhu.propra16.tddtrainer.babysteps.BabystepsManager;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
+import de.hhu.propra16.tddtrainer.events.ExecutionResultEvent;
 import de.hhu.propra16.tddtrainer.events.ExerciseEvent;
 import de.hhu.propra16.tddtrainer.executor.*;
 import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
@@ -80,6 +81,7 @@ public class PhaseManager implements PhaseManagerIF {
 			}
 		}
 		trackingManager.track(exercise, phaseStatus);
+		bus.post(new ExecutionResultEvent(executionResult));
 		return phaseStatus;
 	}
 
@@ -107,6 +109,12 @@ public class PhaseManager implements PhaseManagerIF {
 		Exercise exercise = exerciseSelector.selectExercise();
 		if(exercise == null) {
 			return;
+		}
+		if(exercise.isBabyStepsActivated()) {
+			babystepsManager.enable();
+		}
+		else {
+			babystepsManager.disable();
 		}
 		phase = Phase.RED;
 		originalExercise = validExercise = exercise;
