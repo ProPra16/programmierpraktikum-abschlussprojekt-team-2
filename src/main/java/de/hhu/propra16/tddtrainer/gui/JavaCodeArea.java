@@ -18,7 +18,8 @@ import javafx.concurrent.Task;
 
 /**
  * Source: The code is mainly copied from GitHub RichTextFX Repository but
- * modified to fit to this project
+ * modified to fit to this project.
+ * The ANNOTATION_PATTERN was added.
  * (https://github.com/TomasMikula/RichTextFX/blob/master/richtextfx-demos/src/main/java/org/fxmisc/richtext/demo/JavaKeywordsAsync.java)
  * 
  * @author TomasMikula
@@ -41,10 +42,12 @@ public class JavaCodeArea extends CodeArea {
 	private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";
 	private static final String COMMENT_PATTERN = "//[^\n]*" + "|" + "/\\*(.|\\R)*?\\*/";
 
-	private static final Pattern PATTERN = Pattern.compile(
-			"(?<KEYWORD>" + KEYWORD_PATTERN + ")" + "|(?<PAREN>" + PAREN_PATTERN + ")" + "|(?<BRACE>" + BRACE_PATTERN
-					+ ")" + "|(?<BRACKET>" + BRACKET_PATTERN + ")" + "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")"
-					+ "|(?<STRING>" + STRING_PATTERN + ")" + "|(?<COMMENT>" + COMMENT_PATTERN + ")");
+	private static final String ANNOTATION_PATTERN = "\u0040[^\n]*";
+
+	private static final Pattern PATTERN = Pattern.compile("(?<KEYWORD>" + KEYWORD_PATTERN + ")" + "|(?<PAREN>"
+			+ PAREN_PATTERN + ")" + "|(?<BRACE>" + BRACE_PATTERN + ")" + "|(?<BRACKET>" + BRACKET_PATTERN + ")"
+			+ "|(?<SEMICOLON>" + SEMICOLON_PATTERN + ")" + "|(?<STRING>" + STRING_PATTERN + ")" + "|(?<ANNOTATION>"
+			+ ANNOTATION_PATTERN + ")" + "|(?<COMMENT>" + COMMENT_PATTERN + ")");
 
 	private ExecutorService executor;
 
@@ -77,7 +80,7 @@ public class JavaCodeArea extends CodeArea {
 		return task;
 	}
 
-	private void applyHighlighting(StyleSpans<Collection<String>> highlighting) {		
+	private void applyHighlighting(StyleSpans<Collection<String>> highlighting) {
 		this.setStyleSpans(0, highlighting);
 	}
 
@@ -92,7 +95,9 @@ public class JavaCodeArea extends CodeArea {
 									: matcher.group("BRACKET") != null ? "bracket"
 											: matcher.group("SEMICOLON") != null ? "semicolon"
 													: matcher.group("STRING") != null ? "string"
-															: matcher.group("COMMENT") != null ? "comment" : null;
+															: matcher.group("ANNOTATION") != null ? "annotation"
+																	: matcher.group("COMMENT") != null ? "comment"
+																			: null;
 			/* never happens */ assert styleClass != null;
 			spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
 			spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
