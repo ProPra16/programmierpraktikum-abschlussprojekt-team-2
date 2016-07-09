@@ -24,8 +24,8 @@ public class EditorViewController {
 	private JavaCodeArea code;
 
 	@FXML
-    private TextArea console;
-	
+	private TextArea console;
+
 	@FXML
 	private AnchorPane codePane;
 
@@ -172,12 +172,17 @@ public class EditorViewController {
 		this.rootLayoutController = rootLayoutController;
 		rootLayoutController.enableReset(false);
 	}
-	
+
 	@Subscribe
 	public void showExecutionResult(ExecutionResultEvent event) {
-		console.setText(event.getPhaseStatus().getExecutionResultAsString());
-		console.setStyle("-fx-text-fill: red");
-//		console.setStyle("-fx-text-fill: grey");
+		PhaseStatus status = event.getPhaseStatus();
+		console.setText(status.getExecutionResultAsString());
+
+		if (status.isValid()) {
+			console.setStyle("-fx-text-fill: grey");
+		} else {
+			console.setStyle("-fx-text-fill: red");
+		}
 	}
 
 }
