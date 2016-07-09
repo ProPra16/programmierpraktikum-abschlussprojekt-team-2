@@ -33,7 +33,7 @@ public class PhaseManager implements PhaseManagerIF {
 		ExecutionResult executionResult = new Executor().execute(exercise);
 		PhaseStatus phaseStatus;
 		
-		if(phase.equals(Phase.RED)) {
+		if(phase == Phase.RED) {
 			boolean valid = true;
 			if(executionResult.getCompilerResult().hasCompileErrors()) {
 				loop:
@@ -63,7 +63,7 @@ public class PhaseManager implements PhaseManagerIF {
 			if((!(executionResult.getCompilerResult().hasCompileErrors())) &&
 				(executionResult.getTestResult().getNumberOfFailedTests() == 0)) {
 				if(continuePhase) {
-					if(phase.equals(Phase.GREEN)) {
+					if(phase == Phase.GREEN) {
 						phase = Phase.REFACTOR;
 						babystepsManager.stop();
 					}
@@ -90,15 +90,17 @@ public class PhaseManager implements PhaseManagerIF {
 
 	@Override
 	public void resetPhase() {
-		if(phase.equals(Phase.REFACTOR)) {
+		if(phase == Phase.REFACTOR) {
 			throw new IllegalStateException("Reset not permitted during Refactor.");
 		}
-		if(phase.equals(Phase.GREEN)) {
+		if(phase == Phase.GREEN) {
 			phase = Phase.RED;
 		}
-		babystepsManager.start(originalExercise.getBabyStepsTestTime());
 		
-		bus.post(new ExerciseEvent(validExercise));
+		if(validExercise != null) {
+			babystepsManager.start(originalExercise.getBabyStepsTestTime());
+			bus.post(new ExerciseEvent(validExercise));
+		}
 	}
 	
 	public void selectExercise() {
@@ -106,7 +108,7 @@ public class PhaseManager implements PhaseManagerIF {
 		if(exercise == null) {
 			return;
 		}
-		
+		phase = Phase.RED;
 		originalExercise = validExercise = exercise;
 		
 		bus.post(new ExerciseEvent(validExercise));

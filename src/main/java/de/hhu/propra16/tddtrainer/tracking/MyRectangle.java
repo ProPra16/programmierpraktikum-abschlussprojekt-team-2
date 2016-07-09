@@ -5,6 +5,7 @@ import javafx.scene.shape.Rectangle;
 public class MyRectangle extends Rectangle {
 
 	Snapshot snapshot;
+	private TrackingController controller;
 	
     public MyRectangle(double width, double height, Snapshot snapshot) {
     	
@@ -12,16 +13,20 @@ public class MyRectangle extends Rectangle {
        this.snapshot = snapshot;
         
         setOnMouseClicked(event -> {
-        	Trackline.listViewCompile.getItems().clear();
-        	Trackline.listViewTest.getItems().clear();
+        	controller.listViewCompilationResult.getItems().clear();
+        	controller.listViewTestResult.getItems().clear();
         	
         	for(String result : snapshot.compilationResultToList()) {
-        		Trackline.listViewCompile.getItems().add(result);
+        		controller.listViewCompilationResult.getItems().add(result);
         	}
         	for(String result : snapshot.testResultToList()) {
-        		Trackline.listViewTest.getItems().add(result);
+        		controller.listViewTestResult.getItems().add(result);
         	}
         });
     }
+
+	public void setController(TrackingController trackingController) {
+		this.controller = trackingController;
+	}
 }
 
