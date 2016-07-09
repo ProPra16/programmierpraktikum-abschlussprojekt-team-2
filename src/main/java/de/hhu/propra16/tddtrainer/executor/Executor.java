@@ -16,6 +16,11 @@ import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.catalog.JavaClass;
 import vk.core.api.*;
 
+/**
+ * Class for executing a given exercise. Returns the {@link ExecutionResult} of the Execution.
+ * @author Luisa
+ *
+ */
 public class Executor {
 	
 	public ExecutionResult execute(Exercise exercise) {

@@ -25,7 +25,6 @@ public class ExerciseSelector {
 	/**
 	 * Creates an ExerciseSelector
 	 * @param dataSource the data source from where the catalog should be read
-	 * @param bundle 
 	 */
 	public ExerciseSelector(CatalogDatasourceIF dataSource){
 		this.dataSource = dataSource;

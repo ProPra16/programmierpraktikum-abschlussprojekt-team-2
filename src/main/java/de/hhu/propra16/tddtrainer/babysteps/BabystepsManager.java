@@ -6,6 +6,10 @@ import java.time.temporal.ChronoUnit;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import javafx.application.Platform;
 
+/**
+ * An implementation of {@link BabystepsManagerIF} to force the user to make small tests and less code by limiting the time for editing code and tests.
+ *
+ */
 public class BabystepsManager implements BabystepsManagerIF{
 	
 	PhaseManagerIF phaseManager;

@@ -10,12 +10,22 @@ import java.util.*;
 
 import vk.core.api.*;
 
+/**
+ * Contains the Execution Result, i.e. the Compiler Result, the Test Result and a list of Compile Errors.
+ * @author Luisa
+ *
+ */
 public class ExecutionResult {
 
 	private CompilerResult compilerResult;
 	private TestResult testResult;
 	private List<CompilationResult> compileErrors = new ArrayList<>();
-	
+
+	/**
+	 * Contructor to call, if compile errors have occurred.
+	 * @param cr The {@link CompilerResult} of the Execution
+	 * @param fcu The list of {@link CompilationUnit CompilationUnits}
+	 */
 	public ExecutionResult(CompilerResult cr, List<CompilationUnit> fcu) {
 		compilerResult = cr;
 		for(CompilationUnit cu : fcu) {
@@ -23,6 +33,11 @@ public class ExecutionResult {
 		}
 	}
 	
+	/**
+	 * Constructor to call, if no compile errors have occurred.
+	 * @param cr The current {@link CompilerResult}
+	 * @param tr The current {@link TestResult}
+	 */
 	public ExecutionResult(CompilerResult cr, TestResult tr) {
 		compilerResult = cr;
 		testResult = tr;
