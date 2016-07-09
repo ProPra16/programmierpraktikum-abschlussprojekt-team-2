@@ -17,10 +17,7 @@ public interface PhaseManagerIF {
 	 * @return returns the current Phase
 	 */
 	public Phase getPhase();
-	/**
-	 * 
-	 * @return returns the last valid Exercise
-	 */
+
 	public void resetPhase();
 	
 	public void selectExercise();

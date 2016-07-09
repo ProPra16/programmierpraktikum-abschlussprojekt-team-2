@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A dummy {@link CatalogDatasourceIF} implementation which contains three exercieses where the first has no errors, the second has a compile error and the third has a test error.
+ * A dummy {@link CatalogDatasourceIF} implementation which contains three exercises where the first has no errors, the second has a compile error and the third has a test error.
  * @author Marcel
  *
  */
@@ -26,6 +26,8 @@ public class FakeCatalogDatasource implements CatalogDatasourceIF {
 		Exercise testError = new Exercise("TestError Excercise", "This exercise has a test error");
 		testError.addCode(new JavaClass("TestErrorCode", "public class TestErrorCode {\n\n\tpublic int returnOne() {\n\t\treturn 2;\n\t}\n}"));
 		testError.addTest(new JavaClass("TestErrorTest", "import static org.junit.Assert.*;\nimport org.junit.Test;\n\npublic class TestErrorTest {\n\n\t@Test\n\tpublic void testCode() {\n\t\tTestErrorCode c = new TestErrorCode();\n\t\tassertEquals(1, c.returnOne());\n\t}\n}"));
+		testError.setBabyStepsCodeTime(10);
+		testError.setBabyStepsTestTime(10);
 		catalog.add(testError);
 		
 		return catalog;

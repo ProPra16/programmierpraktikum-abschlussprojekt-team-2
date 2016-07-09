@@ -11,6 +11,11 @@ import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
 import de.hhu.propra16.tddtrainer.tracking.TrackingManager;
 import vk.core.api.CompileError;
 
+/**
+ * Manages the phases, whether to go on to the next phase or not.
+ * @author luisa
+ *
+ */
 public class PhaseManager implements PhaseManagerIF {
 	
 	private Phase phase = Phase.RED;
@@ -29,6 +34,13 @@ public class PhaseManager implements PhaseManagerIF {
 		this.babystepsManager = new BabystepsManager(this);
 	}
 
+	/**
+	 * Checks, if the given {@link Exercise} is valid, depending on the current {@link Phase}, and moves on or not to the next phase.
+	 * Also manages the {@link TrackingManager} and the {@link BabystepsManager}
+	 * @param exercise The current {@link Exercise}
+	 * @param continuePhase whether or not to move on to the next {@link Phase}, if the {@link Exercise} is valid
+	 * @return The {@link PhaseStatus} after the {@link Executor Execution}
+	 */
 	@Override
 	public PhaseStatus checkPhase(Exercise exercise, boolean continuePhase) {
 		ExecutionResult executionResult = new Executor().execute(exercise);
@@ -90,6 +102,11 @@ public class PhaseManager implements PhaseManagerIF {
 		return phase;
 	}
 
+	/**
+	 * Phase.RED: Phase stays in phase RED
+	 * Phase.GREEN: Phase returns to phase RED
+	 * Phase.REFACTOR: Throws Exception
+	 */
 	@Override
 	public void resetPhase() {
 		if(phase == Phase.REFACTOR) {
@@ -105,6 +122,9 @@ public class PhaseManager implements PhaseManagerIF {
 		}
 	}
 	
+	/**
+	 * Selects an {@link Exercise} and manages the {@link TrackingManager} and the {@link BabystepsManager}.
+	 */
 	public void selectExercise() {
 		Exercise exercise = exerciseSelector.selectExercise();
 		if(exercise == null) {
