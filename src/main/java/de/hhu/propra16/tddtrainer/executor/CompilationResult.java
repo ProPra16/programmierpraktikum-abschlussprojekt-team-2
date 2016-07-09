@@ -3,6 +3,11 @@ package de.hhu.propra16.tddtrainer.executor;
 import java.util.List;
 import vk.core.api.CompileError;
 
+/**
+ * Contains the Compilation Result, i.e. the name of the compiled class and the occurring compile Errors.
+ * @author Luisa
+ *
+ */
 public class CompilationResult {
 
 	private String className;

@@ -25,6 +25,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * The Main Class to get the Application started.
+ *
+ */
 public class Main extends Application {
 	private BorderPane rootLayout;
 	private Stage primaryStage;
@@ -79,7 +83,4 @@ public class Main extends Application {
 		primaryStage.setMinWidth(1000);
 		primaryStage.setMinHeight(600);
 	}
-	
-	
-
 }
