@@ -8,7 +8,7 @@
  */
 
 .annotation {
-    -fx-fill: lightgrey;
+    -fx-fill: grey;
 }
 .keyword {
     -fx-fill: #b300b3;
