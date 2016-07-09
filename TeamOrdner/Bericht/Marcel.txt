@@ -1,0 +1,12 @@
+Das Programm verwendet an vielen Stellen die Exercise Klasse.
+Diese stellt eine Aufgabe aus dem Katalog dar, welche einen Titel, eine Aufgabenbeschreibung und zugehörige Skelett-Klassen für Code und Test enthält.
+Zusätzlich wird in der Exercise Klasse gespeichert, ob die Baby Steps Erweiterung aktiviert ist und wie viel Zeit für das Schreiben der Tests und Programmteile zur Verfügung steht, bevor die Erweiterung die aktuelle Phase zurücksetzt.
+
+Die Exercises werden über eine CatalogDatasource geladen.
+Hier habe ich das CatalogDatasourceIF Interface erstellt.
+Es gibt eine FakeCatalogDatasource implementierung, welche immer 3 hart verdratete Exercises
+zurück gibt. Die erste einthält in ihmen Code keine Fehler, die zweite hat einen Compile-Error und die dritte einen Test/Assertion-Error.
+
+Die zweite Implementierung ist die XMLCatalogDatasource, welche die Exercises aus einer angegebenen XML Datei lädt. Die XML Datei wird mit den, von der JVM mitgelieferten javax.xml.* und org.w3c.dom.* Klassen geparsed.
+
+Für die GUI gibt es einen ExerciseSelector, welcher eine CatalogDatasource übergeben bekommt und dann alle, im Katalog enthaltenen Exercises lädt. Die Titel der Exercises werden in einer Liste angezeigt und in einem Textfeld wird die zugehörige Beschreibung der markierten Exercise dargestellt. Beim Klick auf "Select" wird die ausgewählte Exercise zurückgegeben.
