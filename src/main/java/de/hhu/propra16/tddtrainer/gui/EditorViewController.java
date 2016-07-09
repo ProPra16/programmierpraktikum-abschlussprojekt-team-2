@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.catalog.JavaClass;
+import de.hhu.propra16.tddtrainer.events.ExecutionResultEvent;
 import de.hhu.propra16.tddtrainer.events.ExerciseEvent;
 import de.hhu.propra16.tddtrainer.logic.Phase;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
@@ -163,6 +164,11 @@ public class EditorViewController {
 		this.phaseManager = phaseManager;
 		this.rootLayoutController = rootLayoutController;
 		rootLayoutController.enableReset(false);
+	}
+	
+	@Subscribe
+	public void showExecutionResult(ExecutionResultEvent event) {
+		console.setText(event.getExecutionResultAsString());
 	}
 
 }
