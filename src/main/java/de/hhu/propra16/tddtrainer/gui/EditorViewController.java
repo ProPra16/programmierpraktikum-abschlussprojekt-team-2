@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
@@ -115,6 +116,8 @@ public class EditorViewController {
 		code.disable(true);
 		tests.disable(false);
 		rootLayoutController.enableReset(true);
+		tests.setStyle("-fx-border-color: crimson;");
+		code.setStyle("-fx-border-color: transparent;");
 	}
 
 	private void changePhaseToGreen() {
@@ -124,6 +127,8 @@ public class EditorViewController {
 		code.disable(false);
 		tests.disable(true);
 		rootLayoutController.enableReset(true);
+		code.setStyle("-fx-border-color: forestgreen;");
+		tests.setStyle("-fx-border-color: transparent;");
 	}
 
 	private void changePhaseToRefactor() {
@@ -133,6 +138,8 @@ public class EditorViewController {
 		code.disable(false);
 		tests.disable(false);
 		rootLayoutController.enableReset(false);
+		tests.setStyle("-fx-border-color: grey;");
+		code.setStyle("-fx-border-color: grey;");
 	}
 
 	private Exercise newExerciseFromCurrentInput() {
