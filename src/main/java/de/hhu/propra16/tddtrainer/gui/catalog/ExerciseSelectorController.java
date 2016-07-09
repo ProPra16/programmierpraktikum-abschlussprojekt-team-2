@@ -2,15 +2,20 @@ package de.hhu.propra16.tddtrainer.gui.catalog;
 
 import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -20,6 +25,12 @@ public class ExerciseSelectorController {
 	@FXML private TextArea descriptionField;
 	@FXML private Button selectButton;
 	@FXML private Button cancelButton;
+	@FXML private HBox sliderPane;
+	@FXML private CheckBox activateBabyStepsCheckBox;
+	@FXML private Label codeTimeLabel;
+	@FXML private Label testTimeLabel;
+	@FXML private Slider codeTimeSlider;
+	@FXML private Slider testTimeSlider;
 	
 	private CatalogDatasourceIF datasource;
 	private Stage stage;
@@ -64,11 +75,19 @@ public class ExerciseSelectorController {
 		
 		exerciseList.addEventFilter(KeyEvent.KEY_PRESSED, eventHandler);
 		descriptionField.addEventFilter(KeyEvent.KEY_PRESSED, eventHandler);
+		
+		codeTimeLabel.textProperty().bind(Bindings.format("%.0fs", codeTimeSlider.valueProperty()));
+		testTimeLabel.textProperty().bind(Bindings.format("%.0fs", testTimeSlider.valueProperty()));
+		
+		sliderPane.setVisible(false);
 	}
 	
 	public void selectButtonAction(){
 		Exercise selectedExercise = exerciseList.getSelectionModel().getSelectedItem();
 		if(selectedExercise != null){
+			selectedExercise.setBabyStepsActivated(activateBabyStepsCheckBox.isSelected());
+			selectedExercise.setBabyStepsCodeTime((int) codeTimeSlider.getValue());
+			selectedExercise.setBabyStepsTestTime((int) testTimeSlider.getValue());
 			this.selectedExercise = selectedExercise;
 			stage.close();
 		}
@@ -82,6 +101,10 @@ public class ExerciseSelectorController {
 	public void listViewAction(){
 		Exercise selectedExercise = exerciseList.getSelectionModel().getSelectedItem();
 		System.out.println(selectedExercise);
+	}
+	
+	public void checkBabySteps(){
+		sliderPane.setVisible(activateBabyStepsCheckBox.isSelected());
 	}
 
 	public void setDatasource(CatalogDatasourceIF datasource){
