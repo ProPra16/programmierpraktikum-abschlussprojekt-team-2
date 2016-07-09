@@ -169,6 +169,8 @@ public class EditorViewController {
 	@Subscribe
 	public void showExecutionResult(ExecutionResultEvent event) {
 		console.setText(event.getExecutionResultAsString());
+		console.setStyle("-fx-text-fill: red");
+//		console.setStyle("-fx-text-fill: grey");
 	}
 
 }
