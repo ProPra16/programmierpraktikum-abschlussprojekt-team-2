@@ -5,6 +5,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -50,6 +53,23 @@
             					<content>
             						<AnchorPane fx:id="codePane" style="-fx-background-color: white;">
             							<children>
+                                    <HBox fx:id="iGreenBox" alignment="TOP_RIGHT" layoutX="121.0" layoutY="179.0" spacing="20.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <ImageView fitHeight="47.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" rotate="50.0">
+                                             <image>
+                                                <Image url="@black-arrow-curved-hi.png" />
+                                             </image>
+                                             <effect>
+                                                <ColorAdjust brightness="0.86" contrast="1.0" hue="-0.9" saturation="1.0" />
+                                             </effect>
+                                          </ImageView>
+                                          <Label fx:id="iRedLabel1" styleClass="instruction" stylesheets="@tddtrainer.css" text="%instruction.green" textFill="#6f8391">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
             								<HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="-1.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
             									<children>
             										<Label minWidth="-Infinity" text="Code:" textFill="#6f8391" HBox.hgrow="NEVER">
@@ -106,5 +126,22 @@
             <Font size="15.0" />
          </font>
       </Label>
+      <HBox fx:id="iRedBox" layoutX="398.2550048828125" layoutY="29.039085388183594" spacing="20.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Label fx:id="iRedLabel" styleClass="instruction" stylesheets="@tddtrainer.css" text="%instruction.red" textFill="#6f8391">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="47.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" rotate="130.0" scaleY="-1.0">
+               <image>
+                  <Image url="@black-arrow-curved-hi.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.86" contrast="1.0" hue="-0.9" saturation="1.0" />
+               </effect>
+            </ImageView>
+         </children>
+      </HBox>
 	</children>
 </AnchorPane>

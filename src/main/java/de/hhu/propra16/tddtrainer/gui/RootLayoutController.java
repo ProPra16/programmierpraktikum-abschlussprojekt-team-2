@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
@@ -34,6 +35,8 @@ public class RootLayoutController implements Initializable {
 
 	private EventBus bus;
 
+	private EditorViewController editorViewController;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.resources = resources;
@@ -45,9 +48,9 @@ public class RootLayoutController implements Initializable {
 			loader.setLocation(this.getClass().getResource("EditorView.fxml"));
 			loader.setResources(resources);
 			root.setCenter(loader.load());
-			EditorViewController controller = loader.getController();
-			bus.register(controller);
-			controller.init(phaseManager, this);
+			editorViewController = loader.getController();
+			bus.register(editorViewController);
+			editorViewController.init(phaseManager, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -91,6 +94,12 @@ public class RootLayoutController implements Initializable {
 	@FXML
 	private void reset(ActionEvent event) {
 		phaseManager.resetPhase();
+	}
+
+	@FXML
+	private void handleTutorialMode(ActionEvent event) {
+		CheckMenuItem item = (CheckMenuItem) event.getSource();
+		editorViewController.setTutorialMode(item.isSelected());
 	}
 
 	public void init(PhaseManagerIF phaseManager, EventBus bus) {
