@@ -108,7 +108,7 @@ public class RootLayoutController implements Initializable {
 		showEditorView();
 	}
 
-	public void enableReset(boolean enable) {
+	protected void enableReset(boolean enable) {
 		reset.setDisable(!enable);
 	}
 

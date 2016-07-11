@@ -103,12 +103,12 @@ public class EditorViewController {
 			}
 			changePhase(phaseManager.checkPhase(exercise, false));
 			exerciseLabel.setText(exercise.getName());
-			exerciseLabel.setTooltip(new Tooltip(exercise.getDescription()));
+			exerciseLabel.setTooltip(new Tooltip(exercise.getName()));
 		}
 		nextStepButton.setDisable(guidisabled);
 	}
 
-	public void changePhase(PhaseStatus phaseStatus) {
+	private void changePhase(PhaseStatus phaseStatus) {
 		System.out.println(phaseStatus.isValid());
 		Phase phase = phaseStatus.getPhase();
 
@@ -198,7 +198,7 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(tests, 5.0);
 	}
 
-	public void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
+	protected void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
 		this.phaseManager = phaseManager;
 		this.rootLayoutController = rootLayoutController;
 		rootLayoutController.enableReset(false);
@@ -235,7 +235,7 @@ public class EditorViewController {
 		});
 	}
 
-	public void setTutorialMode(boolean selected) {
+	protected void setTutorialMode(boolean selected) {
 		tutorialMode = selected;
 		if(!selected) {
 			iRedBox.setVisible(false);
