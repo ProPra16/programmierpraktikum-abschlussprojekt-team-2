@@ -104,6 +104,7 @@ public class EditorViewController {
 			changePhase(phaseManager.checkPhase(exercise, false));
 			exerciseLabel.setText(exercise.getName());
 			exerciseLabel.setTooltip(new Tooltip(exercise.getName()));
+			rootLayoutController.enableShowDescription(true);
 		}
 		nextStepButton.setDisable(guidisabled);
 	}
@@ -202,6 +203,7 @@ public class EditorViewController {
 		this.phaseManager = phaseManager;
 		this.rootLayoutController = rootLayoutController;
 		rootLayoutController.enableReset(false);
+		rootLayoutController.enableShowDescription(false);
 		iRedBox.setVisible(false);
 		iGreenBox.setVisible(false);
 	}
@@ -243,6 +245,10 @@ public class EditorViewController {
 			AnchorPane.setRightAnchor(codeBox, 15.0);
 		}
 		phaseManager.resetPhase();
+	}
+
+	public void showExerciseDescription() {
+
 	}
 
 }

@@ -28,6 +28,9 @@ public class RootLayoutController implements Initializable {
 	
     @FXML
     private MenuItem reset;
+    
+    @FXML
+    private MenuItem showDescription;
 
 	private ResourceBundle resources;
 
@@ -101,6 +104,11 @@ public class RootLayoutController implements Initializable {
 		CheckMenuItem item = (CheckMenuItem) event.getSource();
 		editorViewController.setTutorialMode(item.isSelected());
 	}
+	
+	@FXML
+	private void showExerciseDescription(ActionEvent event) {
+		editorViewController.showExerciseDescription();
+	}
 
 	public void init(PhaseManagerIF phaseManager, EventBus bus) {
 		this.phaseManager = phaseManager;
@@ -110,6 +118,10 @@ public class RootLayoutController implements Initializable {
 
 	protected void enableReset(boolean enable) {
 		reset.setDisable(!enable);
+	}
+	
+	protected void enableShowDescription(boolean enable) {
+		showDescription.setDisable(!enable);
 	}
 
 }
