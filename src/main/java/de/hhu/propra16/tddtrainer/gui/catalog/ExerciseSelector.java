@@ -48,6 +48,7 @@ public class ExerciseSelector {
 
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.sizeToScene();
+			dialogStage.setResizable(false);
 			dialogStage.showAndWait();
 
 			return controller.getSelectedExercise();
