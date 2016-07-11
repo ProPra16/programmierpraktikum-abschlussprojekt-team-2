@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
 public class EditorViewController {
@@ -45,9 +46,15 @@ public class EditorViewController {
 
 	@FXML
 	private Label testLabel;
-	
+
 	@FXML
 	private Label timeLabel;
+
+	@FXML
+	private HBox iRedBox;
+
+	@FXML
+	private HBox iGreenBox;
 
 	@FXML
 	private Button nextStepButton;
@@ -55,6 +62,7 @@ public class EditorViewController {
 	private PhaseManagerIF phaseManager;
 	private RootLayoutController rootLayoutController;
 	private boolean guidisabled;
+	private boolean tutorialMode;
 
 	public void initialize() {
 		addEditors();
@@ -93,6 +101,10 @@ public class EditorViewController {
 			changePhase(phaseManager.checkPhase(exercise, false));
 			exerciseLabel.setText(exercise.getName());
 			exerciseLabel.setTooltip(new Tooltip(exercise.getDescription()));
+			if(!tutorialMode) {
+				iRedBox.setVisible(false);
+				iGreenBox.setVisible(false);
+			}
 		}
 		nextStepButton.setDisable(guidisabled);
 	}
@@ -123,6 +135,10 @@ public class EditorViewController {
 		rootLayoutController.enableReset(true);
 		tests.setStyle("-fx-border-color: crimson;");
 		code.setStyle("-fx-border-color: transparent;");
+		if (tutorialMode) {
+			iRedBox.setVisible(true);
+			iGreenBox.setVisible(false);
+		}
 	}
 
 	private void changePhaseToGreen() {
@@ -134,6 +150,10 @@ public class EditorViewController {
 		rootLayoutController.enableReset(true);
 		code.setStyle("-fx-border-color: forestgreen;");
 		tests.setStyle("-fx-border-color: transparent;");
+		if (tutorialMode) {
+			iRedBox.setVisible(false);
+			iGreenBox.setVisible(true);
+		}
 	}
 
 	private void changePhaseToRefactor() {
@@ -145,6 +165,10 @@ public class EditorViewController {
 		rootLayoutController.enableReset(false);
 		tests.setStyle("-fx-border-color: grey;");
 		code.setStyle("-fx-border-color: grey;");
+		if (tutorialMode) {
+			iRedBox.setVisible(false);
+			iGreenBox.setVisible(false);
+		}
 	}
 
 	private Exercise newExerciseFromCurrentInput() {
@@ -176,6 +200,8 @@ public class EditorViewController {
 		this.phaseManager = phaseManager;
 		this.rootLayoutController = rootLayoutController;
 		rootLayoutController.enableReset(false);
+		iRedBox.setVisible(false);
+		iGreenBox.setVisible(false);
 	}
 
 	@Subscribe
@@ -189,22 +215,27 @@ public class EditorViewController {
 			console.setStyle("-fx-text-fill: red");
 		}
 	}
-	
+
 	@Subscribe
 	public void updateTime(TimeEvent event) {
 		long time = event.getTime();
 		Platform.runLater(() -> {
 			timeLabel.setText("" + time);
-			if(time <= 5) {
+			if (time <= 5) {
 				timeLabel.setFont(new Font("System bold", 18.0));
 			}
-			if(time <= 10) {
+			if (time <= 10) {
 				timeLabel.setStyle("-fx-text-fill: crimson");
 			} else {
 				timeLabel.setFont(new Font("System", 15.0));
 				timeLabel.setStyle("-fx-text-fill: #6f8391");
 			}
-		});	
+		});
+	}
+
+	public void setTutorialMode(boolean selected) {
+		tutorialMode = selected;
+		phaseManager.resetPhase();
 	}
 
 }

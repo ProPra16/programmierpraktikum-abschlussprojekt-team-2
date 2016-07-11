@@ -45,3 +45,8 @@
 .label {
 	-fx-text-fill: #6f8391;
 }
+
+.instruction {
+	-fx-font-family: 'Swagger';
+	-fx-font-size: 16;
+}
