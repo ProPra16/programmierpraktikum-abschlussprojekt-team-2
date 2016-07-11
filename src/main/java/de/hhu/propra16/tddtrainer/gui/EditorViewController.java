@@ -55,6 +55,9 @@ public class EditorViewController {
 
 	@FXML
 	private HBox iGreenBox;
+	
+	@FXML
+	private HBox codeBox;
 
 	@FXML
 	private Button nextStepButton;
@@ -101,10 +104,6 @@ public class EditorViewController {
 			changePhase(phaseManager.checkPhase(exercise, false));
 			exerciseLabel.setText(exercise.getName());
 			exerciseLabel.setTooltip(new Tooltip(exercise.getDescription()));
-			if(!tutorialMode) {
-				iRedBox.setVisible(false);
-				iGreenBox.setVisible(false);
-			}
 		}
 		nextStepButton.setDisable(guidisabled);
 	}
@@ -139,6 +138,7 @@ public class EditorViewController {
 			iRedBox.setVisible(true);
 			iGreenBox.setVisible(false);
 		}
+		AnchorPane.setRightAnchor(codeBox, 15.0);
 	}
 
 	private void changePhaseToGreen() {
@@ -153,6 +153,7 @@ public class EditorViewController {
 		if (tutorialMode) {
 			iRedBox.setVisible(false);
 			iGreenBox.setVisible(true);
+			AnchorPane.setRightAnchor(codeBox, iGreenBox.getWidth() + 10);
 		}
 	}
 
@@ -169,6 +170,7 @@ public class EditorViewController {
 			iRedBox.setVisible(false);
 			iGreenBox.setVisible(false);
 		}
+		AnchorPane.setRightAnchor(codeBox, 15.0);
 	}
 
 	private Exercise newExerciseFromCurrentInput() {
@@ -235,6 +237,11 @@ public class EditorViewController {
 
 	public void setTutorialMode(boolean selected) {
 		tutorialMode = selected;
+		if(!selected) {
+			iRedBox.setVisible(false);
+			iGreenBox.setVisible(false);
+			AnchorPane.setRightAnchor(codeBox, 15.0);
+		}
 		phaseManager.resetPhase();
 	}
 
