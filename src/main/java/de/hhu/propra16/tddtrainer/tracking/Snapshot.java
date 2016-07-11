@@ -2,7 +2,6 @@ package de.hhu.propra16.tddtrainer.tracking;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
@@ -11,7 +10,6 @@ import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
 import javafx.scene.paint.Color;
 import vk.core.api.CompileError;
 import vk.core.api.TestFailure;
-import vk.core.api.TestResult;
 
 public class Snapshot {
 
