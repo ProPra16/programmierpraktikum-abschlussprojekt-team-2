@@ -6,17 +6,19 @@ import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.catalog.JavaClass;
 import de.hhu.propra16.tddtrainer.events.ExecutionResultEvent;
 import de.hhu.propra16.tddtrainer.events.ExerciseEvent;
+import de.hhu.propra16.tddtrainer.events.TimeEvent;
 import de.hhu.propra16.tddtrainer.logic.Phase;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 
 public class EditorViewController {
 
@@ -43,6 +45,9 @@ public class EditorViewController {
 
 	@FXML
 	private Label testLabel;
+	
+	@FXML
+	private Label timeLabel;
 
 	@FXML
 	private Button nextStepButton;
@@ -183,6 +188,23 @@ public class EditorViewController {
 		} else {
 			console.setStyle("-fx-text-fill: red");
 		}
+	}
+	
+	@Subscribe
+	public void updateTime(TimeEvent event) {
+		long time = event.getTime();
+		Platform.runLater(() -> {
+			timeLabel.setText("" + time);
+			if(time <= 5) {
+				timeLabel.setFont(new Font("System bold", 18.0));
+			}
+			if(time <= 10) {
+				timeLabel.setStyle("-fx-text-fill: crimson");
+			} else {
+				timeLabel.setFont(new Font("System", 15.0));
+				timeLabel.setStyle("-fx-text-fill: #6f8391");
+			}
+		});	
 	}
 
 }

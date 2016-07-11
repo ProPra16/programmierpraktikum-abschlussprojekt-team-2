@@ -101,5 +101,10 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <Label fx:id="timeLabel" layoutX="598.0" layoutY="33.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
 	</children>
 </AnchorPane>

@@ -31,7 +31,7 @@ public class PhaseManager implements PhaseManagerIF {
 		this.trackingManager = trackingManager;
 		this.bus = bus;
 		this.exerciseSelector = exerciseSelector;
-		this.babystepsManager = new BabystepsManager(this);
+		this.babystepsManager = new BabystepsManager(this, bus);
 	}
 
 	/**

@@ -3,6 +3,9 @@ package de.hhu.propra16.tddtrainer.babysteps;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import com.google.common.eventbus.EventBus;
+
+import de.hhu.propra16.tddtrainer.events.TimeEvent;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import javafx.application.Platform;
 
@@ -19,9 +22,11 @@ public class BabystepsManager implements BabystepsManagerIF{
 	private LocalDateTime nowTime;
 	private boolean stopped = true;
 	private int phaseTime;
+	private EventBus bus;
 	
-	public BabystepsManager(PhaseManagerIF phaseManager) {
+	public BabystepsManager(PhaseManagerIF phaseManager, EventBus bus) {
 		this.phaseManager = phaseManager;
+		this.bus = bus;
 	}
 	
 	@Override
@@ -39,11 +44,12 @@ public class BabystepsManager implements BabystepsManagerIF{
 		
 			    		if(dTime > phaseTime) {
 			    			Platform.runLater(() -> phaseManager.resetPhase());
-							running = false;
+							running = false; 
 							return;
 			    		};
 						
 			    		System.out.println(phaseTime - dTime);
+			    		bus.post(new TimeEvent(phaseTime - dTime));
 			    		
 						try {
 							Thread.sleep(1000);
