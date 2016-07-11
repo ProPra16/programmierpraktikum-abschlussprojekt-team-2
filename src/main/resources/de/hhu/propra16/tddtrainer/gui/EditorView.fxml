@@ -70,7 +70,7 @@
                                           </Label>
                                        </children>
                                     </HBox>
-            								<HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="-1.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
+            								<HBox fx:id="codeBox" alignment="CENTER_LEFT" layoutX="14.0" layoutY="-1.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
             									<children>
             										<Label minWidth="-Infinity" text="Code:" textFill="#6f8391" HBox.hgrow="NEVER">
             											<font>

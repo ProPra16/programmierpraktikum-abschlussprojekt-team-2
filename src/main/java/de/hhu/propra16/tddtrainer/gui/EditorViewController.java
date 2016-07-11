@@ -55,6 +55,9 @@ public class EditorViewController {
 
 	@FXML
 	private HBox iGreenBox;
+	
+	@FXML
+	private HBox codeBox;
 
 	@FXML
 	private Button nextStepButton;
@@ -100,16 +103,13 @@ public class EditorViewController {
 			}
 			changePhase(phaseManager.checkPhase(exercise, false));
 			exerciseLabel.setText(exercise.getName());
-			exerciseLabel.setTooltip(new Tooltip(exercise.getDescription()));
-			if(!tutorialMode) {
-				iRedBox.setVisible(false);
-				iGreenBox.setVisible(false);
-			}
+			exerciseLabel.setTooltip(new Tooltip(exercise.getName()));
+			rootLayoutController.enableShowDescription(true);
 		}
 		nextStepButton.setDisable(guidisabled);
 	}
 
-	public void changePhase(PhaseStatus phaseStatus) {
+	private void changePhase(PhaseStatus phaseStatus) {
 		System.out.println(phaseStatus.isValid());
 		Phase phase = phaseStatus.getPhase();
 
@@ -139,6 +139,7 @@ public class EditorViewController {
 			iRedBox.setVisible(true);
 			iGreenBox.setVisible(false);
 		}
+		AnchorPane.setRightAnchor(codeBox, 15.0);
 	}
 
 	private void changePhaseToGreen() {
@@ -153,6 +154,7 @@ public class EditorViewController {
 		if (tutorialMode) {
 			iRedBox.setVisible(false);
 			iGreenBox.setVisible(true);
+			AnchorPane.setRightAnchor(codeBox, iGreenBox.getWidth() + 10);
 		}
 	}
 
@@ -169,6 +171,7 @@ public class EditorViewController {
 			iRedBox.setVisible(false);
 			iGreenBox.setVisible(false);
 		}
+		AnchorPane.setRightAnchor(codeBox, 15.0);
 	}
 
 	private Exercise newExerciseFromCurrentInput() {
@@ -196,10 +199,11 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(tests, 5.0);
 	}
 
-	public void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
+	protected void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
 		this.phaseManager = phaseManager;
 		this.rootLayoutController = rootLayoutController;
 		rootLayoutController.enableReset(false);
+		rootLayoutController.enableShowDescription(false);
 		iRedBox.setVisible(false);
 		iGreenBox.setVisible(false);
 	}
@@ -233,9 +237,18 @@ public class EditorViewController {
 		});
 	}
 
-	public void setTutorialMode(boolean selected) {
+	protected void setTutorialMode(boolean selected) {
 		tutorialMode = selected;
+		if(!selected) {
+			iRedBox.setVisible(false);
+			iGreenBox.setVisible(false);
+			AnchorPane.setRightAnchor(codeBox, 15.0);
+		}
 		phaseManager.resetPhase();
+	}
+
+	public void showExerciseDescription() {
+
 	}
 
 }

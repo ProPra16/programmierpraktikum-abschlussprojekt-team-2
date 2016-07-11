@@ -13,6 +13,7 @@
             <Menu mnemonicParsing="false" text="%menu.exercise">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#selectExercise" text="%menu.exercise.openexercise" />
+                  <MenuItem fx:id="showDescription" mnemonicParsing="false" onAction="#showExerciseDescription" text="%menu.exercise.showDescription" />
                   <MenuItem mnemonicParsing="false" onAction="#showProgress" text="%menu.exercise.tracking" />
                   <MenuItem fx:id="reset" mnemonicParsing="false" onAction="#reset" text="%menu.exercise.reset" />
                </items>
