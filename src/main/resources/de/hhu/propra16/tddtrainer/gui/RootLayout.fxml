@@ -25,7 +25,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="%menu.help">
             <items>
-                  <CheckMenuItem mnemonicParsing="false" onAction="#handleTutorialMode" text="%menu.help.tutorialMode" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#handleTutorialMode" selected="true" text="%menu.help.tutorialMode" />
               <MenuItem mnemonicParsing="false" text="%menu.help.handbook" />
             </items>
           </Menu>
