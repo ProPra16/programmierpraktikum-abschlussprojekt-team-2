@@ -37,6 +37,10 @@ public class PhaseStatus {
 		return executionResult;
 	}
 	
+	void setExecutionResult(ExecutionResult executionResult) {
+		this.executionResult = executionResult;
+	}
+	
 	public String getExecutionResultAsString() {
 		String executionResultAsString = "Compile Errors: ";
 		if(executionResult.getCompilerResult().hasCompileErrors()) {
@@ -68,4 +72,5 @@ public class PhaseStatus {
 		}
 		return executionResultAsString;
 	}
+
 }

@@ -94,7 +94,7 @@ public class RootLayoutController implements Initializable {
 			AnchorPane.setBottomAnchor(editorView, 0.0);
 			AnchorPane.setLeftAnchor(editorView, 5.0);
 			AnchorPane.setRightAnchor(editorView, 5.0);
-			AnchorPane.setTopAnchor(editorView, 55.0);
+			AnchorPane.setTopAnchor(editorView, 60.0);
 			editorViewController = loader.getController();
 			bus.register(editorViewController);
 			editorViewController.init(phaseManager, this);

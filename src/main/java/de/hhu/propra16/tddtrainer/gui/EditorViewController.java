@@ -43,7 +43,7 @@ public class EditorViewController {
 
 	@FXML
 	private HBox iGreenBox;
-	
+
 	@FXML
 	private HBox codeBox;
 
@@ -53,10 +53,17 @@ public class EditorViewController {
 	private boolean tutorialMode;
 
 	public void initialize() {
+		iGreenBox.setVisible(false);
 		addEditors();
 	}
 
-
+	protected void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
+		this.phaseManager = phaseManager;
+		this.rootLayoutController = rootLayoutController;
+		rootLayoutController.enableReset(false);
+		rootLayoutController.enableShowDescription(false);
+		rootLayoutController.iRedBox.setVisible(false);
+	}
 
 	@Subscribe
 	public void showExercise(ExerciseEvent exerciseEvent) {
@@ -64,29 +71,33 @@ public class EditorViewController {
 
 		if (exercise != null) {
 			guidisabled = false;
-			for (JavaClass jclass : exercise.getCode()) {
-				boolean wasDisabled = code.isDisable();
-				code.setDisable(false);
-				code.clear();
-				code.appendText(jclass.getCode());
-				codeLabel.setText(jclass.getName());
-				code.setDisable(wasDisabled);
-			}
-
-			for (JavaClass jclass : exercise.getTests()) {
-				boolean wasDisabled = code.isDisable();
-				tests.setDisable(false);
-				tests.clear();
-				tests.appendText(jclass.getCode());
-				testLabel.setText(jclass.getName());
-				tests.setDisable(wasDisabled);
-			}
+			showExercise(exercise);
 			changePhase(phaseManager.checkPhase(exercise, false));
 			rootLayoutController.exerciseLabel.setText(exercise.getName());
 			rootLayoutController.exerciseLabel.setTooltip(new Tooltip(exercise.getName()));
 			rootLayoutController.enableShowDescription(true);
 		}
 		rootLayoutController.nextStepButton.setDisable(guidisabled);
+	}
+
+	public void showExercise(Exercise exercise) {
+		for (JavaClass jclass : exercise.getCode()) {
+			boolean wasDisabled = code.isDisable();
+			code.setDisable(false);
+			code.clear();
+			code.appendText(jclass.getCode());
+			codeLabel.setText(jclass.getName());
+			code.setDisable(wasDisabled);
+		}
+
+		for (JavaClass jclass : exercise.getTests()) {
+			boolean wasDisabled = code.isDisable();
+			tests.setDisable(false);
+			tests.clear();
+			tests.appendText(jclass.getCode());
+			testLabel.setText(jclass.getName());
+			tests.setDisable(wasDisabled);
+		}
 	}
 
 	void changePhase(PhaseStatus phaseStatus) {
@@ -161,7 +172,7 @@ public class EditorViewController {
 		exercise.addTest(new JavaClass(oldExercise.getTest(0).getName(), tests.getText()));
 		return exercise;
 	}
-	
+
 	private void addEditors() {
 		code = new JavaCodeArea();
 		code.disable(true);
@@ -180,15 +191,6 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(tests, 5.0);
 	}
 
-	protected void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
-		this.phaseManager = phaseManager;
-		this.rootLayoutController = rootLayoutController;
-		rootLayoutController.enableReset(false);
-		rootLayoutController.enableShowDescription(false);
-		rootLayoutController.iRedBox.setVisible(false);
-		iGreenBox.setVisible(false);
-	}
-
 	@Subscribe
 	public void showExecutionResult(ExecutionResultEvent event) {
 		PhaseStatus status = event.getPhaseStatus();
@@ -203,7 +205,7 @@ public class EditorViewController {
 
 	protected void setTutorialMode(boolean selected) {
 		tutorialMode = selected;
-		if(!selected) {
+		if (!selected) {
 			rootLayoutController.iRedBox.setVisible(false);
 			iGreenBox.setVisible(false);
 			AnchorPane.setRightAnchor(codeBox, 15.0);
