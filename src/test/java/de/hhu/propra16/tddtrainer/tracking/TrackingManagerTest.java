@@ -83,6 +83,6 @@ public class TrackingManagerTest {
 			e.printStackTrace();
 		}
 		long totalWorkTime = TrackingManager.getTimeBetweenSnaps(trackingManager.start, trackingManager.progress.get(1).pointOfTime);
-		assertEquals(3, totalWorkTime, 0.1);
+		assertEquals(3, totalWorkTime, 0.2);
 	}
 }

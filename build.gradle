@@ -10,7 +10,7 @@ task fatJar(type: Jar) {
 				   'Implementation-Version': '1.0.0',
 				   'Implementation-Title': 'TDD-Trainer'
 	}
-	baseName = 'TDD Trainer'
+	baseName = 'TDDTrainer'
 	from {
 		configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
 	}
