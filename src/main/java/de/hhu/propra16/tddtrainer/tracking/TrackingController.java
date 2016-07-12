@@ -2,6 +2,7 @@ package de.hhu.propra16.tddtrainer.tracking;
 
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -41,11 +42,13 @@ public class TrackingController {
 		this.trackingManager = trackingManager;
 		
 		try {
-			labelHeader.setText("Progress of: '" + trackingManager.progress.get(0).exercise.getName() + "'");
+			labelHeader.setText(trackingManager.bundle.getString("tracking.header2") + "'" + trackingManager.progress.get(0).exercise.getName() + "'");
+			
 		} catch (Exception e) {
 		}
 		
 		generateRectangles();
+		hboxTracking.setAlignment(Pos.CENTER);
 		buttonClose.setOnAction(event -> stage.close());
 		
 	}

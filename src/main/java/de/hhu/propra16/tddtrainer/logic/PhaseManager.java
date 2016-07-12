@@ -147,4 +147,8 @@ public class PhaseManager implements PhaseManagerIF {
 	public void displayTracking() {
 		trackingManager.displayInNewWindow();
 	}
+	
+	public Exercise getOriginalExercise() {
+		return originalExercise;
+	}
 }

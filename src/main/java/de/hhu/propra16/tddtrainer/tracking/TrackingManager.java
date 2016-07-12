@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.Main;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
+import de.hhu.propra16.tddtrainer.events.LanguageChangeEvent;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +22,7 @@ public class TrackingManager implements TrackingManagerIF {
 
 	ArrayList<Snapshot> progress;
 	LocalDateTime start;
+	ResourceBundle bundle;
 
 	public TrackingManager() {
 		progress = new ArrayList<>();
@@ -38,13 +43,14 @@ public class TrackingManager implements TrackingManagerIF {
 		
 		Stage stage = new Stage();
 		stage.setMinWidth(500);
-		stage.setMinHeight(350);
+		stage.setMinHeight(380);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Tracked Progress");
 		
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
+			loader.setResources(bundle);
 			loader.setLocation(Main.class.getResource("gui/tracking/Tracking.fxml"));
 			BorderPane boarderPane = (BorderPane) loader.load();
 			
@@ -65,5 +71,10 @@ public class TrackingManager implements TrackingManagerIF {
 	public void reset() {
 		progress = new ArrayList<>();
 		start = LocalDateTime.now();
+	}
+	
+	@Subscribe
+	public void setResourceBundle(LanguageChangeEvent event) {
+		this.bundle = event.getBundle();
 	}
 }
