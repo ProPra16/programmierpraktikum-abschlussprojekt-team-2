@@ -67,7 +67,7 @@ public class RootLayoutController implements Initializable {
 		choices.add("English");
 		choices.add("Deutsch");
 
-		ChoiceDialog<String> dialog = new ChoiceDialog<>("", choices);
+		ChoiceDialog<String> dialog = new ChoiceDialog<>("English", choices);
 		dialog.setTitle(resources.getString("languagedialog.title"));
 		dialog.setHeaderText(resources.getString("languagedialog.headerText"));
 		dialog.setContentText(resources.getString("languagedialog.contentText"));
