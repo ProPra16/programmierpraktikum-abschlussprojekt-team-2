@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -43,6 +44,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
 		primaryStage.setTitle("TDDTrainer");
+		primaryStage.getIcons().add(new Image("/de/hhu/propra16/tddtrainer/gui/app_icon.png"));
 		primaryStage.setOnCloseRequest((e) -> System.exit(0));
 		if(ToolProvider.getSystemJavaCompiler() == null){
 			Alert alert = new Alert(AlertType.ERROR);
