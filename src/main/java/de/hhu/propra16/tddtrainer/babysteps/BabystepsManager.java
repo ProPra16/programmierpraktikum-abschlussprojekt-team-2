@@ -48,7 +48,6 @@ public class BabystepsManager implements BabystepsManagerIF{
 							return;
 			    		};
 						
-			    		System.out.println(phaseTime - dTime);
 			    		bus.post(new TimeEvent(phaseTime - dTime));
 			    		
 						try {

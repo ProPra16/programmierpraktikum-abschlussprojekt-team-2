@@ -9,19 +9,31 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
+import de.hhu.propra16.tddtrainer.catalog.Exercise;
+import de.hhu.propra16.tddtrainer.catalog.JavaClass;
 import de.hhu.propra16.tddtrainer.events.LanguageChangeEvent;
+import de.hhu.propra16.tddtrainer.events.TimeEvent;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
+import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 public class RootLayoutController implements Initializable {
 
@@ -31,6 +43,21 @@ public class RootLayoutController implements Initializable {
     @FXML
     private MenuItem reset;
     
+	@FXML
+	Label statusLabel;
+
+	@FXML
+	Label exerciseLabel;
+    
+	@FXML
+	Label timeLabel;
+
+	@FXML
+	Button nextStepButton;
+
+	@FXML
+	HBox iRedBox;
+
     @FXML
     private MenuItem showDescription;
 
@@ -42,9 +69,19 @@ public class RootLayoutController implements Initializable {
 
 	private EditorViewController editorViewController;
 
+    @FXML
+    private AnchorPane rootPane;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.resources = resources;
+	}
+
+	public void init(PhaseManagerIF phaseManager, EventBus bus) {
+		this.phaseManager = phaseManager;
+		this.bus = bus;
+		bus.register(this);
+		showEditorView();
 	}
 
 	private void showEditorView() {
@@ -52,13 +89,35 @@ public class RootLayoutController implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(this.getClass().getResource("EditorView.fxml"));
 			loader.setResources(resources);
-			root.setCenter(loader.load());
+			SplitPane editorView = loader.load();
+			rootPane.getChildren().add(editorView);
+			AnchorPane.setBottomAnchor(editorView, 0.0);
+			AnchorPane.setLeftAnchor(editorView, 5.0);
+			AnchorPane.setRightAnchor(editorView, 5.0);
+			AnchorPane.setTopAnchor(editorView, 60.0);
 			editorViewController = loader.getController();
 			bus.register(editorViewController);
 			editorViewController.init(phaseManager, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Subscribe
+	public void updateTime(TimeEvent event) {
+		long time = event.getTime();
+		Platform.runLater(() -> {
+			timeLabel.setText("" + time);
+			if (time <= 5) {
+				timeLabel.setFont(new Font("System bold", 18.0));
+			}
+			if (time <= 10) {
+				timeLabel.setStyle("-fx-text-fill: crimson");
+			} else {
+				timeLabel.setFont(new Font("System", 15.0));
+				timeLabel.setStyle("-fx-text-fill: #6f8391");
+			}
+		});
 	}
 
 	@FXML
@@ -108,6 +167,13 @@ public class RootLayoutController implements Initializable {
 	}
 	
 	@FXML
+	private void handleNextStep(ActionEvent event) {
+		Exercise exercise = editorViewController.newExerciseFromCurrentInput();
+		PhaseStatus status = phaseManager.checkPhase(exercise, true);
+		editorViewController.changePhase(status);
+	}
+	
+	@FXML
 	private void showExerciseDescription(ActionEvent event) {
 		String description = phaseManager.getOriginalExercise().getDescription();
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -116,12 +182,6 @@ public class RootLayoutController implements Initializable {
 		alert.setContentText(description);
 
 		alert.showAndWait();
-	}
-
-	public void init(PhaseManagerIF phaseManager, EventBus bus) {
-		this.phaseManager = phaseManager;
-		this.bus = bus;
-		showEditorView();
 	}
 
 	protected void enableReset(boolean enable) {

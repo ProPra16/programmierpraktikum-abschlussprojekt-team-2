@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -9,42 +10,12 @@
 
 <BorderPane fx:id="borderPane" minHeight="350.0" minWidth="500.0" prefHeight="350.0" style="-fx-background-color: white;" stylesheets="de/hhu/propra16/tddtrainer/gui/tddtrainer.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.tracking.TrackingController">
    <bottom>
-      <Button fx:id="buttonClose" mnemonicParsing="false" text="%tracking.schließen" BorderPane.alignment="CENTER" />
+      <Button fx:id="buttonClose" mnemonicParsing="false" text="%tracking.schließen" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" />
+         </BorderPane.margin>
+      </Button>
    </bottom>
-   <center>
-      <SplitPane dividerPositions="0.5" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <items>
-            <VBox>
-               <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="245.0" text="%tracking.compilationResult" textAlignment="CENTER" VBox.vgrow="ALWAYS">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <ListView fx:id="listViewCompilationResult" VBox.vgrow="SOMETIMES" />
-               </children>
-            </VBox>
-            <VBox>
-               <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="220.0" text="%tracking.testResult" textAlignment="CENTER">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <ListView fx:id="listViewTestResult" VBox.vgrow="SOMETIMES" />
-               </children>
-            </VBox>
-         </items>
-      </SplitPane>
-   </center>
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -52,13 +23,22 @@
                <children>
                   <Label fx:id="labelHeader" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="500.0" text="%tracking.header" textAlignment="CENTER">
                      <font>
-                        <Font size="20.0" />
+                        <Font name="System Bold" size="20.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
                   </Label>
                </children>
             </HBox>
-            <HBox fx:id="hboxTracking" />
+            <HBox fx:id="hboxTracking">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin></HBox>
          </children>
       </VBox>
    </top>
+   <center>
+      <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

@@ -2,6 +2,7 @@ package de.hhu.propra16.tddtrainer.gui.catalog;
 
 import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
@@ -68,7 +69,7 @@ public class ExerciseSelectorController {
 		});
 		
 		EventHandler<KeyEvent> eventHandler = (e) -> {
-			if(e.getCode() == KeyCode.ENTER){
+			if(e.getCode() == KeyCode.ENTER || e.getCode() == KeyCode.ESCAPE){
 				exerciseList.getParent().fireEvent(e);
 			}
 		};
@@ -80,6 +81,7 @@ public class ExerciseSelectorController {
 		testTimeLabel.textProperty().bind(Bindings.format("%.0fs", testTimeSlider.valueProperty()));
 		
 		sliderPane.setVisible(false);
+		Platform.runLater(() -> exerciseList.requestFocus());
 	}
 	
 	public void selectButtonAction(){

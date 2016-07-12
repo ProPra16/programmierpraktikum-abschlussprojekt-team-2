@@ -26,37 +26,12 @@ public class Snapshot {
 	Color getColor(){
 	    	switch(phaseStatus.getPhase()) {
 	    	case RED:
-	    		return Color.RED;
+	    		return Color.CRIMSON;
 	    	case GREEN:
-	    		return Color.GREEN;
+	    		return Color.FORESTGREEN;
 	    	default:
-	    		return Color.BLUE;
+	    		return Color.web("#6f8391");
+	    		
 	    	}
-	}
-	
-	List<String> compilationResultToList() {
-		List<String> result = new ArrayList<>();
-
-		for(CompilationResult compilationResult:  phaseStatus.getExecutionResult().getCompileErrors()) {
-			List<CompileError> compileErrors = compilationResult.getCompileErrors();
-			for(CompileError compileError : compileErrors) {
-				String outputCompile = compileError.getMessage();
-				result.add(outputCompile);
-			}
-		}		
-		return result;
-	}
-	
-	List<String> testResultToList(){
-		List<String> result = new ArrayList<>();
-		
-		try {
-			for(TestFailure testFail : phaseStatus.getExecutionResult().getTestResult().getTestFailures()) {
-				String outputTest = testFail.getMessage();
-				result.add(outputTest);
-			}
-		} catch (NullPointerException e) {
-		}
-		return result;
 	}
 }

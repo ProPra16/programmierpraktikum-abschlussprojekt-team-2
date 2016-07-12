@@ -36,31 +36,16 @@ public class EditorViewController {
 	private AnchorPane testPane;
 
 	@FXML
-	private Label statusLabel;
-
-	@FXML
-	private Label exerciseLabel;
-
-	@FXML
 	private Label codeLabel;
 
 	@FXML
 	private Label testLabel;
 
 	@FXML
-	private Label timeLabel;
-
-	@FXML
-	private HBox iRedBox;
-
-	@FXML
 	private HBox iGreenBox;
-	
+
 	@FXML
 	private HBox codeBox;
-
-	@FXML
-	private Button nextStepButton;
 
 	private PhaseManagerIF phaseManager;
 	private RootLayoutController rootLayoutController;
@@ -68,14 +53,16 @@ public class EditorViewController {
 	private boolean tutorialMode;
 
 	public void initialize() {
+		iGreenBox.setVisible(false);
 		addEditors();
 	}
 
-	@FXML
-	private void handleNextStep(ActionEvent event) {
-		Exercise exercise = newExerciseFromCurrentInput();
-		PhaseStatus status = phaseManager.checkPhase(exercise, true);
-		changePhase(status);
+	protected void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
+		this.phaseManager = phaseManager;
+		this.rootLayoutController = rootLayoutController;
+		rootLayoutController.enableReset(false);
+		rootLayoutController.enableShowDescription(false);
+		rootLayoutController.iRedBox.setVisible(false);
 	}
 
 	@Subscribe
@@ -84,33 +71,36 @@ public class EditorViewController {
 
 		if (exercise != null) {
 			guidisabled = false;
-			for (JavaClass jclass : exercise.getCode()) {
-				boolean wasDisabled = code.isDisable();
-				code.setDisable(false);
-				code.clear();
-				code.appendText(jclass.getCode());
-				codeLabel.setText(jclass.getName());
-				code.setDisable(wasDisabled);
-			}
-
-			for (JavaClass jclass : exercise.getTests()) {
-				boolean wasDisabled = code.isDisable();
-				tests.setDisable(false);
-				tests.clear();
-				tests.appendText(jclass.getCode());
-				testLabel.setText(jclass.getName());
-				tests.setDisable(wasDisabled);
-			}
+			showExercise(exercise);
 			changePhase(phaseManager.checkPhase(exercise, false));
-			exerciseLabel.setText(exercise.getName());
-			exerciseLabel.setTooltip(new Tooltip(exercise.getName()));
+			rootLayoutController.exerciseLabel.setText(exercise.getName());
+			rootLayoutController.exerciseLabel.setTooltip(new Tooltip(exercise.getName()));
 			rootLayoutController.enableShowDescription(true);
 		}
-		nextStepButton.setDisable(guidisabled);
+		rootLayoutController.nextStepButton.setDisable(guidisabled);
 	}
 
-	private void changePhase(PhaseStatus phaseStatus) {
-		System.out.println(phaseStatus.isValid());
+	public void showExercise(Exercise exercise) {
+		for (JavaClass jclass : exercise.getCode()) {
+			boolean wasDisabled = code.isDisable();
+			code.setDisable(false);
+			code.clear();
+			code.appendText(jclass.getCode());
+			codeLabel.setText(jclass.getName());
+			code.setDisable(wasDisabled);
+		}
+
+		for (JavaClass jclass : exercise.getTests()) {
+			boolean wasDisabled = code.isDisable();
+			tests.setDisable(false);
+			tests.clear();
+			tests.appendText(jclass.getCode());
+			testLabel.setText(jclass.getName());
+			tests.setDisable(wasDisabled);
+		}
+	}
+
+	void changePhase(PhaseStatus phaseStatus) {
 		Phase phase = phaseStatus.getPhase();
 
 		switch (phase) {
@@ -127,57 +117,58 @@ public class EditorViewController {
 	}
 
 	private void changePhaseToRed() {
-		statusLabel.setText("red");
-		statusLabel.getStyleClass().clear();
-		statusLabel.getStyleClass().add("statuslabel-red");
+		rootLayoutController.statusLabel.setText("red");
+		rootLayoutController.statusLabel.getStyleClass().clear();
+		rootLayoutController.statusLabel.getStyleClass().add("statuslabel-red");
 		code.disable(true);
 		tests.disable(false);
 		rootLayoutController.enableReset(true);
 		tests.setStyle("-fx-border-color: crimson;");
 		code.setStyle("-fx-border-color: transparent;");
 		if (tutorialMode) {
-			iRedBox.setVisible(true);
+			rootLayoutController.iRedBox.setVisible(true);
 			iGreenBox.setVisible(false);
 		}
 		AnchorPane.setRightAnchor(codeBox, 15.0);
 	}
 
 	private void changePhaseToGreen() {
-		statusLabel.setText("green");
-		statusLabel.getStyleClass().clear();
-		statusLabel.getStyleClass().add("statuslabel-green");
+		rootLayoutController.statusLabel.setText("green");
+		rootLayoutController.statusLabel.getStyleClass().clear();
+		rootLayoutController.statusLabel.getStyleClass().add("statuslabel-green");
 		code.disable(false);
 		tests.disable(true);
 		rootLayoutController.enableReset(true);
 		code.setStyle("-fx-border-color: forestgreen;");
 		tests.setStyle("-fx-border-color: transparent;");
 		if (tutorialMode) {
-			iRedBox.setVisible(false);
+			rootLayoutController.iRedBox.setVisible(false);
 			iGreenBox.setVisible(true);
 			AnchorPane.setRightAnchor(codeBox, iGreenBox.getWidth() + 10);
 		}
 	}
 
 	private void changePhaseToRefactor() {
-		statusLabel.setText("refactor");
-		statusLabel.getStyleClass().clear();
-		statusLabel.getStyleClass().add("statuslabel-refactor");
+		rootLayoutController.statusLabel.setText("refactor");
+		rootLayoutController.statusLabel.getStyleClass().clear();
+		rootLayoutController.statusLabel.getStyleClass().add("statuslabel-refactor");
 		code.disable(false);
 		tests.disable(false);
 		rootLayoutController.enableReset(false);
 		tests.setStyle("-fx-border-color: grey;");
 		code.setStyle("-fx-border-color: grey;");
 		if (tutorialMode) {
-			iRedBox.setVisible(false);
+			rootLayoutController.iRedBox.setVisible(false);
 			iGreenBox.setVisible(false);
 		}
 		AnchorPane.setRightAnchor(codeBox, 15.0);
 	}
 
-	private Exercise newExerciseFromCurrentInput() {
-		Exercise exercise = new Exercise(exerciseLabel.getText(), "");
-		exercise.addCode(new JavaClass(codeLabel.getText(), code.getText()));
-		exercise.addTest(new JavaClass(testLabel.getText(), tests.getText()));
+	Exercise newExerciseFromCurrentInput() {
+		Exercise oldExercise = phaseManager.getOriginalExercise();
+		Exercise exercise = new Exercise(oldExercise.getName(), oldExercise.getDescription());
+		exercise.addCode(new JavaClass(oldExercise.getCode(0).getName(), code.getText()));
+		exercise.addTest(new JavaClass(oldExercise.getTest(0).getName(), tests.getText()));
 		return exercise;
 	}
 
@@ -199,15 +190,6 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(tests, 5.0);
 	}
 
-	protected void init(PhaseManagerIF phaseManager, RootLayoutController rootLayoutController) {
-		this.phaseManager = phaseManager;
-		this.rootLayoutController = rootLayoutController;
-		rootLayoutController.enableReset(false);
-		rootLayoutController.enableShowDescription(false);
-		iRedBox.setVisible(false);
-		iGreenBox.setVisible(false);
-	}
-
 	@Subscribe
 	public void showExecutionResult(ExecutionResultEvent event) {
 		PhaseStatus status = event.getPhaseStatus();
@@ -220,27 +202,10 @@ public class EditorViewController {
 		}
 	}
 
-	@Subscribe
-	public void updateTime(TimeEvent event) {
-		long time = event.getTime();
-		Platform.runLater(() -> {
-			timeLabel.setText("" + time);
-			if (time <= 5) {
-				timeLabel.setFont(new Font("System bold", 18.0));
-			}
-			if (time <= 10) {
-				timeLabel.setStyle("-fx-text-fill: crimson");
-			} else {
-				timeLabel.setFont(new Font("System", 15.0));
-				timeLabel.setStyle("-fx-text-fill: #6f8391");
-			}
-		});
-	}
-
 	protected void setTutorialMode(boolean selected) {
 		tutorialMode = selected;
-		if(!selected) {
-			iRedBox.setVisible(false);
+		if (!selected) {
+			rootLayoutController.iRedBox.setVisible(false);
 			iGreenBox.setVisible(false);
 			AnchorPane.setRightAnchor(codeBox, 15.0);
 		}
