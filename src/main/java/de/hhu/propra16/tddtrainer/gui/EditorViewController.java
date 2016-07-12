@@ -101,7 +101,6 @@ public class EditorViewController {
 	}
 
 	void changePhase(PhaseStatus phaseStatus) {
-		System.out.println(phaseStatus.isValid());
 		Phase phase = phaseStatus.getPhase();
 
 		switch (phase) {
