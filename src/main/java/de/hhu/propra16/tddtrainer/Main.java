@@ -58,6 +58,7 @@ public class Main extends Application {
 		bus = new EventBus();
 		bus.register(this);
 		TrackingManager trackingManager = new TrackingManager();
+		bus.register(trackingManager);
 		CatalogDatasourceIF datasource = new FakeCatalogDatasource();
 		ExerciseSelector exerciseSelector = new ExerciseSelector(datasource);
 		bus.register(exerciseSelector);
