@@ -17,7 +17,7 @@
       </Button>
    </bottom>
    <top>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER">
                <children>
@@ -31,10 +31,18 @@
                   </Label>
                </children>
             </HBox>
-            <HBox fx:id="hboxTracking">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
-               </VBox.margin></HBox>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hvalue="1.0" prefViewportHeight="10.0" prefViewportWidth="500.0" style="-fx-background-color: white; -fx-background: white;" vbarPolicy="NEVER">
+               <content>
+                  <HBox fx:id="hboxTracking" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" spacing="2.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </HBox>
+               </content>
+            </ScrollPane>
          </children>
       </VBox>
    </top>
