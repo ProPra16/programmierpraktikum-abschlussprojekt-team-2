@@ -5,7 +5,9 @@ ProPra Abschlussprojekt der Gruppe (╯°□°）╯︵ ┻━┻
 
 Open a terminal.
 Navigate in the folder containing the src-folder.
-Type 'gradle eclipse'
+Type 'gradle eclipse' to build an eclipse project
+Type 'gradle fatJar' to build an executable jar file
+Type 'gradle run' to run the application directly
 
 ┬─┬ﾉ(°-°ﾉ)
 

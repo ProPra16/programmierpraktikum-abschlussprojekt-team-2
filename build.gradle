@@ -1,4 +1,5 @@
 apply plugin: "java"
+apply plugin: "application"
 apply plugin: "eclipse"
 
 sourceCompatibility = 1.8
@@ -27,3 +28,4 @@ dependencies {
 	compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.6.10'
 }
 
+mainClassName = "de.hhu.propra16.tddtrainer.Main"
