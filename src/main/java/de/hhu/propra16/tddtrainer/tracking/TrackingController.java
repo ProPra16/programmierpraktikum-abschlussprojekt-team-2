@@ -77,7 +77,6 @@ public class TrackingController {
 		}
 		
 		generateRectangles();
-		hboxTracking.setAlignment(Pos.CENTER);
 		buttonClose.setOnAction(event -> stage.close());
 		
 	}
