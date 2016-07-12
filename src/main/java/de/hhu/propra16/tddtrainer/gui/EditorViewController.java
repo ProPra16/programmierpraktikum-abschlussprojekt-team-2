@@ -6,20 +6,15 @@ import de.hhu.propra16.tddtrainer.catalog.Exercise;
 import de.hhu.propra16.tddtrainer.catalog.JavaClass;
 import de.hhu.propra16.tddtrainer.events.ExecutionResultEvent;
 import de.hhu.propra16.tddtrainer.events.ExerciseEvent;
-import de.hhu.propra16.tddtrainer.events.TimeEvent;
 import de.hhu.propra16.tddtrainer.logic.Phase;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 
 public class EditorViewController {
 
