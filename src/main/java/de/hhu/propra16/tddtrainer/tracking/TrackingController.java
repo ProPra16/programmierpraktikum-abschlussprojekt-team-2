@@ -85,13 +85,6 @@ public class TrackingController {
 	private void generateRectangles() {
 		
 		int size = trackingManager.progress.size();
-		long totalWorktime;
-		
-		try {
-			totalWorktime = TrackingManager.getTimeBetweenSnaps(trackingManager.start, trackingManager.progress.get(size-1).pointOfTime);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			totalWorktime = 0;
-		} 
 		long timeOfSnap;
 		
 		for (int i = 0; i<size; i++) {
@@ -101,7 +94,7 @@ public class TrackingController {
 			} else { 
 				timeOfSnap = TrackingManager.getTimeBetweenSnaps(trackingManager.progress.get(i-1).pointOfTime, trackingManager.progress.get(i).pointOfTime);
 			}
-			MyRectangle rectangle = new MyRectangle((timeOfSnap/(double) totalWorktime)*800.0+5, 40.0, trackingManager.progress.get(i));
+			MyRectangle rectangle = new MyRectangle(timeOfSnap*1.0+5, 40.0, trackingManager.progress.get(i));
 			rectangle.setController(this);
 			hboxTracking.getChildren().add(rectangle);
 		}
