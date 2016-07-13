@@ -43,7 +43,9 @@ public class TrackingManager implements TrackingManagerIF {
 		
 		Stage stage = new Stage();
 		stage.setMinWidth(800);
-		stage.setMinHeight(500);
+		stage.setWidth(800);
+		stage.setMinHeight(600);
+		stage.setHeight(500);
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setTitle("Tracked Progress");
 		
