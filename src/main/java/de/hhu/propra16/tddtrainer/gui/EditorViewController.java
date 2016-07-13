@@ -45,7 +45,7 @@ public class EditorViewController {
 	private PhaseManagerIF phaseManager;
 	private RootLayoutController rootLayoutController;
 	private boolean guidisabled;
-	private boolean tutorialMode;
+	private boolean tutorialMode = true;
 
 	public void initialize() {
 		iGreenBox.setVisible(false);
@@ -122,6 +122,7 @@ public class EditorViewController {
 		code.setStyle("-fx-border-color: transparent;");
 		if (tutorialMode) {
 			rootLayoutController.iRedBox.setVisible(true);
+			rootLayoutController.iRedBox.toFront();
 			iGreenBox.setVisible(false);
 		}
 		AnchorPane.setRightAnchor(codeBox, 15.0);
@@ -147,6 +148,7 @@ public class EditorViewController {
 		rootLayoutController.statusLabel.setText("refactor");
 		rootLayoutController.statusLabel.getStyleClass().clear();
 		rootLayoutController.statusLabel.getStyleClass().add("statuslabel-refactor");
+		rootLayoutController.timeLabel.setText("");
 		code.disable(false);
 		tests.disable(false);
 		rootLayoutController.enableReset(false);
