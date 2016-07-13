@@ -101,7 +101,7 @@ public class TrackingController {
 			} else { 
 				timeOfSnap = TrackingManager.getTimeBetweenSnaps(trackingManager.progress.get(i-1).pointOfTime, trackingManager.progress.get(i).pointOfTime);
 			}
-			MyRectangle rectangle = new MyRectangle((timeOfSnap/(double) totalWorktime)*50.0+5, 40.0, trackingManager.progress.get(i));
+			MyRectangle rectangle = new MyRectangle((timeOfSnap/(double) totalWorktime)*800.0+5, 40.0, trackingManager.progress.get(i));
 			rectangle.setController(this);
 			hboxTracking.getChildren().add(rectangle);
 		}

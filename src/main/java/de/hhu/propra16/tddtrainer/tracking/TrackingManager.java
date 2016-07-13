@@ -55,8 +55,9 @@ public class TrackingManager implements TrackingManagerIF {
 			BorderPane boarderPane = (BorderPane) loader.load();
 			
 			TrackingController controller = loader.getController();
-			controller.generateTrackline(this);
+			
 			controller.setStage(stage);
+			controller.generateTrackline(this);
 			
 			Scene scene = new Scene(boarderPane);
 	        stage.setScene(scene);
