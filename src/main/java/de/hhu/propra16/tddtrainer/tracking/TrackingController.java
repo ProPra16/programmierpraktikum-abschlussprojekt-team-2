@@ -77,7 +77,6 @@ public class TrackingController {
 		}
 		
 		generateRectangles();
-		hboxTracking.setAlignment(Pos.CENTER);
 		buttonClose.setOnAction(event -> stage.close());
 		
 	}
@@ -102,8 +101,7 @@ public class TrackingController {
 			} else { 
 				timeOfSnap = TrackingManager.getTimeBetweenSnaps(trackingManager.progress.get(i-1).pointOfTime, trackingManager.progress.get(i).pointOfTime);
 			}
-			MyRectangle rectangle = new MyRectangle((timeOfSnap/(double) totalWorktime)*500.0, 50.0, trackingManager.progress.get(i));
-			rectangle.setStroke(Color.BLACK);
+			MyRectangle rectangle = new MyRectangle((timeOfSnap/(double) totalWorktime)*800.0+5, 40.0, trackingManager.progress.get(i));
 			rectangle.setController(this);
 			hboxTracking.getChildren().add(rectangle);
 		}
