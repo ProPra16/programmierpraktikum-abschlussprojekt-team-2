@@ -12,9 +12,9 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
-import de.hhu.propra16.tddtrainer.catalog.JavaClass;
 import de.hhu.propra16.tddtrainer.events.LanguageChangeEvent;
 import de.hhu.propra16.tddtrainer.events.TimeEvent;
+import de.hhu.propra16.tddtrainer.handbook.Handbook;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
 import de.hhu.propra16.tddtrainer.logic.PhaseStatus;
 import javafx.application.Platform;
@@ -23,8 +23,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
@@ -110,8 +110,8 @@ public class RootLayoutController implements Initializable {
 			timeLabel.setText("" + time);
 			if (time <= 5) {
 				timeLabel.setFont(new Font("System bold", 18.0));
-			}
-			if (time <= 10) {
+			} else if (time <= 10) {
+				timeLabel.setFont(new Font("System", 15.0));
 				timeLabel.setStyle("-fx-text-fill: crimson");
 			} else {
 				timeLabel.setFont(new Font("System", 15.0));
@@ -182,6 +182,11 @@ public class RootLayoutController implements Initializable {
 		alert.setContentText(description);
 
 		alert.showAndWait();
+	}
+	
+	@FXML
+	private void showHandbook(ActionEvent event) {
+		new Handbook().showPDF();
 	}
 
 	protected void enableReset(boolean enable) {
