@@ -18,7 +18,7 @@ Note:
 * To run the jar file you have to use a jdk. Execute with <path/to/jdk/bin>/java -jar TDDTrainer.jar
 
 ##License
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](programmierpraktikum-abschlussprojekt-team-2/License.md)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/ProPra16/programmierpraktikum-abschlussprojekt-team-2/License.md)
 
 ##Attempt to bring order to chaos
 putting the table back ┬─┬ﾉ(°-°ﾉ)
