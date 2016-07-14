@@ -34,7 +34,7 @@
 				<Menu mnemonicParsing="false" text="%menu.help">
 					<items>
 						<CheckMenuItem mnemonicParsing="false" onAction="#handleTutorialMode" selected="true" text="%menu.help.tutorialMode" />
-						<MenuItem mnemonicParsing="false" text="%menu.help.handbook" />
+						<MenuItem mnemonicParsing="false" text="%menu.help.handbook" onAction="#showHandbook"/>
 					</items>
 				</Menu>
 			</menus>

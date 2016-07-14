@@ -1,13 +1,8 @@
-package PDFViewer;
+package de.hhu.propra16.tddtrainer.handbook;
 
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 /**
  * shows the Handbook inside the application
@@ -20,11 +15,14 @@ public class Handbook {
 		// PDF zeigen            		
 		if (Desktop.isDesktopSupported()) {
 		    try {
-		        File myFile = new File("C:/Users/Benedikt/Documents/GitHub/programmierpraktikum-abschlussprojekt-team-2/Nutzerhandbuch.pdf");
+		        File myFile = new File("Nutzerhandbuch.pdf");
 		        Desktop.getDesktop().open(myFile);
 		    } catch (IOException e) {
-		        // PDF Dateien können auf diesem Rechner nicht dargestellt werden
+		    	e.printStackTrace();
+		    	System.err.println("PDF Dateien koennen auf diesem Rechner nicht dargestellt werden");
 		    }
+		} else {
+			System.err.println("Desktop.isDesktopSupported() = false");
 		}
 	}
 }
