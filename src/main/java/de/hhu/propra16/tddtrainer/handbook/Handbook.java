@@ -2,7 +2,6 @@ package de.hhu.propra16.tddtrainer.handbook;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * shows the Handbook inside the application
@@ -10,19 +9,15 @@ import java.io.IOException;
 public class Handbook {
 	/**
 	 * shows the Handbook in PDF Viewer application 
+	 * @throws Exception if the pdf can not be opened
 	 */
-	public void showPDF() {
+	public void showPDF() throws Exception {
 		// PDF zeigen            		
 		if (Desktop.isDesktopSupported()) {
-		    try {
-		        File myFile = new File("Nutzerhandbuch.pdf");
-		        Desktop.getDesktop().open(myFile);
-		    } catch (IOException e) {
-		    	e.printStackTrace();
-		    	System.err.println("PDF Dateien koennen auf diesem Rechner nicht dargestellt werden");
-		    }
+	        File myFile = new File("Nutzerhandbuch.pdf");
+	        Desktop.getDesktop().open(myFile);
 		} else {
-			System.err.println("Desktop.isDesktopSupported() = false");
+			throw new Exception("Desktop.isDesktopSupported() = false");
 		}
 	}
 }
