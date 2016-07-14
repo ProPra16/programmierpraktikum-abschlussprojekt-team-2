@@ -19,34 +19,38 @@
       </Button>
    </bottom>
    <top>
-      <VBox style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER">
+            <VBox style="-fx-background-color: white;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
                <children>
-                  <Label fx:id="labelHeader" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="500.0" text="%tracking.header" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <ScrollPane fitToHeight="true" fitToWidth="true" hvalue="1.0" prefViewportWidth="500.0" style="-fx-background-color: white; -fx-background: white;" vbarPolicy="NEVER">
-               <content>
-                  <HBox fx:id="hboxTracking" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" spacing="2.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" />
-                     </padding>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="labelHeader" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="500.0" text="%tracking.header" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
                   </HBox>
-               </content>
-            </ScrollPane>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hvalue="1.0" prefViewportWidth="500.0" style="-fx-background-color: white; -fx-background: white;" vbarPolicy="NEVER">
+                     <content>
+                        <HBox fx:id="hboxTracking" alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" spacing="2.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" />
+                           </padding>
+                        </HBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </AnchorPane>
    </top>
    <center>
       <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
