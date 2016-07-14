@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" minHeight="100.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" stylesheets="@tddtrainer.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.gui.RootLayoutController">
+<BorderPane fx:id="root" minHeight="100.0" minWidth="500.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.hhu.propra16.tddtrainer.gui.RootLayoutController">
 	<top>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
@@ -42,7 +42,7 @@
       		</MenuBar>
             <HBox alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fx:id="timerImage" fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                  <ImageView fx:id="timerImage" fitHeight="15.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@timer_icon.png" />
                      </image>
@@ -61,7 +61,7 @@
       </AnchorPane>
 	</top>
 	<center>
-		<AnchorPane fx:id="rootPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+		<AnchorPane fx:id="rootPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@tddtrainer.css" BorderPane.alignment="CENTER">
 			<children>
             <HBox alignment="CENTER_LEFT" layoutX="815.0" layoutY="5.0" spacing="5.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
                <children>
