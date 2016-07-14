@@ -30,7 +30,6 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -43,7 +42,7 @@ public class RootLayoutController implements Initializable {
 	private BorderPane root;
 	
     @FXML
-    private MenuItem reset;
+    private Button reset;
     
 	@FXML
 	Label statusLabel;

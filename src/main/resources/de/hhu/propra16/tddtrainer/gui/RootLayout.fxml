@@ -23,7 +23,6 @@
 						<MenuItem mnemonicParsing="false" onAction="#selectExercise" text="%menu.exercise.openexercise" />
 						<MenuItem fx:id="showDescription" mnemonicParsing="false" onAction="#showExerciseDescription" text="%menu.exercise.showDescription" />
 						<MenuItem mnemonicParsing="false" onAction="#showProgress" text="%menu.exercise.tracking" />
-						<MenuItem fx:id="reset" mnemonicParsing="false" onAction="#reset" text="%menu.exercise.reset" />
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="false" text="%menu.settings">
@@ -34,7 +33,7 @@
 				<Menu mnemonicParsing="false" text="%menu.help">
 					<items>
 						<CheckMenuItem mnemonicParsing="false" onAction="#handleTutorialMode" selected="true" text="%menu.help.tutorialMode" />
-						<MenuItem mnemonicParsing="false" text="%menu.help.handbook" onAction="#showHandbook"/>
+						<MenuItem mnemonicParsing="false" onAction="#showHandbook" text="%menu.help.handbook" />
 					</items>
 				</Menu>
 			</menus>
@@ -43,16 +42,30 @@
 	<center>
 		<AnchorPane fx:id="rootPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<children>
-				<Label layoutX="368.0" layoutY="10.0" text="STATUS:" textFill="#6f8391" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="10.0">
-					<font>
-						<Font name="System Bold" size="18.0" />
-					</font>
-				</Label>
-				<Label fx:id="statusLabel" layoutX="455.0" layoutY="5.0" prefHeight="36.0" prefWidth="85.0" stylesheets="@tddtrainer.css" textFill="#6f8391" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="5.0">
-					<font>
-						<Font name="System Bold" size="25.0" />
-					</font>
-				</Label>
+            <HBox alignment="CENTER_LEFT" layoutX="815.0" layoutY="5.0" spacing="5.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0">
+               <children>
+      				<Label text="STATUS:" textFill="#6f8391">
+      					<font>
+      						<Font name="System Bold" size="18.0" />
+      					</font>
+      				</Label>
+      				<Label fx:id="statusLabel" minHeight="36.0" minWidth="85.0" prefHeight="36.0" stylesheets="@tddtrainer.css" textFill="#6f8391">
+      					<font>
+      						<Font name="System Bold" size="25.0" />
+      					</font>
+      				</Label>
+                  <Button fx:id="reset" disable="true" mnemonicParsing="false" onAction="#reset" text="%backToRed" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+      				<Button fx:id="nextStepButton" disable="true" mnemonicParsing="false" onAction="#handleNextStep" text="%nextStep" textFill="WHITE">
+      					<font>
+      						<Font name="System Bold" size="12.0" />
+      					</font>
+      				</Button>
+               </children>
+            </HBox>
 				<HBox fx:id="iRedBox" layoutX="404.0" layoutY="40.0" spacing="20.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="45.0">
 					<children>
 						<Label fx:id="iRedLabel" styleClass="instruction" stylesheets="@tddtrainer.css" text="%instruction.red" textFill="#6f8391">
@@ -70,11 +83,6 @@
 						</ImageView>
 					</children>
 				</HBox>
-				<Button fx:id="nextStepButton" disable="true" layoutX="544.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleNextStep" text="%nextStep" textFill="WHITE" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
-					<font>
-						<Font name="System Bold" size="12.0" />
-					</font>
-				</Button>
 				<HBox layoutX="15.0" layoutY="10.0" minWidth="100.0" prefHeight="31.0" prefWidth="356.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="10.0">
 					<children>
 						<Label text="%exercise" textFill="#6f8391" HBox.hgrow="NEVER">
