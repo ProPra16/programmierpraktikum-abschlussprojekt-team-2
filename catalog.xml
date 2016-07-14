@@ -10,8 +10,7 @@ public class HelloWorld {
 			</class>
 		</classes>
 		<tests>
-			<test name="HelloWorldTest">
-import static org.junit.Assert.*;
+			<test name="HelloWorldTest">import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class HelloWorldTest {
@@ -23,28 +22,159 @@ public class HelloWorldTest {
 			</test>
 		</tests>
 	</exercise>
-	<exercise name="Multiplikator">
-		<description>Ein beits funktionierender Test.
-Normalerweise werden Tests und Klassen im Katalog unvollständig sein, da diese vom Benutzer geschrieben werden müssen</description>
+	<exercise name="FIZZ BUZZ">
+		<description>Quelle: Praktische Übung 1 WS2015 Informatik I
+		
+Schreiben Sie ein Programm, dass eine Zahl als Kommandozeilenargument übergeben bekommt.Sie dürfen davon ausgehen, dass der Benutzer dabei keine Fehler macht. Das Programm soll nun von 1 bis zu dieser Zahl hochzählen, dabei jedoch alle Zahlen, die durch vier teilbar sind durch das Wort FIZZ und alle Zahlen, die durch sechs teilbar sind durch das Wort BUZZ ersetzen. Zahlen, die sowohl durch vier als auch durch sechs teilbar sind werden durch FIZZ BUZZ ersetzt.
+		</description>
 		<classes>
-			<class name="WorkingCode">
-public class WorkingCode {
-	public int returnOne() {
-		return 1;
-	}
+			<class name="FizzBuzz">
+public class FizzBuzz {
+
 }
 			</class>
 		</classes>
 		<tests>
-			<test name="WorkingTest">
-import static org.junit.Assert.*;
+			<test name="FizzBuzzTest">import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class WorkingTest {
+public class FizzBuzzTest {
+
 	@Test
-	public void testCode() {
-		WorkingCode c = new WorkingCode();
-		assertEquals(1, c.returnOne());
+	public void fizzbuzz(){
+	
+	}
+
+}
+			</test>
+		</tests>
+	</exercise>
+	<exercise name="Game of Life">
+		<description>Quelle: Praktische Übung 2 WS2015 Informatik I
+		
+Wir programmieren heute eine Variante von Conways Game of Life.
+Eingabe: Ein zweidimensionales Array von Zellen (int[][]), jede Zelle ist entweder tot (0)
+oder lebendig (1). Diese Eingabe generieren wir fur Sie.
+
+Ausgabe: Ein zweidimensionales Array, welches durch den nächsten Schritt nach den Regeln des Game Of Life berechnet wird.
+Definitionen: Wir definieren fur unsere Regeln folgende Begriffe:
+- Das Spielfeld erhält zusätzlich einen Rand mit toten Zellen. Diese Zellen durfen ihren Status nicht verändern. Das Spielfeld wird im Programmgerust bereits fertig eingelesen.
+- Die Nachbarn einer Zelle sind genau die 8 adjazenten Zellen.
+Regeln: Fur die Berechnung des nächsten Schritts gilt folgendes:
+1. Jede lebende Zelle mit weniger als zwei lebenden Nachbarn stirbt.
+2. Jede lebende Zelle mit genau zwei oder drei lebenden Nachbarn, lebt auch im nächsten Schritt.
+3. Jede lebende Zelle mit mehr als drei lebenden Nachbarn stirbt.
+4. Jede tote Zelle mit genau drei lebenden Nachbarn wird zu einer lebenden Zelle.
+		</description>
+		<classes>
+			<class name="GameOfLife">public class GameOfLife {
+
+	/*
+	 * Gibt die Anzahl der Nachbarn der Zelle an Position zeile, spalte in dem
+	 * Array board zurueck.
+	 */
+	public static int zaehleLebendeNachbarn(int[][] board, int zeile, int spalte) {
+		return -1;
+	}
+
+	/*
+	 * Gibt 0 zurueck, falls die Zelle in der naechsten Generation tot sein soll
+	 * Gibt 1 zurueck, falls die Zelle in der naechsten Generation lebendig sein soll
+	 */
+	public static int spielregel(int nachbarn, int aktiv) {
+		return -1;
+	}
+
+	/* Ausgehend von dem Array board wird ein Schritt berechnet.
+	 * Hinweis: Alle Randzellen sind immer 0
+	 */
+	public static int[][] berechneNaechsteGeneration(int[][] board) {
+		return board;
+	}
+
+// *******************************************************************************************
+//                              AB HIER NICHTS AENDERN
+// *******************************************************************************************
+
+
+// Diese Funktion kann fuer das Debugging verwendet werden 
+	public static void printBoard(int[][] b) {
+		for (int i = 0; i &lt; b.length; i++) {
+			for (int j = 0; j &lt; b[i].length - 1; j++) {
+				System.out.print(b[i][j] + " ");
+			}
+			System.out.println(b[i][b[i].length - 1]);
+		}
+	}
+
+// Erzeuge ein zufaelliges Board
+	public static int[][] createRandomBoard(int size) {
+		int[][] b = new int[size][size];
+		for (int i = 1; i &lt; b.length - 1; i++) {
+			for (int j = 1; j &lt; b.length - 1; j++) {
+				if (Math.random() &gt; 0.9)
+					b[i][j] = 1;
+			}
+		}
+		return b;
+	}
+
+// Demo (board erzeugen, ausgeben, einen Schritt berechnen, ausgeben)
+	public static void main(String[] args) {
+		int[][] board = createRandomBoard(30);
+		printBoard(board);
+		printBoard(berechneNaechsteGeneration(board));
+	}
+
+}
+			</class>
+		</classes>
+		<tests>
+			<test name="GameOfLifeTest">import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class GameOfLifeTest {
+	@Test
+	public void einsameZellenSterbenKeineNachbarn() throws Exception {
+		assertEquals(0, GameOfLife.spielregel(0 /* Anzahl Nachbarn */, 1 /* 1= lebt, 0 = tot */));
+	}
+
+	@Test
+	public void einsameZellenSterbenEinNachbar() throws Exception {
+		assertEquals(0, GameOfLife.spielregel(1, 1));
+	}
+
+}
+			</test>
+		</tests>
+	</exercise>
+	<exercise name="Roman Numbers">
+		<description>Quelle: Praktische Übung 3 WS2015 Informatik I
+		
+Schreiben Sie eine Methode String roman(int n), die ein Zahl 1 &lt; n &lt; 50 übergeben bekommt und einen String mit der Darstellung der Zahl in römischen Ziffern zurückgibt. Für ungültige n soll der leere String zurückgegeben werden. Die Zahlzeichen des römischen Ziffersystems sind: I (1), V (5) X (10) und 50 (L). Es werden höchstens drei gleiche Ziffern hintereinander geschreiben, dann greift die Subtraktionsregel, d.h. Es kann ein einzelnes I vor ein V oder ein X, bzw. ein einzelnes X vor ein L geschrieben werden. Die Subraktionsregel liefert also zum Beispiel die Zahlen 4 (IV), 9 (IX), 40 (XL).
+Einige weitere Beispiele: 14 = 10 + 4 (XIV), 39 = 30 + 9 (XXXIX), 44 = 40 + 4 (XLIV).
+		</description>
+		<classes>
+			<class name="RomanNumbers">public class RomanNumbers {
+
+	public static String roman(int n) {
+		return "I am groot.";
+	}
+
+}	
+			</class>
+		</classes>
+		<tests>
+			<test name="RomanNumbersTest">import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class RomanNumbersTest {
+
+	@Test
+	public void dieZahlEinsErgibtI() {
+		String berechnet = RomanNumbers.roman(1);
+		String erwartet = "I";
+		assertEquals(erwartet, berechnet);
 	}
 }
 			</test>

@@ -1,5 +1,6 @@
 package de.hhu.propra16.tddtrainer;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -10,7 +11,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.CatalogDatasourceIF;
-import de.hhu.propra16.tddtrainer.catalog.FakeCatalogDatasource;
+import de.hhu.propra16.tddtrainer.catalog.XMLCatalogDatasource;
 import de.hhu.propra16.tddtrainer.events.LanguageChangeEvent;
 import de.hhu.propra16.tddtrainer.gui.RootLayoutController;
 import de.hhu.propra16.tddtrainer.gui.catalog.ExerciseSelector;
@@ -61,7 +62,7 @@ public class Main extends Application {
 		bus.register(this);
 		TrackingManager trackingManager = new TrackingManager();
 		bus.register(trackingManager);
-		CatalogDatasourceIF datasource = new FakeCatalogDatasource();
+		CatalogDatasourceIF datasource = new XMLCatalogDatasource(new File("catalog.xml"));
 		ExerciseSelector exerciseSelector = new ExerciseSelector(datasource);
 		bus.register(exerciseSelector);
 		phaseManager = new PhaseManager(trackingManager, exerciseSelector, bus);
