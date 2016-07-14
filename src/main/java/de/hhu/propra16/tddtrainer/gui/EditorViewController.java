@@ -77,21 +77,21 @@ public class EditorViewController {
 
 	public void showExercise(Exercise exercise) {
 		for (JavaClass jclass : exercise.getCode()) {
-			boolean wasDisabled = code.isDisable();
-			code.setDisable(false);
+//			boolean wasDisabled = code.isDisable();
+//			code.setDisable(false);
 			code.clear();
 			code.appendText(jclass.getCode());
 			codeLabel.setText(jclass.getName());
-			code.setDisable(wasDisabled);
+//			code.setDisable(wasDisabled);
 		}
 
 		for (JavaClass jclass : exercise.getTests()) {
-			boolean wasDisabled = code.isDisable();
-			tests.setDisable(false);
+//			boolean wasDisabled = code.isDisable();
+//			tests.setDisable(false);
 			tests.clear();
 			tests.appendText(jclass.getCode());
 			testLabel.setText(jclass.getName());
-			tests.setDisable(wasDisabled);
+//			tests.setDisable(wasDisabled);
 		}
 	}
 
@@ -149,6 +149,7 @@ public class EditorViewController {
 		rootLayoutController.statusLabel.getStyleClass().clear();
 		rootLayoutController.statusLabel.getStyleClass().add("statuslabel-refactor");
 		rootLayoutController.timeLabel.setText("");
+		rootLayoutController.timerImage.setVisible(false);
 		code.disable(false);
 		tests.disable(false);
 		rootLayoutController.enableReset(false);
@@ -171,7 +172,7 @@ public class EditorViewController {
 
 	private void addEditors() {
 		code = new JavaCodeArea();
-		code.disable(true);
+		code.setEditable(false);
 		codePane.getChildren().add(code);
 		AnchorPane.setTopAnchor(code, 50.0);
 		AnchorPane.setLeftAnchor(code, 20.0);
@@ -179,7 +180,7 @@ public class EditorViewController {
 		AnchorPane.setBottomAnchor(code, 5.0);
 
 		tests = new JavaCodeArea();
-		tests.disable(true);
+		tests.setEditable(false);
 		testPane.getChildren().add(tests);
 		AnchorPane.setTopAnchor(tests, 50.0);
 		AnchorPane.setLeftAnchor(tests, 20.0);

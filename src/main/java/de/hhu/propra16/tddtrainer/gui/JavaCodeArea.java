@@ -108,12 +108,13 @@ public class JavaCodeArea extends CodeArea {
 	}
 
 	public void disable(boolean disable) {
+		this.setEditable(!disable);
 		if (disable) {
 			this.getStylesheets().remove(this.getClass().getResource("java-keywords.css").toExternalForm());
 			this.getStylesheets().add(this.getClass().getResource("java-keywords-disabled.css").toExternalForm());
-			this.setDisable(disable);
+//			this.setDisable(disable);
 		} else {
-			this.setDisable(disable);
+//			this.setDisable(disable);
 			this.getStylesheets().remove(this.getClass().getResource("java-keywords-disabled.css").toExternalForm());
 			this.getStylesheets().add(this.getClass().getResource("java-keywords.css").toExternalForm());
 		}

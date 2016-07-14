@@ -30,6 +30,8 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -60,6 +62,9 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     private MenuItem showDescription;
+    
+    @FXML
+    ImageView timerImage;
 
 	private ResourceBundle resources;
 
@@ -107,6 +112,7 @@ public class RootLayoutController implements Initializable {
 	public void updateTime(TimeEvent event) {
 		long time = event.getTime();
 		Platform.runLater(() -> {
+			timerImage.setVisible(true);
 			timeLabel.setText("" + time);
 			if (time <= 5) {
 				timeLabel.setFont(new Font("System bold", 18.0));
