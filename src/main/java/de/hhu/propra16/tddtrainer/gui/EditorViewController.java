@@ -149,6 +149,7 @@ public class EditorViewController {
 		rootLayoutController.statusLabel.getStyleClass().clear();
 		rootLayoutController.statusLabel.getStyleClass().add("statuslabel-refactor");
 		rootLayoutController.timeLabel.setText("");
+		rootLayoutController.timerImage.setVisible(false);
 		code.disable(false);
 		tests.disable(false);
 		rootLayoutController.enableReset(false);
