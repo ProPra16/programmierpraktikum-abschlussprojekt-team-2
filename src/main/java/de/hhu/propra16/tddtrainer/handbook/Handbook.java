@@ -18,8 +18,8 @@ public class Handbook {
 		        File myFile = new File("Nutzerhandbuch.pdf");
 		        Desktop.getDesktop().open(myFile);
 		    } catch (IOException e) {
-		        // PDF Dateien können auf diesem Rechner nicht dargestellt werden
-		    	System.err.println("PDF Dateien können auf diesem Rechner nicht dargestellt werden");
+		    	e.printStackTrace();
+		    	System.err.println("PDF Dateien koennen auf diesem Rechner nicht dargestellt werden");
 		    }
 		} else {
 			System.err.println("Desktop.isDesktopSupported() = false");
