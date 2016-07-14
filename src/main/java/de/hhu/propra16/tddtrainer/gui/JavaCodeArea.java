@@ -13,8 +13,13 @@ import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
 import org.fxmisc.richtext.StyleSpans;
 import org.fxmisc.richtext.StyleSpansBuilder;
+import org.fxmisc.wellbehaved.event.EventHandlerHelper;
+import static org.fxmisc.wellbehaved.event.EventPattern.*;
 
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
+import static javafx.scene.input.KeyCode.*;
 
 /**
  * Source: The code is mainly copied from GitHub RichTextFX Repository but
@@ -50,8 +55,14 @@ public class JavaCodeArea extends CodeArea {
 			+ ANNOTATION_PATTERN + ")" + "|(?<COMMENT>" + COMMENT_PATTERN + ")");
 
 	private ExecutorService executor;
+	
+	EventHandler<? super KeyEvent> tabHandler = EventHandlerHelper
+	        .on(keyPressed(TAB)).act(event -> this.replaceSelection("    "))
+	        .create();
+	
 
 	public JavaCodeArea() {
+		EventHandlerHelper.install(this.onKeyPressedProperty(), tabHandler);
 		executor = Executors.newSingleThreadExecutor();
 		this.setParagraphGraphicFactory(LineNumberFactory.get(this));
 		this.richChanges().filter(ch -> !ch.getInserted().equals(ch.getRemoved())) // XXX
@@ -112,12 +123,16 @@ public class JavaCodeArea extends CodeArea {
 		if (disable) {
 			this.getStylesheets().remove(this.getClass().getResource("java-keywords.css").toExternalForm());
 			this.getStylesheets().add(this.getClass().getResource("java-keywords-disabled.css").toExternalForm());
-//			this.setDisable(disable);
 		} else {
-//			this.setDisable(disable);
 			this.getStylesheets().remove(this.getClass().getResource("java-keywords-disabled.css").toExternalForm());
 			this.getStylesheets().add(this.getClass().getResource("java-keywords.css").toExternalForm());
 		}
 	}
+	
+	@Override
+	public void appendText(String text) {
+		text = text.replace("\t", "    ");
+        super.appendText(text);
+    }
 
 }
