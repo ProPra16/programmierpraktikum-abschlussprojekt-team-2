@@ -12,7 +12,6 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 import de.hhu.propra16.tddtrainer.catalog.Exercise;
-import de.hhu.propra16.tddtrainer.catalog.JavaClass;
 import de.hhu.propra16.tddtrainer.events.LanguageChangeEvent;
 import de.hhu.propra16.tddtrainer.events.TimeEvent;
 import de.hhu.propra16.tddtrainer.logic.PhaseManagerIF;
@@ -23,13 +22,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -60,6 +61,9 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     private MenuItem showDescription;
+    
+    @FXML
+    ImageView timerImage;
 
 	private ResourceBundle resources;
 
@@ -107,6 +111,7 @@ public class RootLayoutController implements Initializable {
 	public void updateTime(TimeEvent event) {
 		long time = event.getTime();
 		Platform.runLater(() -> {
+			timerImage.setVisible(true);
 			timeLabel.setText("" + time);
 			if (time <= 5) {
 				timeLabel.setFont(new Font("System bold", 18.0));

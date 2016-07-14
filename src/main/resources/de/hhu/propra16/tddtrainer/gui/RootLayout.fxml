@@ -53,7 +53,7 @@
 						<Font name="System Bold" size="25.0" />
 					</font>
 				</Label>
-				<HBox fx:id="iRedBox" layoutX="404.0" layoutY="40.0" spacing="20.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="40.0">
+				<HBox fx:id="iRedBox" layoutX="404.0" layoutY="40.0" spacing="20.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="45.0">
 					<children>
 						<Label fx:id="iRedLabel" styleClass="instruction" stylesheets="@tddtrainer.css" text="%instruction.red" textFill="#6f8391">
 							<font>
@@ -89,11 +89,19 @@
 						</Label>
 					</children>
 				</HBox>
-				<Label fx:id="timeLabel" layoutX="615.0" layoutY="40.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="40.0">
+				<Label fx:id="timeLabel" layoutX="615.0" layoutY="40.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="40.0">
 					<font>
 						<Font size="15.0" />
 					</font>
 				</Label>
+            <ImageView fx:id="timerImage" fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="42.0">
+               <image>
+                  <Image url="@timer_icon.png" />
+               </image>
+               <effect>
+                  <ColorAdjust brightness="0.43" />
+               </effect>
+            </ImageView>
 			</children>
 		</AnchorPane>
 	</center>
