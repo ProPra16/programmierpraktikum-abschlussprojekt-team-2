@@ -191,7 +191,15 @@ public class RootLayoutController implements Initializable {
 	
 	@FXML
 	private void showHandbook(ActionEvent event) {
-		new Handbook().showPDF();
+		try {
+			new Handbook().showPDF();
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle(resources.getString("handbook.error.title"));
+			alert.setHeaderText(null);
+			alert.setContentText(resources.getString("handbook.error.message") + "\n" + e.getMessage());
+			alert.showAndWait();
+		}
 	}
 
 	protected void enableReset(boolean enable) {
