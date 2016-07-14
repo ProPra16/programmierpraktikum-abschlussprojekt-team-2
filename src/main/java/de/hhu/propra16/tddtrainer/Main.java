@@ -84,7 +84,9 @@ public class Main extends Application {
 		controller.init(phaseManager, bus);
 		primaryStage.setScene(new Scene(rootLayout));
 		primaryStage.show();
-		primaryStage.setMinWidth(1000);
+		primaryStage.setWidth(1100);
+		primaryStage.setMinWidth(1100);
+		primaryStage.setHeight(600);
 		primaryStage.setMinHeight(600);
 	}
 }
