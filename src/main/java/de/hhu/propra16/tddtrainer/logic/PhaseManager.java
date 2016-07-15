@@ -54,7 +54,7 @@ public class PhaseManager implements PhaseManagerIF {
 				loop:
 				for(CompilationResult cr : executionResult.getCompileErrors()) {
 					for(CompileError ce : cr.getCompileErrors()) {
-						if(!(ce.getMessage().contains("cannot find symbol"))) {
+						if(!(ce.getMessage().contains("cannot find symbol") || ce.getMessage().contains("method"))) {
 							valid = false;
 							break loop;
 						}
